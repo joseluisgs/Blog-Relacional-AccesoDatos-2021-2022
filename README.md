@@ -10,6 +10,9 @@ Ejemplo de desarrollo de un blog (backend básico) para Acceso a Datos, usando u
   - [Tecnologías](#tecnologías)
   - [Enunciado](#enunciado)
     - [Ejemplo de diagrama](#ejemplo-de-diagrama)
+  - [Ejecución](#ejecución)
+    - [Docker](#docker)
+    - [Adminer](#adminer)
   - [Autor](#autor)
     - [Contacto](#contacto)
   - [Licencia](#licencia)
@@ -32,7 +35,23 @@ Se desea implementar la base de un blog teniendo en cuenta que:
 - Los usuarios pueden hacer distintos comentarios sobre posts existentes.
 
 ### Ejemplo de diagrama
-![diagra](./diagrams/Diagrams.png)
+![diagrama](./diagrams/Diagrams.png)
+
+## Ejecución
+
+### Docker
+Entrar en el directorio docker y ejecutar
+```sh
+$ docker-compose up -d
+```
+Para iniciar la BD con algunos datos modifica el fichero [docker/mariadb/sql/init.sql](docker/mariadb/sql/init-db.sql)
+
+### Adminer
+Contectarte a http://localhost:8080/
+- server: mariadb
+- user: blog
+- password: blog1234 
+- base de datos blog
 
 ## Autor
 
