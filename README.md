@@ -16,6 +16,15 @@ Se han usado las siguientes tecnologías:
 - MariaDB como motor de base de datos relacional.
 - Docker para lanzar la base de datos, así como otras utilidades para manejarla.
 
+## Enunciado
+Se desea implementar la base de un blog teniendo en cuenta que: 
+- Un usuario una vez registrado mediante email y password puede hacer login y logout en el sistema.
+- El usuario puede escribir varios posts los cuales tiene al menos una categoría preestablecida, como general, dudas o evaluación.
+- Los usuarios pueden hacer distintos comentarios sobre posts existentes.
+
+### Ejemplo de diagrama
+![diagra](./diagrams/Diagrams.png)
+
 ## Autor
 
 Codificado con :sparkling_heart: por [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
@@ -49,5 +58,4 @@ Codificado con :sparkling_heart: por [José Luis González Sánchez](https://twi
 
 ## Licencia
 
-Este proyecto está licenciado bajo licencia **MIT**, si desea saber más, visite el fichero [LICENSE](https://github.com/joseluisgs/MoriaKotlin2020/blob/master/LICENSE) para su uso docente y educativo.
-Basado en las ideas y apuntes básicos de Programación de mi compañero de módulo y amigo [Fernando G. Aranzabe](https://github.com/aranzabe)
+Este proyecto está licenciado bajo licencia **MIT**, si desea saber más, visite el fichero [LICENSE](./LICENSE) para su uso docente y educativo.
