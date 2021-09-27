@@ -36,7 +36,7 @@ Se han usado las siguientes tecnologías:
 ## Enunciado
 Se desea implementar la base de un blog teniendo en cuenta que: 
 - Un usuario una vez registrado mediante email y password puede hacer login y logout en el sistema.
-- El usuario puede escribir varios posts los cuales tiene al menos una categoría preestablecida, como general, dudas o evaluación.
+- El usuario puede escribir varios posts los cuales pertenecen solo a una categoría existente, como general, dudas o evaluación. Se pueden crear nuevas categorías.
 - Los usuarios pueden hacer distintos comentarios sobre posts existentes.
 
 ### Ejemplo de diagrama
