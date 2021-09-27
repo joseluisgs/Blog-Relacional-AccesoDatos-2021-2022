@@ -10,9 +10,14 @@ Ejemplo de desarrollo de un blog (backend básico) para Acceso a Datos, usando u
   - [Tecnologías](#tecnologías)
   - [Enunciado](#enunciado)
     - [Ejemplo de diagrama](#ejemplo-de-diagrama)
+  - [Desarrollo](#desarrollo)
+    - [GitFlow](#gitflow)
+    - [Maven](#maven)
+    - [Secretos](#secretos)
+    - [Lombok](#lombok)
   - [Ejecución](#ejecución)
     - [Docker](#docker)
-    - [Adminer](#adminer)
+    - [Adminer o cliente de Bases de Datos](#adminer-o-cliente-de-bases-de-datos)
   - [Autor](#autor)
     - [Contacto](#contacto)
   - [Licencia](#licencia)
@@ -37,8 +42,26 @@ Se desea implementar la base de un blog teniendo en cuenta que:
 ### Ejemplo de diagrama
 ![diagrama](./diagrams/Diagrams.png)
 
-## Ejecución
+## Desarrollo
+### GitFlow
+Se ha usado GitFlow como modelo de flujo de desarrollo y trabajo con el repositorio.
 
+### Maven
+Apache Maven es un software de gestión de proyectos. Maven aumenta la reutilización y también se encarga de la mayoría 
+de las tareas relacionadas con la construcción. Funciona en muchos pasos, como agregar archivos jar a la biblioteca del proyecto, 
+crear informes y ejecutar casos de prueba o crear archivos Jar para el proyecto e incluso muchas más cosas.
+La configuración de Maven se guarda en el fichero [pom.xml](./pom.xml).
+
+### Secretos
+Para trabajar con secretos y o variables globales se han usado dos enfoques en el directorio recursos:
+- Ficheros de Properties (Propiedades): con ellos podemos leer propiedades de la manea clave valor.
+- Ficheros .env: Mediante ellos leemos las variables de entorno ya sea del sistema o definidas en un fichero .env 
+
+### Lombok
+Se ha usado [Lombok](https://projectlombok.org/features/all) como sistema de anotaciones para aumentar la productividad 
+y reducir el código repetitivo.
+
+## Ejecución
 ### Docker
 Entrar en el directorio docker y ejecutar
 ```sh
@@ -46,8 +69,9 @@ $ docker-compose up -d
 ```
 Para iniciar la BD con algunos datos modifica el fichero [docker/mariadb/sql/init.sql](docker/mariadb/sql/init-db.sql)
 
-### Adminer
-Contectarte a http://localhost:8080/
+
+### Adminer o cliente de Bases de Datos
+Debes conectarte a http://localhost:8080/
 - server: mariadb
 - user: blog
 - password: blog1234 
