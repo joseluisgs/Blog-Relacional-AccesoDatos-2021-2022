@@ -1,8 +1,11 @@
 package es.joseluisgs.dam.blog.model;
 
+import lombok.Data;
+
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 public class Category {
     private Long id;
     private String texto;

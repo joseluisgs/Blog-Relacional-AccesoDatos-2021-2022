@@ -1,12 +1,14 @@
 package es.joseluisgs.dam.blog.service;
 
 import es.joseluisgs.dam.blog.repository.CrudRespository;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor // Requerimos un constructor con al menos las propiedades finales
 public abstract class BaseService<T, ID, R extends CrudRespository<T, ID>> {
-    protected R repository;
+    protected final R repository;
 
     // Operaciones CRUD
 
