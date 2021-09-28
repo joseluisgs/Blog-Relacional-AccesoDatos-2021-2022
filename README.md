@@ -15,6 +15,13 @@ Ejemplo de desarrollo de un blog (backend básico) para Acceso a Datos, usando u
     - [Maven](#maven)
     - [Secretos](#secretos)
     - [Lombok](#lombok)
+  - [Arquitectura](#arquitectura)
+    - [Patrón DAO](#patrón-dao)
+    - [Controladores - Servicios - Repositorios](#controladores---servicios---repositorios)
+      - [Controlador](#controlador)
+      - [Servicios](#servicios)
+      - [Repositorios](#repositorios)
+      - [Repositorio vs DAO](#repositorio-vs-dao)
   - [Ejecución](#ejecución)
     - [Docker](#docker)
     - [Adminer o cliente de Bases de Datos](#adminer-o-cliente-de-bases-de-datos)
@@ -60,6 +67,29 @@ Para trabajar con secretos y o variables globales se han usado dos enfoques en e
 ### Lombok
 Se ha usado [Lombok](https://projectlombok.org/features/all) como sistema de anotaciones para aumentar la productividad 
 y reducir el código repetitivo.
+
+## Arquitectura
+### Patrón DAO
+Debemos tener en cuenta que la implementación y formato de la información puede variar según la fuente de los datos el patrón DAO propone separar por completo la lógica de negocio de la lógica para acceder a los datos, de esta forma, el DAO proporcionará los métodos necesarios para insertar, actualizar, borrar y consultar la información; por otra parte, la capa de negocio solo se preocupa por lógica de negocio y utiliza el DAO para interactuar con la fuente de datos.
+![diagrama](./diagrams/dao.png)
+
+### Controladores - Servicios - Repositorios
+La arquitectura que seguiremos es tipo CSS (Controladores -> Servicios -> Repositorios) de esta manera cualquier cambio no afectaría a la capa superior, manteniendo nuestra compatibilidad si por ejemplo pasamos de almacenamiento en ficheros XML a bases de datos relacionales o no relacionales.
+![diagrama](./diagrams/arquitectura.png)
+
+#### Controlador 
+Tiene la lógica de la aplicación y controla y redirige las distintas peticiones que se nos hacen.
+
+#### Servicios
+Tienen la lógica de negocio y procesan las peticiones que se nos hacen accediendo a los recursos necesarios para ello usando los repositorios. Son la capa intermedia.
+
+#### Repositorios
+Implementan la lógica de acceso y manipulación de dato encapsulando dichas operaciones.
+
+#### Repositorio vs DAO
+- DAO implementa las operaciones a más bajo nivel para persistencia y manipulación de la información. DAO es una abstracción de la persistencia de datos. DAO es un concepto de nivel inferior, más cercano a los sistemas de almacenamiento de datos. DAO funciona como una capa de mapeo/acceso de datos.
+- Repositorio encapsula el propio sistema de almacenamiento, pero no suele estar tan ligado a dicho sistema de almacenamiento. Un repositorio es una abstracción de una colección de objetos. El el repositorio es un concepto de nivel superior, más cercano a los objetos de dominio. un repositorio es una capa entre dominios y capas de acceso a datos, que oculta la complejidad de recopilar datos y preparar un objeto de dominio.
+- Se puede dar el caso que un mismo repositorio trabaje con distintos DAOS, por ejemplo las operaciones de manejo de datos de usuarios estén en una base de datos relacional (login, password) y en una NoSQL otra información (nombre, apellidos, email, etc). Es por ello que el repositorio para manejo de usuario llamará por debajo a dos DAOS separados. Pero si la correspondencia es 1 a 1, las ideas son muy similares y podemos optar por uno de ellos.
 
 ## Ejecución
 ### Docker
