@@ -84,7 +84,7 @@ Tiene la lógica de la aplicación y controla y redirige las distintas peticione
 Tienen la lógica de negocio y procesan las peticiones que se nos hacen accediendo a los recursos necesarios para ello usando los repositorios. Son la capa intermedia.
 
 #### Repositorios
-Implementan la lógica de acceso y manipulación de dato encapsulando dichas operaciones.
+Implementan la lógica de acceso y manipulación de los datos encapsulando dichas operaciones.
 
 #### Repositorio vs DAO
 - DAO implementa las operaciones a más bajo nivel para persistencia y manipulación de la información. DAO es una abstracción de la persistencia de datos. DAO es un concepto de nivel inferior, más cercano a los sistemas de almacenamiento de datos. DAO funciona como una capa de mapeo/acceso de datos.
