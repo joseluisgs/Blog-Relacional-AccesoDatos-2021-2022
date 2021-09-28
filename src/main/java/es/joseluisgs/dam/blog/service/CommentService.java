@@ -1,9 +1,7 @@
 package es.joseluisgs.dam.blog.service;
 
 import es.joseluisgs.dam.blog.model.Comment;
-import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.repository.CommentRepository;
-import es.joseluisgs.dam.blog.repository.PostRepository;
 
 import java.util.List;
 

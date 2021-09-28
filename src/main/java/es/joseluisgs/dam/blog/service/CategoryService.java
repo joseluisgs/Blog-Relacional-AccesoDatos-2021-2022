@@ -1,9 +1,7 @@
 package es.joseluisgs.dam.blog.service;
 
 import es.joseluisgs.dam.blog.model.Category;
-import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.repository.CategoryRepository;
-import es.joseluisgs.dam.blog.repository.PostRepository;
 
 import java.util.List;
 

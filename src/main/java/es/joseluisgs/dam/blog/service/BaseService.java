@@ -1,7 +1,6 @@
 package es.joseluisgs.dam.blog.service;
 
 import es.joseluisgs.dam.blog.repository.CrudRespository;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;

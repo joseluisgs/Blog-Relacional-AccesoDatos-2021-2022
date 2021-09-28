@@ -7,6 +7,6 @@ public class Category {
     private Long id;
     private String texto;
     // Lista de post que tiene asociado
-    private Set<Post> posts = new HashSet<>();
+    private final Set<Post> posts = new HashSet<>();
 
 }

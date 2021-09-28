@@ -8,15 +8,19 @@ public interface CrudRespository<T, ID> {
     // Operaciones CRUD
 
     // Obtiene todos
-    public List<T> findAll();
+    List<T> findAll();
+
     // Obtiene por ID
-    public Optional<T> getById(ID id);
+    Optional<T> getById(ID id);
+
     // Salva
-    public T save(T t);
+    T save(T t);
+
     // Actualiza
-    public T update(T t);
+    T update(T t);
+
     // Elimina
-    public void delete(T t);
+    void delete(T t);
 
 
 }
