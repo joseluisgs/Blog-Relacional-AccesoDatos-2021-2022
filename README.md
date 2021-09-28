@@ -19,8 +19,8 @@ Ejemplo de desarrollo de un blog (backend básico) para Acceso a Datos, usando u
     - [Patrón DAO](#patrón-dao)
     - [Controladores - Servicios - Repositorios](#controladores---servicios---repositorios)
       - [Controlador](#controlador)
-      - [Servicios](#servicios)
-      - [Repositorios](#repositorios)
+      - [Servicio](#servicio)
+      - [Repositorio](#repositorio)
       - [Repositorio vs DAO](#repositorio-vs-dao)
   - [Ejecución](#ejecución)
     - [Docker](#docker)
@@ -80,10 +80,10 @@ La arquitectura que seguiremos es tipo CSS (Controladores -> Servicios -> Reposi
 #### Controlador 
 Tiene la lógica de la aplicación y controla y redirige las distintas peticiones que se nos hacen.
 
-#### Servicios
+#### Servicio
 Tienen la lógica de negocio y procesan las peticiones que se nos hacen accediendo a los recursos necesarios para ello usando los repositorios. Son la capa intermedia.
 
-#### Repositorios
+#### Repositorio
 Implementan la lógica de acceso y manipulación de los datos encapsulando dichas operaciones.
 
 #### Repositorio vs DAO
