@@ -5,7 +5,7 @@ import es.joseluisgs.dam.blog.model.Category;
 import java.util.List;
 import java.util.Optional;
 
-public class CategoryRepository implements RepositoryCRUD<Category, Long> {
+public class CategoryRepository implements CrudRespository<Category, Long> {
     @Override
     public List<Category> findAll() {
         return null;

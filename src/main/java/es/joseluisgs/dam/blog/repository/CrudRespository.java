@@ -3,7 +3,10 @@ package es.joseluisgs.dam.blog.repository;
 import java.util.List;
 import java.util.Optional;
 
-public interface RepositoryCRUD<T, ID> {
+public interface CrudRespository<T, ID> {
+
+    // Operaciones CRUD
+
     // Obtiene todos
     public List<T> findAll();
     // Obtiene por ID
