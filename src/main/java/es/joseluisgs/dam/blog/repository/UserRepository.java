@@ -5,7 +5,7 @@ import es.joseluisgs.dam.blog.model.User;
 import java.util.List;
 import java.util.Optional;
 
-public class UserRepository implements RepositoryCRUD<User, Long> {
+public class UserRepository implements CrudRespository<User, Long> {
     @Override
     public List<User> findAll() {
         return null;

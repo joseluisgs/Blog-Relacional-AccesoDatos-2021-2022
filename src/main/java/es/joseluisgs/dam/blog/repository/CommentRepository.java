@@ -5,7 +5,7 @@ import es.joseluisgs.dam.blog.model.Comment;
 import java.util.List;
 import java.util.Optional;
 
-public class CommentRepository implements RepositoryCRUD<Comment, Long>{
+public class CommentRepository implements CrudRespository<Comment, Long> {
     @Override
     public List<Comment> findAll() {
         return null;

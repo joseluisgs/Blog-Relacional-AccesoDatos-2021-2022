@@ -1,7 +1,5 @@
 package es.joseluisgs.dam.blog.utils;
 
-import lombok.Builder;
-
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;

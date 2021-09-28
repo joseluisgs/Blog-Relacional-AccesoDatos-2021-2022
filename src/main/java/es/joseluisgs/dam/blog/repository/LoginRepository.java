@@ -5,7 +5,7 @@ import es.joseluisgs.dam.blog.model.Login;
 import java.util.List;
 import java.util.Optional;
 
-public class LoginRepository implements RepositoryCRUD<Login, Long>{
+public class LoginRepository implements CrudRespository<Login, Long> {
     @Override
     public List<Login> findAll() {
         return null;

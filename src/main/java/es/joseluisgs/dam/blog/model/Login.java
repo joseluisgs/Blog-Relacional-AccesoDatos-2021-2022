@@ -2,7 +2,6 @@ package es.joseluisgs.dam.blog.model;
 
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
