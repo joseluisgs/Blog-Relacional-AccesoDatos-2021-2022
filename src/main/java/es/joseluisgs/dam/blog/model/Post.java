@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class Post {
-    private long id;
+    private Long id;
     private String titulo;
     private String url;
     private String contenido;

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class Comment {
-    private long id;
+    private Long id;
     private String texto;
     // Autor que la realiza
     private User autor;
