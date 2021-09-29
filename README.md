@@ -22,6 +22,7 @@ Ejemplo de desarrollo de un blog (backend básico) para Acceso a Datos, usando u
       - [Servicio](#servicio)
       - [Repositorio](#repositorio)
       - [Repositorio vs DAO](#repositorio-vs-dao)
+    - [Base de datos](#base-de-datos)
   - [Ejecución](#ejecución)
     - [Docker](#docker)
     - [Adminer o cliente de Bases de Datos](#adminer-o-cliente-de-bases-de-datos)
@@ -71,10 +72,12 @@ y reducir el código repetitivo.
 ## Arquitectura
 ### Patrón DAO
 Debemos tener en cuenta que la implementación y formato de la información puede variar según la fuente de los datos el patrón DAO propone separar por completo la lógica de negocio de la lógica para acceder a los datos, de esta forma, el DAO proporcionará los métodos necesarios para insertar, actualizar, borrar y consultar la información; por otra parte, la capa de negocio solo se preocupa por lógica de negocio y utiliza el DAO para interactuar con la fuente de datos.
+
 ![diagrama](./diagrams/dao.png)
 
 ### Controladores - Servicios - Repositorios
 La arquitectura que seguiremos es tipo CSS (Controladores -> Servicios -> Repositorios) de esta manera cualquier cambio no afectaría a la capa superior, manteniendo nuestra compatibilidad si por ejemplo pasamos de almacenamiento en ficheros XML a bases de datos relacionales o no relacionales.
+
 ![diagrama](./diagrams/arquitectura.png)
 
 #### Controlador 
@@ -90,6 +93,13 @@ Implementan la lógica de acceso y manipulación de los datos encapsulando dicha
 - DAO implementa las operaciones a más bajo nivel para persistencia y manipulación de la información. DAO es una abstracción de la persistencia de datos. DAO es un concepto de nivel inferior, más cercano a los sistemas de almacenamiento de datos. DAO funciona como una capa de mapeo/acceso de datos.
 - Repositorio encapsula el propio sistema de almacenamiento, pero no suele estar tan ligado a dicho sistema de almacenamiento. Un repositorio es una abstracción de una colección de objetos. El el repositorio es un concepto de nivel superior, más cercano a los objetos de dominio. un repositorio es una capa entre dominios y capas de acceso a datos, que oculta la complejidad de recopilar datos y preparar un objeto de dominio.
 - Se puede dar el caso que un mismo repositorio trabaje con distintos DAOS, por ejemplo las operaciones de manejo de datos de usuarios estén en una base de datos relacional (login, password) y en una NoSQL otra información (nombre, apellidos, email, etc). Es por ello que el repositorio para manejo de usuario llamará por debajo a dos DAOS separados. Pero si la correspondencia es 1 a 1, las ideas son muy similares y podemos optar por uno de ellos.
+
+### Base de datos
+Se ha usado MariaDB como motor de base de datos relacional y se ha creado un controlador para su manejo usando PreparedStatements, con ello conseguimos:
+- Ahorrar en la construcción de planes de ejecución. Pues la base de estas consultas se repite y tendremos un hash para identificarlas y con ellas podremos aprovechar el plan existente.
+- Evitar que nos inyecten SQL ya que al parametrizar la consulta el API de JDBC nos protege contra las este tipo de ataques. Normalmente el uso de consultas parametrizadas mejora el rendimiento entre un 20 y un 30 % a nivel de base de datos.
+
+![imagen](https://www.arquitecturajava.com/wp-content/uploads/jdbcpreparedstatementparametros.png)
 
 ## Ejecución
 ### Docker
