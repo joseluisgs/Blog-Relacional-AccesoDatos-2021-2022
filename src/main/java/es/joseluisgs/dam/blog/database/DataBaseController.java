@@ -1,5 +1,6 @@
-package es.joseluisgs.dam.blog.utils;
+package es.joseluisgs.dam.blog.database;
 
+import es.joseluisgs.dam.blog.utils.ApplicationProperties;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
@@ -52,19 +53,6 @@ public class DataBaseController {
 
     // Método para abrir la Conexion la Base de Datos
     public void open() {
-       /* try (Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost/", "blog", "blog1234")) {
-            // create a Statement
-            try (Statement stmt = conn.createStatement()) {
-                //execute query
-                try (ResultSet rs = stmt.executeQuery("SELECT 'Hello World!'")) {
-                    //position result to first
-                    rs.first();
-                    System.out.println(rs.getString(1)); //result is "Hello World!"
-                }
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }*/
         try {
             //String url = "jdbc:sqlite:"+this.ruta+this.bbdd; //MySQL jdbc:mysql://localhost/prueba", "root", "1daw"
             String url = "jdbc:mariadb://" + this.serverUrl + ":" + this.serverPort + "/" + this.dataBaseName + "";

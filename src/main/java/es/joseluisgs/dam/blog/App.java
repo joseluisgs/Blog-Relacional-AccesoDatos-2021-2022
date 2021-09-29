@@ -1,7 +1,7 @@
 package es.joseluisgs.dam.blog;
 
 import es.joseluisgs.dam.blog.utils.ApplicationProperties;
-import es.joseluisgs.dam.blog.utils.DataBaseController;
+import es.joseluisgs.dam.blog.database.DataBaseController;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.ResultSet;
@@ -31,7 +31,6 @@ public class App {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
     }
 }
