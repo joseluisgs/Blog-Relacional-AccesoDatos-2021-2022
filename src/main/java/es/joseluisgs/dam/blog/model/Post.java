@@ -14,7 +14,7 @@ public class Post {
     private String contenido;
     private LocalDateTime fechaPublicacion;
     // Autor
-    private User autor;
+    private User user;
     // Lista de comentarios asociados
     private List<Comment> comentarios = new ArrayList<>();
     // Categoría a la que pertenece
