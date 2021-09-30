@@ -9,6 +9,7 @@ import es.joseluisgs.dam.blog.dto.UserDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.time.LocalDate;
 
 public class Blog {
     private static Blog instance;
@@ -85,20 +86,21 @@ public class Blog {
                 .nombre("Nombre " + Instant.now().toString())
                 .email("user"+Math.random()+"@mail.com")
                 .password("1234")
+                .fechaRegistro(LocalDate.now())
                 .build();
         System.out.println(userController.postUserJSON(userDTO));
 
-        System.out.println("UPDATE Usuario con ID = 4");
+        System.out.println("UPDATE Usuario con ID = 5");
         userDTO = UserDTO.builder()
-                .id(4L)
+                .id(5L)
                 .nombre("Prueba Update")
                 .email("prueba@update.com")
                 .build();
         System.out.println(userController.updateUserJSON(userDTO));
 
-        System.out.println("DELETE User con ID = 4");
+        System.out.println("DELETE User con ID = 5");
         userDTO = UserDTO.builder()
-                .id(4L)
+                .id(5L)
                 .build();
         System.out.println(userController.deleteUserJSON(userDTO));
 
