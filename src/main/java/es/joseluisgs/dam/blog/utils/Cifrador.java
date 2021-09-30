@@ -19,7 +19,7 @@ public class Cifrador {
         byte[] hash = null;
         // Llamamos a la función de hash de java
         try {
-            md = MessageDigest.getInstance("SHA-512");
+            md = MessageDigest.getInstance("SHA-1");
             hash = md.digest(cadena.getBytes("UTF-8"));
         } catch (Exception ex) {
             ex.printStackTrace();
