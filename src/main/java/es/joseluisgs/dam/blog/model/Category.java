@@ -1,15 +1,26 @@
 package es.joseluisgs.dam.blog.model;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Builder
 public class Category {
     private Long id;
     private String texto;
-    // Lista de post que tiene asociado
-    private final Set<Post> posts = new HashSet<>();
+
+    public Category(Long id, String texto) {
+        this.id = id;
+        this.texto = texto;
+    }
+
+
+    // Lista de post que tiene asociado. Por ahora suprimo la bidireccionalidad
+    // private final Set<Post> posts = new HashSet<>();
 
 }

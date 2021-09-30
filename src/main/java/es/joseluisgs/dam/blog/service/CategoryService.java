@@ -1,12 +1,16 @@
 package es.joseluisgs.dam.blog.service;
 
+import es.joseluisgs.dam.blog.dto.CategoryDTO;
+import es.joseluisgs.dam.blog.mapper.CategoryMapper;
 import es.joseluisgs.dam.blog.model.Category;
 import es.joseluisgs.dam.blog.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CategoryService extends BaseService<Category, Long, CategoryRepository> {
+    CategoryMapper mapper = new CategoryMapper();
 
     // Inyección de dependencias en el constructor. El servicio necesita este repositorio
     public CategoryService(CategoryRepository repository) {
@@ -16,11 +20,28 @@ public class CategoryService extends BaseService<Category, Long, CategoryReposit
     // Otras operaciones o especificaciones para CRUD
     // O podíamos mapear el nombre
     // O simplemente ocultar las que no queramos usar en niveles superiores
-    public List<Category> getAllCategories() {
-        return this.findAll();
+    // Utilizamos los DTO para par datos del servico al controlador que los presenta
+    public List<CategoryDTO> getAllCategories() {
+        return mapper.toDTO(this.findAll());
     }
 
-    public Category createCategory(Category category) {
-        return this.save(category);
+    public CategoryDTO getCategoryById(Long id) {
+        return mapper.toDTO(this.getById(id));
     }
+
+    public CategoryDTO postCategory(CategoryDTO categoryDTO) {
+        Category res = this.save(mapper.fromDTO(categoryDTO));
+        return mapper.toDTO(res);
+    }
+
+    public CategoryDTO updateCategory(CategoryDTO categoryDTO) {
+        Category res = this.update(mapper.fromDTO(categoryDTO));
+        return mapper.toDTO(res);
+    }
+
+    public CategoryDTO deleteCategory(CategoryDTO categoryDTO) {
+        Category res = this.delete(mapper.fromDTO(categoryDTO));
+        return mapper.toDTO(res);
+    }
+
 }
