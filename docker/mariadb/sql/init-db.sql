@@ -83,5 +83,11 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de usuarios';
 
+INSERT INTO `user` (`id`, `nombre`, `email`, `password`, `fecha_registro`) VALUES
+(1,	'Pepe Perez',	'pepe@pepe.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(2,	'Ana Anaya',	'ana@anaya.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(3,	'Paco Perez',	'paco@perez.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(4,	'Son Goku',	'goku@dragonball.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(5,	'Naruto',	'naruto@shipuden.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30');
 
--- 2021-09-30 16:41:16
+-- 2021-09-30 20:55:13
