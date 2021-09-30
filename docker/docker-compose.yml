@@ -18,7 +18,7 @@ services:
       - mariadb-volume:/var/lib/mysql
     networks:
       - mariadb-network
-    restart: always
+    # restart: always
 
   # ADMIN MARIADB
   adminer:
