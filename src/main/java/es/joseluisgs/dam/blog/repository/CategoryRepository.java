@@ -105,8 +105,10 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
             db.open();
             ResultSet result = db.query(query);
             result.absolute(1);
-            category.setId(result.getLong("id"));
-            category.setTexto(result.getString("texto"));
+            category = new Category(
+                    result.getLong("id"),
+                    result.getString("texto")
+            );
             db.close();
             return category;
         } catch (SQLException e) {
