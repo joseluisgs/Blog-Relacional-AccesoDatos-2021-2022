@@ -18,19 +18,13 @@ public class App {
                 + properties.readProperty("app.version") +" de " +
                 properties.readProperty("app.curso"));
 
-        Dotenv dotenv = Dotenv.load();
-        System.out.println(dotenv.get("DATABASE_NAME"));
+        Blog blog = Blog.getInstance();
+        // Chequeamos el sistema
+        blog.checkService();
 
-        DataBaseController controller = DataBaseController.getInstance();
-        controller.open();
-        ResultSet rs = controller.query("SELECT * from test");
-        try {
-            rs.first();
-            System.out.println(rs.getString(1));
-            controller.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // Categorías
+        blog.Categories();
+
 
     }
 }

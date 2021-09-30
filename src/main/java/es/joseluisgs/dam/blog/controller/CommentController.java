@@ -4,6 +4,7 @@ import es.joseluisgs.dam.blog.model.Comment;
 import es.joseluisgs.dam.blog.repository.CommentRepository;
 import es.joseluisgs.dam.blog.service.CommentService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CommentController {
@@ -25,7 +26,7 @@ public class CommentController {
     }
 
     // Ejemplo de operaciones
-    public List<Comment> getAllComments() {
+    public List<Comment> getAllComments() throws SQLException {
         return commentService.getAllComments();
     }
 }

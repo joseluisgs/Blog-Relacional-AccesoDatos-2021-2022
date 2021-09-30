@@ -4,6 +4,7 @@ import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.repository.PostRepository;
 import es.joseluisgs.dam.blog.service.PostService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class PostController {
@@ -25,7 +26,7 @@ public class PostController {
     }
 
     // Ejemplo de operaciones
-    public List<Post> getAllPost() {
+    public List<Post> getAllPost() throws SQLException {
         return postService.getAllPosts();
     }
 }

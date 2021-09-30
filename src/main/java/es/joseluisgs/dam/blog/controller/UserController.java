@@ -4,6 +4,7 @@ import es.joseluisgs.dam.blog.model.User;
 import es.joseluisgs.dam.blog.repository.UserRepository;
 import es.joseluisgs.dam.blog.service.UserService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserController {
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     // Ejemplo de operaciones
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws SQLException {
         return userService.getAllUsers();
     }
 }

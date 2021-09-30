@@ -16,6 +16,11 @@ CREATE TABLE `category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Base de Datos de Categoría';
 
+INSERT INTO `category` (`id`, `texto`) VALUES
+(1,	'General'),
+(2,	'Dudas'),
+(3,	'Evaluación'),
+(4,	'Pruebas');
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -79,4 +84,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de usuarios';
 
 
--- 2021-09-29 16:51:07
+-- 2021-09-30 16:41:16

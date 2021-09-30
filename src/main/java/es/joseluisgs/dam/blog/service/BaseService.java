@@ -3,6 +3,7 @@ package es.joseluisgs.dam.blog.service;
 import es.joseluisgs.dam.blog.repository.CrudRespository;
 import lombok.RequiredArgsConstructor;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public abstract class BaseService<T, ID, R extends CrudRespository<T, ID>> {
     }
 
     // Obtiene por ID
-    public Optional<T> getById(ID id) {
+    public T getById(ID id) {
         return repository.getById(id);
     }
 
@@ -29,11 +30,11 @@ public abstract class BaseService<T, ID, R extends CrudRespository<T, ID>> {
 
     // Actualiza
     public T update(T t) {
-        return repository.save(t);
+        return repository.update(t);
     }
 
     // Elimina
-    public void delete(T t) {
-        repository.delete(t);
+    public T delete(T t) {
+        return repository.delete(t);
     }
 }

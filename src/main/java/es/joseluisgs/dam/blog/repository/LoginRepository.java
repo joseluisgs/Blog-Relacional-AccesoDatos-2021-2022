@@ -12,8 +12,8 @@ public class LoginRepository implements CrudRespository<Login, Long> {
     }
 
     @Override
-    public Optional<Login> getById(Long aLong) {
-        return Optional.empty();
+    public Login getById(Long id) {
+        return null;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class LoginRepository implements CrudRespository<Login, Long> {
     }
 
     @Override
-    public void delete(Login login) {
-
+    public Login delete(Login login) {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package es.joseluisgs.dam.blog.repository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ public interface CrudRespository<T, ID> {
     List<T> findAll();
 
     // Obtiene por ID
-    Optional<T> getById(ID id);
+    T getById(ID id);
 
     // Salva
     T save(T t);
@@ -20,7 +21,7 @@ public interface CrudRespository<T, ID> {
     T update(T t);
 
     // Elimina
-    void delete(T t);
+    T delete(T t);
 
 
 }

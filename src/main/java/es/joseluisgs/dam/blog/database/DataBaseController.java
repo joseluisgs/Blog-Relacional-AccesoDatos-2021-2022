@@ -84,6 +84,18 @@ public class DataBaseController {
         return resultSet;
     }
 
+    public ResultSet query(String querySQL, int limit, int offset) {
+        resultSet = null;
+        String query = querySQL + " LIMIT " + limit + " OFFSET " + offset;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            System.err.println("Error al consultar BD" + e.getMessage());
+        }
+        return resultSet;
+    }
+
     public int update(String updateSQL) {
         int changes = -1;
         try {
