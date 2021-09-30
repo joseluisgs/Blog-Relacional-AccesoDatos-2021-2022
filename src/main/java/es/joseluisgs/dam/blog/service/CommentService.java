@@ -4,6 +4,7 @@ import es.joseluisgs.dam.blog.model.Comment;
 import es.joseluisgs.dam.blog.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public class CommentService extends BaseService<Comment, Long, CommentRepository
     // Otras operaciones o especificaciones para CRUD
     // O podíamos mapear el nombre
     // O simplemente ocultar las que no queramos usar en niveles superiores
-    public List<Comment> getAllComments() {
+    public List<Comment> getAllComments() throws SQLException {
         return this.findAll();
     }
 

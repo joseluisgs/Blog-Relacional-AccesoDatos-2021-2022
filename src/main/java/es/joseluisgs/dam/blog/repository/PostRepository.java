@@ -12,8 +12,8 @@ public class PostRepository implements CrudRespository<Post, Long> {
     }
 
     @Override
-    public Optional<Post> getById(Long aLong) {
-        return Optional.empty();
+    public Post getById(Long id) {
+        return null;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class PostRepository implements CrudRespository<Post, Long> {
     }
 
     @Override
-    public void delete(Post post) {
-
+    public Post delete(Post post) {
+        return null;
     }
 }

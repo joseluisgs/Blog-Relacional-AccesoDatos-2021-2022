@@ -12,8 +12,8 @@ public class UserRepository implements CrudRespository<User, Long> {
     }
 
     @Override
-    public Optional<User> getById(Long aLong) {
-        return Optional.empty();
+    public User getById(Long id) {
+        return null;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class UserRepository implements CrudRespository<User, Long> {
     }
 
     @Override
-    public void delete(User user) {
-
+    public User delete(User user) {
+        return null;
     }
 }

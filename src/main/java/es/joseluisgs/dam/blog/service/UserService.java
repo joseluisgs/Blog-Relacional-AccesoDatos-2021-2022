@@ -5,6 +5,7 @@ import es.joseluisgs.dam.blog.repository.UserRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserService extends BaseService<User, Long, UserRepository> {
@@ -17,7 +18,7 @@ public class UserService extends BaseService<User, Long, UserRepository> {
     // Otras operaciones o especificaciones para CRUD
     // O podíamos mapear el nombre
     // O simplemente ocultar las que no queramos usar en niveles superiores
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws SQLException {
         return this.findAll();
     }
 

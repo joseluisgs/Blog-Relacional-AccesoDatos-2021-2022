@@ -4,6 +4,7 @@ import es.joseluisgs.dam.blog.model.Login;
 import es.joseluisgs.dam.blog.repository.LoginRepository;
 import es.joseluisgs.dam.blog.service.LoginService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class LoginController {
@@ -25,7 +26,7 @@ public class LoginController {
     }
 
     // Ejemplo de operaciones
-    public List<Login> getAllLogins() {
+    public List<Login> getAllLogins() throws SQLException {
         return loginService.getAllLogins();
     }
 }

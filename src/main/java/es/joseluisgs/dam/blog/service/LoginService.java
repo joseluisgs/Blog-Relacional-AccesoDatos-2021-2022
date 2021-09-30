@@ -5,6 +5,7 @@ import es.joseluisgs.dam.blog.repository.LoginRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class LoginService extends BaseService<Login, Long, LoginRepository> {
@@ -17,7 +18,7 @@ public class LoginService extends BaseService<Login, Long, LoginRepository> {
     // Otras operaciones o especificaciones para CRUD
     // O podíamos mapear el nombre
     // O simplemente ocultar las que no queramos usar en niveles superiores
-    public List<Login> getAllLogins() {
+    public List<Login> getAllLogins() throws SQLException {
         return this.findAll();
     }
 

@@ -12,8 +12,8 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
     }
 
     @Override
-    public Optional<Comment> getById(Long aLong) {
-        return Optional.empty();
+    public Comment getById(Long aLong) {
+        return null;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
     }
 
     @Override
-    public void delete(Comment comment) {
-
+    public Comment delete(Comment comment) {
+        return null;
     }
 }
