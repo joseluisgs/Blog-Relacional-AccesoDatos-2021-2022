@@ -19,7 +19,7 @@ public class Category {
         this.texto = texto;
     }
 
-
+    // TODO Bidireccionalidad
     // Lista de post que tiene asociado. Por ahora suprimo la bidireccionalidad
     // private final Set<Post> posts = new HashSet<>();
 

@@ -43,7 +43,7 @@ public class CategoryController {
     public String getCategoryByIdJSON(Long id){
         // Vamos a devolver el JSON de las categorías
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        return prettyGson.toJson(categoryService.getById(id));
+        return prettyGson.toJson(categoryService.getCategoryById(id));
     }
 
     public String postCategoryJSON(CategoryDTO categoryDTO) {
