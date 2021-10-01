@@ -1,9 +1,11 @@
 package es.joseluisgs.dam.blog;
 
 import es.joseluisgs.dam.blog.controller.CategoryController;
+import es.joseluisgs.dam.blog.controller.PostController;
 import es.joseluisgs.dam.blog.controller.UserController;
 import es.joseluisgs.dam.blog.database.DataBaseController;
 import es.joseluisgs.dam.blog.dto.CategoryDTO;
+import es.joseluisgs.dam.blog.dto.PostDTO;
 import es.joseluisgs.dam.blog.dto.UserDTO;
 
 import java.sql.ResultSet;
@@ -71,14 +73,11 @@ public class Blog {
 
     public void Users() {
         UserController userController = UserController.getInstance();
-        // Obtenemos todas las categorías
-        // List<CategoryDTO> categories = categoryController.getAllCategories();
-        // categories.forEach(c-> System.out.println(c.toJSON()));
 
         System.out.println("GET Todos los usuarios");
         System.out.println(userController.getAllUsersJSON());
 
-        System.out.println("GET Ussuario con ID = 2");
+        System.out.println("GET Usuario con ID = 2");
         System.out.println(userController.getUserByIdJSON(2L));
 
         System.out.println("POST Insertando Usuario");
@@ -103,6 +102,39 @@ public class Blog {
                 .id(5L)
                 .build();
         System.out.println(userController.deleteUserJSON(userDTO));
+    }
+
+    public void Posts() {
+        PostController postController = PostController.getInstance();
+
+        System.out.println("GET Todos los Post");
+        System.out.println(postController.getAllPostJSON());
+
+//        System.out.println("GET Post con ID = 2");
+//        System.out.println(postController.getPostByIdJSON(2L));
+//
+//        System.out.println("POST Insertando Post");
+//        PostDTO postDTO = PostDTO.builder()
+//                .nombre("Nombre " + Instant.now().toString())
+//                .email("user"+Math.random()+"@mail.com")
+//                .password("1234")
+//                .fechaRegistro(LocalDate.now())
+//                .build();
+//        System.out.println(postController.postPostJSON(postDTO));
+//
+//        System.out.println("UPDATE Post con ID = 5");
+//        postDTO = UserDTO.builder()
+//                .id(5L)
+//                .nombre("Prueba Update")
+//                .email("prueba@update.com")
+//                .build();
+//        System.out.println(postController.updatePostJSON(postDTO));
+//
+//        System.out.println("DELETE User con ID = 5");
+//        postDTO = PostDTO.builder()
+//                .id(5L)
+//                .build();
+//        System.out.println(postController.deletePostJSON(postDTO));
 
     }
 }
