@@ -99,7 +99,6 @@ public class PostRepository implements CrudRespository<Post, Long> {
                 "category_id = "+post.getCategory_id()+" " +
                 " WHERE id = "+post.getId();
 
-        System.out.println(query);
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.update(query);
@@ -111,6 +110,15 @@ public class PostRepository implements CrudRespository<Post, Long> {
 
     @Override
     public Post delete(Post post) {
+        String query = "DELETE FROM post " +
+                "WHERE id = " + post.getId();
+
+        DataBaseController db = DataBaseController.getInstance();
+        db.open();
+        int res = db.update(query);
+        db.close();
+        if(res != 0)
+            return post;
         return null;
     }
 

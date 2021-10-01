@@ -104,7 +104,6 @@ public class UserRepository implements CrudRespository<User, Long> {
     public User delete(User user) {
         String query = "DELETE FROM user " +
                 "WHERE id = " + user.getId();
-        System.out.println(query);
 
         DataBaseController db = DataBaseController.getInstance();
         db.open();

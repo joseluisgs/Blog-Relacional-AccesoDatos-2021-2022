@@ -151,12 +151,14 @@ public class Blog {
         postDTO.setUser(postUser);
         postDTO.setCategory(categoryPost);
         System.out.println(postController.updatePostJSON(postDTO));
-//
-//        System.out.println("DELETE User con ID = 5");
-//        postDTO = PostDTO.builder()
-//                .id(5L)
-//                .build();
-//        System.out.println(postController.deletePostJSON(postDTO));
+
+        System.out.println("DELETE User con ID = 4");
+        postDTO = PostDTO.builder()
+                .id(4L)
+                .build();
+        postDTO.setUser(postUser);
+        postDTO.setCategory(categoryPost);
+        System.out.println(postController.deletePostJSON(postDTO));
 
     }
 }
