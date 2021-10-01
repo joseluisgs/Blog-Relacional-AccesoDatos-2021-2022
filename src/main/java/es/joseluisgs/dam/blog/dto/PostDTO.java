@@ -22,6 +22,9 @@ public class PostDTO {
     // Categoría a la que pertenece
     private Category category;
 
+    // TODO Lista de comentarios asociados
+    // private List<Comment> comentarios = new ArrayList<>();
+
     public String toJSON() {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(this);

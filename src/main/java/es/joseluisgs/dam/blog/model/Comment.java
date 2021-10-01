@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 public class Comment {
     private Long id;
     private String texto;
-    // Autor que la realiza
-    private User user;
-    // Post al que pertenece
-    private Post post;
     private LocalDateTime fechaPublicacion;
+    // Autor que la realiza
+    private Long user_id;
+    // Post al que pertenece
+    private Long post_id;
 }

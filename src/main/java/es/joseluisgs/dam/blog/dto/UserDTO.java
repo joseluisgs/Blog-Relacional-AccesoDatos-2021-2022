@@ -16,6 +16,14 @@ public class UserDTO {
     private LocalDate fechaRegistro;
     private String password;
 
+    // TODO Bidireccionalidad
+    // Lista de Comentarios
+    //private Set<Comment> comentarios = new HashSet<>();
+    // Lista de Posts
+    //private Set<Post> posts = new HashSet<>();
+    // Su login activo si lo tiene
+    //private Login login;
+
     public String toJSON() {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(this);

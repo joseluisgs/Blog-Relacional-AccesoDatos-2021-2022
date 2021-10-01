@@ -21,10 +21,6 @@ public class Post {
     // Categoría a la que pertenece
     private Long category_id;
 
-    // TODO Lista de comentarios asociados
-    // private List<Comment> comentarios = new ArrayList<>();
-
-
     public Post(Long id, String titulo, String url, String contenido, LocalDateTime fechaPublicacion, Long user_id, Long category_id) {
         this.id = id;
         this.titulo = titulo;

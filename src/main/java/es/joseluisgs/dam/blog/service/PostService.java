@@ -50,18 +50,27 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
     }
 
     public PostDTO postPost(PostDTO postDTO) {
-        Post res = this.save(mapper.fromDTO(postDTO));
-        return mapper.toDTO(res);
+        Post post = this.save(mapper.fromDTO(postDTO));
+        PostDTO res = mapper.toDTO(post);
+        res.setUser(this.getUserById(post.getUser_id()));
+        res.setCategory(this.getCategoryById(post.getCategory_id()));
+        return res;
     }
 
     public PostDTO updatePost(PostDTO postDTO) {
-        Post res = this.update(mapper.fromDTO(postDTO));
-        return mapper.toDTO(res);
+        Post post = this.update(mapper.fromDTO(postDTO));
+        PostDTO res = mapper.toDTO(post);
+        res.setUser(this.getUserById(post.getUser_id()));
+        res.setCategory(this.getCategoryById(post.getCategory_id()));
+        return res;
     }
 
     public PostDTO deletePost(PostDTO postDTO) {
-        Post res = this.delete(mapper.fromDTO(postDTO));
-        return mapper.toDTO(res);
+        Post post = this.delete(mapper.fromDTO(postDTO));
+        PostDTO res = mapper.toDTO(post);
+        res.setUser(this.getUserById(post.getUser_id()));
+        res.setCategory(this.getCategoryById(post.getCategory_id()));
+        return res;
     }
     
     private User getUserById(Long id) {
