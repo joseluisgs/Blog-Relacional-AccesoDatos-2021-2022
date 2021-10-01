@@ -22,6 +22,7 @@ Ejemplo de desarrollo de un blog (backend básico) para Acceso a Datos, usando u
       - [Servicio](#servicio)
       - [Repositorio](#repositorio)
       - [Repositorio vs DAO](#repositorio-vs-dao)
+    - [Patrón DTO y Mapper](#patrón-dto-y-mapper)
     - [Base de datos](#base-de-datos)
   - [Ejecución](#ejecución)
     - [Docker](#docker)
@@ -93,6 +94,14 @@ Implementan la lógica de acceso y manipulación de los datos encapsulando dicha
 - DAO implementa las operaciones a más bajo nivel para persistencia y manipulación de la información. DAO es una abstracción de la persistencia de datos. DAO es un concepto de nivel inferior, más cercano a los sistemas de almacenamiento de datos. DAO funciona como una capa de mapeo/acceso de datos.
 - Repositorio encapsula el propio sistema de almacenamiento, pero no suele estar tan ligado a dicho sistema de almacenamiento. Un repositorio es una abstracción de una colección de objetos. El el repositorio es un concepto de nivel superior, más cercano a los objetos de dominio. un repositorio es una capa entre dominios y capas de acceso a datos, que oculta la complejidad de recopilar datos y preparar un objeto de dominio.
 - Se puede dar el caso que un mismo repositorio trabaje con distintos DAOS, por ejemplo las operaciones de manejo de datos de usuarios estén en una base de datos relacional (login, password) y en una NoSQL otra información (nombre, apellidos, email, etc). Es por ello que el repositorio para manejo de usuario llamará por debajo a dos DAOS separados. Pero si la correspondencia es 1 a 1, las ideas son muy similares y podemos optar por uno de ellos.
+
+### Patrón DTO y Mapper
+El patrón DTO tiene como finalidad de crear un objeto plano (POJO) con una serie de atributos que puedan ser enviados o recuperados por nuestro servicio y enviados a capas superiores cone l objetivo de condensar o adaptar la información para disminuir las trasferencia y con ello respetar nuestro modelo de datos, pues es en el objeto DTO donde realizamos operaciones de trasferencia de datos.
+Por ejemplo en nuestro modelo tenemos usuarios que escriben post. Podemos de una tacada traernos todos los usuarios y sus post en el DTO de usuarios.
+
+Por otro lado, los Mapper nos ayuda a ensamblar los DTO o desensamblaralos según el modelo de datos que tenemos. Es decir crear un objeto POJO a partir de un objeto DTO o POJO desde objetos DTO.
+
+![dto](./diagrams/dto.svg)
 
 ### Base de datos
 Se ha usado MariaDB como motor de base de datos relacional y se ha creado un controlador para su manejo usando PreparedStatements, con ello conseguimos:
