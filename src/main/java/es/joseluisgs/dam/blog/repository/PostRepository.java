@@ -68,16 +68,73 @@ public class PostRepository implements CrudRespository<Post, Long> {
 
     @Override
     public Post save(Post post) {
-        return null;
+        String query = "INSERT INTO post (titulo, url, contenido, fecha_publicacion, user_id, category_id) VALUES (" +
+                "'"+post.getTitulo()+"', " +
+                "'"+post.getUrl()+"', " +
+                "'"+post.getContenido()+"', " +
+                "'"+post.getFechaPublicacion()+"', " +
+                post.getUser_id() +", " +
+                post.getCategory_id() +
+                ")";
+
+        DataBaseController db = DataBaseController.getInstance();
+        db.open();
+        int res = db.update(query);
+        if(res != 0)
+            // Para obtener su ID
+            post= this.getItem(post);
+        // una vez insertado comprobamos que esta correcto para devolverlo
+        db.close();
+        return post;
     }
 
     @Override
     public Post update(Post post) {
+        String query = "UPDATE post SET " +
+                "titulo = '"+post.getTitulo()+"', " +
+                "contenido = '"+post.getContenido()+ "', " +
+                "url = '"+post.getUrl()+"', " +
+                "fecha_publicacion = '"+post.getFechaPublicacion()+"', " +
+                "user_id = "+post.getUser_id()+", " +
+                "category_id = "+post.getCategory_id()+" " +
+                " WHERE id = "+post.getId();
+
+        System.out.println(query);
+        DataBaseController db = DataBaseController.getInstance();
+        db.open();
+        int res = db.update(query);
+        db.close();
+        if(res != 0)
+            return post;
         return null;
     }
 
     @Override
     public Post delete(Post post) {
         return null;
+    }
+
+    private Post getItem(Post post) {
+        try {
+            String query = "SELECT * FROM post WHERE url = '" + post.getUrl() +"'";
+            DataBaseController db = DataBaseController.getInstance();
+            db.open();
+            ResultSet result = db.query(query);
+            result.absolute(1);
+            post = new Post(
+                    result.getLong("id"),
+                    result.getString("titulo"),
+                    result.getString("url"),
+                    result.getString("contenido"),
+                    result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                    result.getLong("user_id"),
+                    result.getLong("category_id")
+            );
+            db.close();
+            return post;
+        } catch (SQLException e) {
+            System.err.println("Error getItem: " + e.getMessage());
+            return null;
+        }
     }
 }

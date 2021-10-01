@@ -7,11 +7,14 @@ import es.joseluisgs.dam.blog.database.DataBaseController;
 import es.joseluisgs.dam.blog.dto.CategoryDTO;
 import es.joseluisgs.dam.blog.dto.PostDTO;
 import es.joseluisgs.dam.blog.dto.UserDTO;
+import es.joseluisgs.dam.blog.model.Category;
+import es.joseluisgs.dam.blog.model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Blog {
     private static Blog instance;
@@ -112,23 +115,42 @@ public class Blog {
 
         System.out.println("GET Post con ID = 2");
         System.out.println(postController.getPostByIdJSON(2L));
-//
-//        System.out.println("POST Insertando Post");
-//        PostDTO postDTO = PostDTO.builder()
-//                .nombre("Nombre " + Instant.now().toString())
-//                .email("user"+Math.random()+"@mail.com")
-//                .password("1234")
-//                .fechaRegistro(LocalDate.now())
-//                .build();
-//        System.out.println(postController.postPostJSON(postDTO));
-//
-//        System.out.println("UPDATE Post con ID = 5");
-//        postDTO = UserDTO.builder()
-//                .id(5L)
-//                .nombre("Prueba Update")
-//                .email("prueba@update.com")
-//                .build();
-//        System.out.println(postController.updatePostJSON(postDTO));
+
+        System.out.println("POST Insertando Post");
+        PostDTO postDTO = PostDTO.builder()
+                .titulo("Post " + Instant.now().toString())
+                .url("http://"+Math.random()+".dominio.com")
+                .contenido(Instant.now().toString())
+                .fechaPublicacion(LocalDateTime.now())
+                .build();
+        // Asignamos el usuario que exista, solo necesitamos su ID
+        User postUser = User.builder()
+                .id(1L)
+                .nombre("Pepe Perez")
+                .email("pepe@pepe.com")
+                .build();
+        postDTO.setUser(postUser);
+        // Asignamos una categoria que exita
+        Category categoryPost = Category.builder()
+                .id(1L)
+                .texto("General")
+                .build();
+        postDTO.setCategory(categoryPost);
+
+        System.out.println(postController.postPostJSON(postDTO));
+
+        System.out.println("UPDATE Post con ID = 4");
+        // Solo dejamos cambiar el tútulo o el contenido
+        postDTO = PostDTO.builder()
+                .id(4L)
+                .titulo("Update " + Instant.now().toString())
+                .contenido("Update " + Instant.now().toString())
+                .url("http://"+Math.random()+".dominio.com")
+                .fechaPublicacion(LocalDateTime.now())
+                .build();
+        postDTO.setUser(postUser);
+        postDTO.setCategory(categoryPost);
+        System.out.println(postController.updatePostJSON(postDTO));
 //
 //        System.out.println("DELETE User con ID = 5");
 //        postDTO = PostDTO.builder()
