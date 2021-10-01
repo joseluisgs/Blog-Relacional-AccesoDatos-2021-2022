@@ -70,6 +70,8 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         PostDTO res = mapper.toDTO(post);
         res.setUser(this.getUserById(post.getUser_id()));
         res.setCategory(this.getCategoryById(post.getCategory_id()));
+        // Debemos borrar todos los comentarios del post
+        // TODO Borrar comentarios del blog
         return res;
     }
     
