@@ -18,9 +18,9 @@ public class PostDTO {
     private String contenido;
     private LocalDateTime fechaPublicacion;
     // Autor
-    private User autor;
+    private User user;
     // Categoría a la que pertenece
-    private Category categoria;
+    private Category category;
 
     public String toJSON() {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();

@@ -14,8 +14,8 @@ public class PostMapper extends BaseMapper<Post, PostDTO>{
                 .url(item.getUrl())
                 .contenido(item.getContenido())
                 .fechaPublicacion(item.getFechaPublicacion())
-                .autor(item.getAutor())
-                .categoria(item.getCategoria())
+                .user_id(item.getUser().getId())
+                .category_id(item.getCategory().getId())
                 .build();
     }
 
@@ -27,8 +27,6 @@ public class PostMapper extends BaseMapper<Post, PostDTO>{
                 .url(item.getUrl())
                 .contenido(item.getContenido())
                 .fechaPublicacion(item.getFechaPublicacion())
-                .autor(item.getAutor())
-                .categoria(item.getCategoria())
                 .build();
     }
 }
