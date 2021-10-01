@@ -66,7 +66,7 @@ INSERT INTO `post` (`id`, `titulo`, `url`, `contenido`, `fecha_publicacion`, `us
 (2,	'Posy num 2',	'http://post2.com',	'Este es el post num 2',	'2021-10-01 16:12:28',	2,	2),
 (3,	'Post num 3',	'https://post3.com',	'Este es el post num 3',	'2021-10-01 16:13:00',	3,	3),
 (4,	'Post num 4',	'http://post4.com',	'Esto es el post num 4',	'2021-10-01 16:13:40',	1,	1),
-(5,	'',	'Post num 5',	'Esto es el post num 5',	'2021-10-01 16:14:14',	3,	3);
+(5,	'Post num 5',	'http://post5.com',	'Esto es el post num 5',	'2021-10-01 16:14:14',	2,	3);
 
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE `test` (

@@ -66,7 +66,7 @@ INSERT INTO `post` (`id`, `titulo`, `url`, `contenido`, `fecha_publicacion`, `us
 (2,	'Posy num 2',	'http://post2.com',	'Este es el post num 2',	'2021-10-01 16:12:28',	2,	2),
 (3,	'Post num 3',	'https://post3.com',	'Este es el post num 3',	'2021-10-01 16:13:00',	3,	3),
 (4,	'Post num 4',	'http://post4.com',	'Esto es el post num 4',	'2021-10-01 16:13:40',	1,	1),
-(5,	'',	'Post num 5',	'Esto es el post num 5',	'2021-10-01 16:14:14',	3,	3);
+(5,	'Post num 5',	'http://post5.com',	'Esto es el post num 5',	'2021-10-01 16:14:14',	2,	3);
 
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE `test` (
@@ -101,4 +101,4 @@ INSERT INTO `user` (`id`, `nombre`, `email`, `password`, `fecha_registro`) VALUE
 (16,	'Nombre 2021-09-30T20:59:29.803847Z',	'user0.916961699546684@mail.com',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
 (17,	'Nombre 2021-09-30T20:59:57.720217Z',	'user0.739033396026499@mail.com',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30');
 
--- 2021-10-01 16:14:44
+-- 2021-10-01 16:14:29
