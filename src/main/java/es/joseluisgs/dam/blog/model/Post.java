@@ -17,19 +17,21 @@ public class Post {
     private LocalDateTime fechaPublicacion;
 
     // Autor
-    private User autor;
+    private Long user_id;
     // Categoría a la que pertenece
-    private Category categoria;
+    private Long category_id;
 
     // TODO Lista de comentarios asociados
     // private List<Comment> comentarios = new ArrayList<>();
 
 
-    public Post(Long id, String titulo, String url, String contenido, LocalDateTime fechaPublicacion) {
+    public Post(Long id, String titulo, String url, String contenido, LocalDateTime fechaPublicacion, Long user_id, Long category_id) {
         this.id = id;
         this.titulo = titulo;
         this.url = url;
         this.contenido = contenido;
         this.fechaPublicacion = fechaPublicacion;
+        this.user_id = user_id;
+        this.category_id = category_id;
     }
 }
