@@ -24,7 +24,10 @@ public class App {
         // blog.Users();
 
         // Post
-        blog.Posts();
+        // blog.Posts();
+
+        // Commentarios
+        blog.Comments();
 
 
     }
