@@ -32,17 +32,21 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         
         // Ahora debemos añadir al DTO el Usuario como objeto y la Categoria, 
         // no como ID que es lo que nos viene de la BD
-        posts.forEach(p-> {
-            PostDTO postDTO = mapper.toDTO(p);
-            postDTO.setUser(this.getUserById(p.getUser_id()));
-            postDTO.setCategory(this.getCategoryById(p.getCategory_id()));
+        posts.forEach(post-> {
+            PostDTO postDTO = mapper.toDTO(post);
+            postDTO.setUser(this.getUserById(post.getUser_id()));
+            postDTO.setCategory(this.getCategoryById(post.getCategory_id()));
             result.add(postDTO);
         });
         return result;
     }
 
     public PostDTO getPostById(Long id) {
-        return mapper.toDTO(this.getById(id));
+        Post post = this.getById(id);
+        PostDTO postDTO = mapper.toDTO(post);
+        postDTO.setUser(this.getUserById(post.getUser_id()));
+        postDTO.setCategory(this.getCategoryById(post.getCategory_id()));
+        return postDTO;
     }
 
     public PostDTO postPost(PostDTO postDTO) {

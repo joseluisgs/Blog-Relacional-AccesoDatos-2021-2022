@@ -42,8 +42,28 @@ public class PostRepository implements CrudRespository<Post, Long> {
     }
 
     @Override
-    public Post getById(Long id) {
-        return null;
+    public Post getById(Long ID) {
+        try {
+            String query = "SELECT * FROM post WHERE id = " + ID;
+            DataBaseController db = DataBaseController.getInstance();
+            db.open();
+            ResultSet result = db.query(query);
+            result.absolute(1);
+            Post post = new Post(
+                    result.getLong("id"),
+                    result.getString("titulo"),
+                    result.getString("url"),
+                    result.getString("contenido"),
+                    result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                    result.getLong("user_id"),
+                    result.getLong("category_id")
+            );
+            db.close();
+            return post;
+        } catch (SQLException e) {
+            System.err.println("Error getById: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override

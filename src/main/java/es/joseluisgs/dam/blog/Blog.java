@@ -110,8 +110,8 @@ public class Blog {
         System.out.println("GET Todos los Post");
         System.out.println(postController.getAllPostJSON());
 
-//        System.out.println("GET Post con ID = 2");
-//        System.out.println(postController.getPostByIdJSON(2L));
+        System.out.println("GET Post con ID = 2");
+        System.out.println(postController.getPostByIdJSON(2L));
 //
 //        System.out.println("POST Insertando Post");
 //        PostDTO postDTO = PostDTO.builder()
