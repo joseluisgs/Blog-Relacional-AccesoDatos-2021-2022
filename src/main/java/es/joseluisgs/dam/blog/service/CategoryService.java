@@ -4,9 +4,7 @@ import es.joseluisgs.dam.blog.dto.CategoryDTO;
 import es.joseluisgs.dam.blog.mapper.CategoryMapper;
 import es.joseluisgs.dam.blog.model.Category;
 import es.joseluisgs.dam.blog.repository.CategoryRepository;
-import lombok.RequiredArgsConstructor;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class CategoryService extends BaseService<Category, Long, CategoryRepository> {

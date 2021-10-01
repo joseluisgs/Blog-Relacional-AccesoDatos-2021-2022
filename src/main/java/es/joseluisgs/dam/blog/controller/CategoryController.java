@@ -3,11 +3,9 @@ package es.joseluisgs.dam.blog.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import es.joseluisgs.dam.blog.dto.CategoryDTO;
-import es.joseluisgs.dam.blog.model.Category;
 import es.joseluisgs.dam.blog.repository.CategoryRepository;
 import es.joseluisgs.dam.blog.service.CategoryService;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class CategoryController {
@@ -30,17 +28,17 @@ public class CategoryController {
 
     // Ejemplo de operaciones
     // Usamos DTO para implementar este patrón en represantación y trasporte de la información
-    public List<CategoryDTO> getAllCategories()  {
+    public List<CategoryDTO> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
-    public String getAllCategoriesJSON()  {
+    public String getAllCategoriesJSON() {
         // Vamos a devolver el JSON de las categorías
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.getAllCategories());
     }
 
-    public String getCategoryByIdJSON(Long id){
+    public String getCategoryByIdJSON(Long id) {
         // Vamos a devolver el JSON de las categorías
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.getCategoryById(id));

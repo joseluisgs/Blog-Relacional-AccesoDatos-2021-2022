@@ -2,12 +2,8 @@ package es.joseluisgs.dam.blog.dto;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import es.joseluisgs.dam.blog.model.Post;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @Builder
@@ -19,13 +15,13 @@ public class CategoryDTO {
     // Lista de post que tiene asociado. Por ahora suprimo la bidireccionalidad
     // private final Set<Post> posts = new HashSet<>();
 
-    public String toJSON() {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-         return prettyGson.toJson(this);
-    }
-
     public static CategoryDTO fromJSON(String json) {
         final Gson gson = new Gson();
-        return  gson.fromJson(json, CategoryDTO.class);
+        return gson.fromJson(json, CategoryDTO.class);
+    }
+
+    public String toJSON() {
+        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        return prettyGson.toJson(this);
     }
 }

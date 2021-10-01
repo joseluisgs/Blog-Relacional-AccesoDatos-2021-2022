@@ -24,13 +24,13 @@ public class UserDTO {
     // Su login activo si lo tiene
     //private Login login;
 
+    public static CategoryDTO fromJSON(String json) {
+        final Gson gson = new Gson();
+        return gson.fromJson(json, CategoryDTO.class);
+    }
+
     public String toJSON() {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(this);
-    }
-
-    public static CategoryDTO fromJSON(String json) {
-        final Gson gson = new Gson();
-        return  gson.fromJson(json, CategoryDTO.class);
     }
 }

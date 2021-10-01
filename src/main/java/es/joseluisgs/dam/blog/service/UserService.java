@@ -1,17 +1,11 @@
 package es.joseluisgs.dam.blog.service;
 
-import es.joseluisgs.dam.blog.dto.CategoryDTO;
 import es.joseluisgs.dam.blog.dto.UserDTO;
-import es.joseluisgs.dam.blog.mapper.CategoryMapper;
 import es.joseluisgs.dam.blog.mapper.UserMapper;
-import es.joseluisgs.dam.blog.model.Category;
 import es.joseluisgs.dam.blog.model.User;
 import es.joseluisgs.dam.blog.repository.UserRepository;
 import es.joseluisgs.dam.blog.utils.Cifrador;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserService extends BaseService<User, Long, UserRepository> {

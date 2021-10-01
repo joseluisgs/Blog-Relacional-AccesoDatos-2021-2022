@@ -2,8 +2,6 @@ package es.joseluisgs.dam.blog.service;
 
 import es.joseluisgs.dam.blog.model.Login;
 import es.joseluisgs.dam.blog.repository.LoginRepository;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.sql.SQLException;
 import java.util.List;

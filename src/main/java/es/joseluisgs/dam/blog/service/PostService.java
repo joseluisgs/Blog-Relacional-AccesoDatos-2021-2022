@@ -8,9 +8,7 @@ import es.joseluisgs.dam.blog.model.User;
 import es.joseluisgs.dam.blog.repository.CategoryRepository;
 import es.joseluisgs.dam.blog.repository.PostRepository;
 import es.joseluisgs.dam.blog.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +27,10 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         // Obtenemos la lista
         List<Post> posts = this.findAll();
         List<PostDTO> result = new ArrayList<>();
-        
+
         // Ahora debemos añadir al DTO el Usuario como objeto y la Categoria, 
         // no como ID que es lo que nos viene de la BD
-        posts.forEach(post-> {
+        posts.forEach(post -> {
             PostDTO postDTO = mapper.toDTO(post);
             postDTO.setUser(this.getUserById(post.getUser_id()));
             postDTO.setCategory(this.getCategoryById(post.getCategory_id()));
@@ -74,7 +72,7 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         // TODO Borrar comentarios del blog
         return res;
     }
-    
+
     private User getUserById(Long id) {
         UserService service = new UserService(new UserRepository());
         return service.getById(id);

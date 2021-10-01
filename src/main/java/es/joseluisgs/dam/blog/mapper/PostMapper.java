@@ -1,11 +1,9 @@
 package es.joseluisgs.dam.blog.mapper;
 
 import es.joseluisgs.dam.blog.dto.PostDTO;
-import es.joseluisgs.dam.blog.dto.UserDTO;
 import es.joseluisgs.dam.blog.model.Post;
-import es.joseluisgs.dam.blog.model.User;
 
-public class PostMapper extends BaseMapper<Post, PostDTO>{
+public class PostMapper extends BaseMapper<Post, PostDTO> {
     @Override
     public Post fromDTO(PostDTO item) {
         return Post.builder()

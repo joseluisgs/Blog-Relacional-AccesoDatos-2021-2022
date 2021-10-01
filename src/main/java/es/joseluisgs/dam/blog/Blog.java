@@ -86,7 +86,7 @@ public class Blog {
         System.out.println("POST Insertando Usuario");
         UserDTO userDTO = UserDTO.builder()
                 .nombre("Nombre " + Instant.now().toString())
-                .email("user"+Math.random()+"@mail.com")
+                .email("user" + Math.random() + "@mail.com")
                 .password("1234")
                 .fechaRegistro(LocalDate.now())
                 .build();
@@ -119,7 +119,7 @@ public class Blog {
         System.out.println("POST Insertando Post");
         PostDTO postDTO = PostDTO.builder()
                 .titulo("Post " + Instant.now().toString())
-                .url("http://"+Math.random()+".dominio.com")
+                .url("http://" + Math.random() + ".dominio.com")
                 .contenido(Instant.now().toString())
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
@@ -145,7 +145,7 @@ public class Blog {
                 .id(4L)
                 .titulo("Update " + Instant.now().toString())
                 .contenido("Update " + Instant.now().toString())
-                .url("http://"+Math.random()+".dominio.com")
+                .url("http://" + Math.random() + ".dominio.com")
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
         postDTO.setUser(postUser);

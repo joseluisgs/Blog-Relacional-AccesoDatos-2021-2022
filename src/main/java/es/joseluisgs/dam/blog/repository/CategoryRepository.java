@@ -7,18 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class CategoryRepository implements CrudRespository<Category, Long> {
     @Override
-    public List<Category> findAll()  {
+    public List<Category> findAll() {
         try {
             String query = "SELECT * FROM category";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
             ResultSet result = db.query(query);
             ArrayList<Category> list = new ArrayList<Category>();
-            while(true) {
+            while (true) {
                 if (!result.next()) break;
                 list.add(
                         new Category(
@@ -62,7 +61,7 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.update(query);
-        if(res != 0)
+        if (res != 0)
             // Para obtener su ID
             category = this.getItem(category);
         // una vez insertado comprobamos que esta correcto para devolverlo
@@ -73,13 +72,13 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
     @Override
     public Category update(Category category) {
         String query = "UPDATE category SET " +
-                "texto = '" + category.getTexto() +"'" +
+                "texto = '" + category.getTexto() + "'" +
                 " WHERE id = " + category.getId();
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.update(query);
         db.close();
-        if(res != 0)
+        if (res != 0)
             return category;
         return null;
     }
@@ -92,7 +91,7 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
         db.open();
         int res = db.update(query);
         db.close();
-        if(res != 0)
+        if (res != 0)
             return category;
         return null;
 
@@ -100,7 +99,7 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
 
     private Category getItem(Category category) {
         try {
-            String query = "SELECT * FROM category WHERE texto = '" + category.getTexto() +"'";
+            String query = "SELECT * FROM category WHERE texto = '" + category.getTexto() + "'";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
             ResultSet result = db.query(query);

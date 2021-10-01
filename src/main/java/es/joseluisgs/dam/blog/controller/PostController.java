@@ -2,14 +2,9 @@ package es.joseluisgs.dam.blog.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import es.joseluisgs.dam.blog.dto.CategoryDTO;
 import es.joseluisgs.dam.blog.dto.PostDTO;
-import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.repository.PostRepository;
 import es.joseluisgs.dam.blog.service.PostService;
-
-import java.sql.SQLException;
-import java.util.List;
 
 public class PostController {
     private static PostController controller = null;
@@ -30,13 +25,13 @@ public class PostController {
     }
 
     // Ejemplo de operaciones
-    public String getAllPostJSON()  {
+    public String getAllPostJSON() {
         // Vamos a devolver el JSON de las categorías
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(postService.getAllPosts());
     }
 
-    public String getPostByIdJSON(Long id){
+    public String getPostByIdJSON(Long id) {
         // Vamos a devolver el JSON de las categorías
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(postService.getPostById(id));

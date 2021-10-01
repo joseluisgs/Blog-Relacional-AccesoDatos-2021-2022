@@ -3,7 +3,6 @@ package es.joseluisgs.dam.blog.repository;
 import es.joseluisgs.dam.blog.model.Login;
 
 import java.util.List;
-import java.util.Optional;
 
 public class LoginRepository implements CrudRespository<Login, Long> {
     @Override

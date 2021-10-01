@@ -1,9 +1,13 @@
 package es.joseluisgs.dam.blog.utils;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 public class Cifrador {
     private static Cifrador cif = null;
+
+    private Cifrador() {
+    }
 
     public static Cifrador getInstance() {
         if (cif == null) {
@@ -12,15 +16,13 @@ public class Cifrador {
         return cif;
     }
 
-    private Cifrador() { }
-
     public String SHA512(String cadena) {
         MessageDigest md = null;
         byte[] hash = null;
         // Llamamos a la función de hash de java
         try {
             md = MessageDigest.getInstance("SHA-1");
-            hash = md.digest(cadena.getBytes("UTF-8"));
+            hash = md.digest(cadena.getBytes(StandardCharsets.UTF_8));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

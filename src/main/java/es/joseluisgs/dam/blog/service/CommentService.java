@@ -2,7 +2,6 @@ package es.joseluisgs.dam.blog.service;
 
 import es.joseluisgs.dam.blog.model.Comment;
 import es.joseluisgs.dam.blog.repository.CommentRepository;
-import lombok.RequiredArgsConstructor;
 
 import java.sql.SQLException;
 import java.util.List;

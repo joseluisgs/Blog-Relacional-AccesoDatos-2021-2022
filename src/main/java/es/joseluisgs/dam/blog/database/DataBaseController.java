@@ -29,6 +29,13 @@ public class DataBaseController {
         initConfig();
     }
 
+    public static DataBaseController getInstance() {
+        if (controller == null) {
+            controller = new DataBaseController();
+        }
+        return controller;
+    }
+
     private void initConfig() {
         // Leemos los datos de la base de datos que pueden estar en
         // porperties o en .env
@@ -42,13 +49,6 @@ public class DataBaseController {
         user = dotenv.get("DATABASE_USER");
         password = dotenv.get("DATABASE_PASSWORD");
 
-    }
-
-    public static DataBaseController getInstance() {
-        if (controller == null) {
-            controller = new DataBaseController();
-        }
-        return controller;
     }
 
     // Método para abrir la Conexion la Base de Datos

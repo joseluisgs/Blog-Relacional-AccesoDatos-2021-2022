@@ -3,7 +3,6 @@ package es.joseluisgs.dam.blog.repository;
 import es.joseluisgs.dam.blog.model.Comment;
 
 import java.util.List;
-import java.util.Optional;
 
 public class CommentRepository implements CrudRespository<Comment, Long> {
     @Override
