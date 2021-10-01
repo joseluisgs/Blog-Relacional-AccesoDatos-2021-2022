@@ -23,10 +23,13 @@ public class App {
         blog.checkService();
 
         // Categorías
-        // blog.Categories();
+        //blog.Categories();
 
         // Usuarios
-        blog.Users();
+        // blog.Users();
+
+        // Post
+        blog.Posts();
 
 
     }

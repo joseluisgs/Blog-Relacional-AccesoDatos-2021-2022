@@ -2,27 +2,28 @@ package es.joseluisgs.dam.blog.dto;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import es.joseluisgs.dam.blog.model.Category;
+import es.joseluisgs.dam.blog.model.User;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class UserDTO {
+public class PostDTO {
     private Long id;
-    private String nombre;
-    private String email;
-    private LocalDate fechaRegistro;
-    private String password;
+    private String titulo;
+    private String url;
+    private String contenido;
+    private LocalDateTime fechaPublicacion;
+    // Autor
+    private User user;
+    // Categoría a la que pertenece
+    private Category category;
 
-    // TODO Bidireccionalidad
-    // Lista de Comentarios
-    //private Set<Comment> comentarios = new HashSet<>();
-    // Lista de Posts
-    //private Set<Post> posts = new HashSet<>();
-    // Su login activo si lo tiene
-    //private Login login;
+    // TODO Lista de comentarios asociados
+    // private List<Comment> comentarios = new ArrayList<>();
 
     public String toJSON() {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();

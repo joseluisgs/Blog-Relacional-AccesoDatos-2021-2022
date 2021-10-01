@@ -16,15 +16,6 @@ public class User {
     private String password;
     private LocalDate fechaRegistro;
 
-    // TODO Bidireccionalidad
-    // Lista de Comentarios
-    //private Set<Comment> comentarios = new HashSet<>();
-    // Lista de Posts
-    //private Set<Post> posts = new HashSet<>();
-    // Su login activo si lo tiene
-    //private Login login;
-
-
     public User(Long id, String nombre, String email, String password, LocalDate fechaRegistro) {
         this.id = id;
         this.nombre = nombre;
