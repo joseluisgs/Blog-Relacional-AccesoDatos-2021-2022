@@ -61,6 +61,12 @@ CREATE TABLE `post` (
   CONSTRAINT `post_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de posts';
 
+INSERT INTO `post` (`id`, `titulo`, `url`, `contenido`, `fecha_publicacion`, `user_id`, `category_id`) VALUES
+(1,	'Post num 1',	'http://post1.com',	'Este es el post num 1',	'2021-10-01 16:12:03',	1,	1),
+(2,	'Posy num 2',	'http://post2.com',	'Este es el post num 2',	'2021-10-01 16:12:28',	2,	2),
+(3,	'Post num 3',	'https://post3.com',	'Este es el post num 3',	'2021-10-01 16:13:00',	3,	3),
+(4,	'Post num 4',	'http://post4.com',	'Esto es el post num 4',	'2021-10-01 16:13:40',	1,	1),
+(5,	'',	'Post num 5',	'Esto es el post num 5',	'2021-10-01 16:14:14',	3,	3);
 
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE `test` (
@@ -88,6 +94,11 @@ INSERT INTO `user` (`id`, `nombre`, `email`, `password`, `fecha_registro`) VALUE
 (2,	'Ana Anaya',	'ana@anaya.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
 (3,	'Paco Perez',	'paco@perez.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
 (4,	'Son Goku',	'goku@dragonball.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
-(5,	'Naruto',	'naruto@shipuden.es',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30');
+(12,	'Nombre 2021-09-30T20:57:02.585364Z',	'user0.47501774601573044@mail.com',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(13,	'Nombre 2021-09-30T20:57:31.744763Z',	'user0.8514411713293946@mail.com',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(14,	'Nombre 2021-09-30T20:57:58.822282Z',	'user0.5993475249152452@mail.com',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(15,	'Nombre 2021-09-30T20:58:33.110103Z',	'user0.04610336742519294@mail.com',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(16,	'Nombre 2021-09-30T20:59:29.803847Z',	'user0.916961699546684@mail.com',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30'),
+(17,	'Nombre 2021-09-30T20:59:57.720217Z',	'user0.739033396026499@mail.com',	'7110eda4d09e062aa5e4a390b0a572ac0d2c0220',	'2021-09-30');
 
--- 2021-09-30 20:55:13
+-- 2021-10-01 16:14:44
