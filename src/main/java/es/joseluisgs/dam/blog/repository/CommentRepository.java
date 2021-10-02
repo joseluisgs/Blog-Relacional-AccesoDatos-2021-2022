@@ -39,13 +39,47 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
     }
 
     @Override
-    public Comment getById(Long aLong) {
-        return null;
+    public Comment getById(Long ID) {
+        try {
+            String query = "SELECT * FROM comment WHERE id = " + ID;
+            DataBaseController db = DataBaseController.getInstance();
+            db.open();
+            ResultSet result = db.query(query);
+            result.absolute(1);
+            Comment comment = new Comment(
+                    result.getLong("id"),
+                    result.getString("texto"),
+                    result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                    result.getLong("user_id"),
+                    result.getLong("post_id")
+            );
+            db.close();
+            return comment;
+        } catch (SQLException e) {
+            System.err.println("Error getById: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public Comment save(Comment comment) {
-        return null;
+        String query = "INSERT INTO comment (texto, fecha_publicacion, user_id, post_id) VALUES (" +
+                "'" + comment.getTexto() + "', " +
+                "'" + comment.getFechaPublicacion() + "', " +
+                comment.getUser_id() + ", " +
+                comment.getPost_id() +
+                ")";
+
+        System.out.println(query);
+        DataBaseController db = DataBaseController.getInstance();
+        db.open();
+        int res = db.update(query);
+        if (res != 0)
+            // Para obtener su ID
+            comment = this.getItem(comment);
+        // una vez insertado comprobamos que esta correcto para devolverlo
+        db.close();
+        return comment;
     }
 
     @Override
@@ -56,5 +90,27 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
     @Override
     public Comment delete(Comment comment) {
         return null;
+    }
+
+    private Comment getItem(Comment comment) {
+        try {
+            String query = "SELECT * FROM comment WHERE texto = '" + comment.getTexto() + "'";
+            DataBaseController db = DataBaseController.getInstance();
+            db.open();
+            ResultSet result = db.query(query);
+            result.absolute(1);
+            comment = new Comment(
+                    result.getLong("id"),
+                    result.getString("texto"),
+                    result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                    result.getLong("user_id"),
+                    result.getLong("post_id")
+            );
+            db.close();
+            return comment;
+        } catch (SQLException e) {
+            System.err.println("Error getItem: " + e.getMessage());
+            return null;
+        }
     }
 }

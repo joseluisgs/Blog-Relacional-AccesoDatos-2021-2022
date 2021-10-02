@@ -189,45 +189,44 @@ public class Blog {
         System.out.println("GET Todos los Comentarios");
         System.out.println(commentController.getAllCommentsJSON());
 
-//        System.out.println("GET Comentario con ID = 2");
-//        System.out.println(commentController.getCommentByIdJSON(2L));
-//
-//        System.out.println("POST Insertando Comentario");
-//        CommentDTO commentDTO = CommentDTO.builder()
-//                .texto("Comentario " + Instant.now().toString())
-//                .fechaPublicacion(LocalDateTime.now())
-//                .build();
-//        // Asignamos el usuario que exista, solo necesitamos su ID
-//        User commentUser = User.builder()
-//                .id(1L)
-//                .nombre("Pepe Perez")
-//                .email("pepe@pepe.com")
-//                .build();
-//        commentDTO.setUser(commentUser);
-//        // Asignamos una post que exita
-//        Post commentPost = Post.builder()
-//                .id(3L)
-//                .titulo("Post num 3")
-//                .url("http://post3.com")
-//                .contenido("Este es el post num 3")
-//                .fechaPublicacion(LocalDateTime.now())
-//                .user_id(3L)
-//                .category_id(3L)
-//                .build();
-//        commentDTO.setPost(commentPost);
-//
-//        System.out.println(commentController.postCommentJSON(commentDTO));
-//
-//        System.out.println("UPDATE Comentario con ID = 7");
-//        // Solo dejamos cambiar el tútulo o el contenido
-//        commentDTO = CommentDTO.builder()
-//                .id(4L)
-//                .texto("Update " + Instant.now().toString())
-//                .fechaPublicacion(LocalDateTime.now())
-//                .build();
-//        commentDTO.setUser(commentUser);
-//        commentDTO.setPost(commentPost);
-//        System.out.println(commentController.updateCommentJSON(commentDTO));
+        System.out.println("GET Comentario con ID = 2");
+        System.out.println(commentController.getCommentByIdJSON(2L));
+
+        System.out.println("POST Insertando Comentario");
+        CommentDTO commentDTO = CommentDTO.builder()
+                .texto("Comentario " + Instant.now().toString())
+                .fechaPublicacion(LocalDateTime.now())
+                .build();
+        // Asignamos el usuario que exista, solo necesitamos su ID
+        User commentUser = User.builder()
+                .id(1L)
+                .nombre("Pepe Perez")
+                .email("pepe@pepe.com")
+                .build();
+        commentDTO.setUser(commentUser);
+        // Asignamos una post que exita
+        Post commentPost = Post.builder()
+                .id(3L)
+                .titulo("Post num 3")
+                .url("http://post3.com")
+                .contenido("Este es el post num 3")
+                .fechaPublicacion(LocalDateTime.now())
+                .user_id(3L)
+                .category_id(3L)
+                .build();
+        commentDTO.setPost(commentPost);
+        System.out.println(commentController.postCommentJSON(commentDTO));
+
+        System.out.println("UPDATE Comentario con ID = 7");
+        // Solo dejamos cambiar el tútulo o el contenido
+        commentDTO = CommentDTO.builder()
+                .id(4L)
+                .texto("Update " + Instant.now().toString())
+                .fechaPublicacion(LocalDateTime.now())
+                .build();
+        commentDTO.setUser(commentUser);
+        commentDTO.setPost(commentPost);
+        System.out.println(commentController.updateCommentJSON(commentDTO));
 //
 //        System.out.println("DELETE Comentario con ID = 7");
 //        commentDTO = CommentDTO.builder()
