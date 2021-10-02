@@ -2,7 +2,12 @@ package es.joseluisgs.dam.blog.database;
 
 import es.joseluisgs.dam.blog.utils.ApplicationProperties;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.sql.*;
 
 public class DataBaseController {
@@ -105,5 +110,11 @@ public class DataBaseController {
             System.err.println("Error al actualizar BD" + e.getMessage());
         }
         return changes;
+    }
+
+    public void initData(String sqlFile) throws FileNotFoundException {
+        ScriptRunner sr = new ScriptRunner(connection);
+        Reader reader = new BufferedReader(new FileReader(sqlFile));
+        sr.runScript(reader);
     }
 }

@@ -1,15 +1,21 @@
 package es.joseluisgs.dam.blog;
 
 import es.joseluisgs.dam.blog.controller.CategoryController;
+import es.joseluisgs.dam.blog.controller.CommentController;
 import es.joseluisgs.dam.blog.controller.PostController;
 import es.joseluisgs.dam.blog.controller.UserController;
 import es.joseluisgs.dam.blog.database.DataBaseController;
 import es.joseluisgs.dam.blog.dto.CategoryDTO;
+import es.joseluisgs.dam.blog.dto.CommentDTO;
 import es.joseluisgs.dam.blog.dto.PostDTO;
 import es.joseluisgs.dam.blog.dto.UserDTO;
 import es.joseluisgs.dam.blog.model.Category;
+import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.model.User;
+import es.joseluisgs.dam.blog.utils.ApplicationProperties;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -41,6 +47,28 @@ public class Blog {
             System.exit(1);
         }
     }
+
+    public void initDataBase() {
+        String sqlFile =  System.getProperty("user.dir")+ File.separator+"sql"+File.separator+"blog.sql";
+        System.out.println(sqlFile);
+        DataBaseController controller = DataBaseController.getInstance();
+        controller.open();
+        try {
+            controller.initData(sqlFile);
+            controller.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Error al arrancar Base de Datos: " + e.getMessage());
+            System.exit(1);
+        }
+    }
+
+    // TODO implementar un hash para indentidicar item al recuperar por ID y no usar datos repetidos
+    // En Categorías, texto es unico
+    // En usuario email
+    // En post es URL
+    // en comments un hash md5
+
+    // TODO eliminar lo de insertar Objetos completos en post y comments para crear la referencia, solo el ID
 
     public void Categories() {
         CategoryController categoryController = CategoryController.getInstance();
@@ -152,13 +180,67 @@ public class Blog {
         postDTO.setCategory(categoryPost);
         System.out.println(postController.updatePostJSON(postDTO));
 
-        System.out.println("DELETE User con ID = 4");
+        System.out.println("DELETE Post con ID = 4");
         postDTO = PostDTO.builder()
-                .id(4L)
+                .id(5L)
                 .build();
         postDTO.setUser(postUser);
         postDTO.setCategory(categoryPost);
         System.out.println(postController.deletePostJSON(postDTO));
 
+    }
+
+    public void Comments() {
+        CommentController commentController = CommentController.getInstance();
+
+        System.out.println("GET Todos los Comentarios");
+        System.out.println(commentController.getAllCommentsJSON());
+
+        System.out.println("GET Comentario con ID = 2");
+        System.out.println(commentController.getCommentByIdJSON(2L));
+
+        System.out.println("POST Insertando Comentario");
+        CommentDTO commentDTO = CommentDTO.builder()
+                .texto("Comentario " + Instant.now().toString())
+                .fechaPublicacion(LocalDateTime.now())
+                .build();
+        // Asignamos el usuario que exista, solo necesitamos su ID
+        User commentUser = User.builder()
+                .id(1L)
+                .nombre("Pepe Perez")
+                .email("pepe@pepe.com")
+                .build();
+        commentDTO.setUser(commentUser);
+        // Asignamos una post que exita
+        Post commentPost = Post.builder()
+                .id(3L)
+                .titulo("Post num 3")
+                .url("http://post3.com")
+                .contenido("Este es el post num 3")
+                .fechaPublicacion(LocalDateTime.now())
+                .user_id(3L)
+                .category_id(3L)
+                .build();
+        commentDTO.setPost(commentPost);
+        System.out.println(commentController.postCommentJSON(commentDTO));
+
+        System.out.println("UPDATE Comentario con ID = 7");
+        // Solo dejamos cambiar el tútulo o el contenido
+        commentDTO = CommentDTO.builder()
+                .id(4L)
+                .texto("Update " + Instant.now().toString())
+                .fechaPublicacion(LocalDateTime.now())
+                .build();
+        commentDTO.setUser(commentUser);
+        commentDTO.setPost(commentPost);
+        System.out.println(commentController.updateCommentJSON(commentDTO));
+
+        System.out.println("DELETE Comentario con ID = 7");
+        commentDTO = CommentDTO.builder()
+                .id(7L)
+                .build();
+        commentDTO.setUser(commentUser);
+        commentDTO.setPost(commentPost);
+        System.out.println(commentController.deleteCommentJSON(commentDTO));
     }
 }

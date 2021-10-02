@@ -2,6 +2,7 @@ package es.joseluisgs.dam.blog.dto;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import lombok.Builder;
 import lombok.Data;
 
@@ -24,9 +25,9 @@ public class UserDTO {
     // Su login activo si lo tiene
     //private Login login;
 
-    public static CategoryDTO fromJSON(String json) {
+    public static UserDTO fromJSON(String json) {
         final Gson gson = new Gson();
-        return gson.fromJson(json, CategoryDTO.class);
+        return gson.fromJson(json, UserDTO.class);
     }
 
     public String toJSON() {
