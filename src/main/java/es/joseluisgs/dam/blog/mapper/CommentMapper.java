@@ -4,7 +4,7 @@ import es.joseluisgs.dam.blog.dto.CommentDTO;
 import es.joseluisgs.dam.blog.model.Comment;
 import es.joseluisgs.dam.blog.model.Post;
 
-public class CommetMapper extends BaseMapper<Comment, CommentDTO>{
+public class CommentMapper extends BaseMapper<Comment, CommentDTO>{
     @Override
     public Comment fromDTO(CommentDTO item) {
         return Comment.builder()
