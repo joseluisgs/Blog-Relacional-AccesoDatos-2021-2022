@@ -89,7 +89,7 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
                 "user_id = " + comment.getUser_id() + ", " +
                 "post_id = " + comment.getPost_id() + " " +
                 " WHERE id = " + comment.getId();
-        
+
         System.out.println(query);
         DataBaseController db = DataBaseController.getInstance();
         db.open();
@@ -102,9 +102,19 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
 
     @Override
     public Comment delete(Comment comment) {
+        String query = "DELETE FROM comment " +
+                "WHERE id = " + comment.getId();
+
+        DataBaseController db = DataBaseController.getInstance();
+        db.open();
+        int res = db.update(query);
+        db.close();
+        if (res != 0)
+            return comment;
         return null;
     }
 
+    // TODO implementar un hash para identificar los campos sin recurrir a un campo que puede estar repetido
     private Comment getItem(Comment comment) {
         try {
             String query = "SELECT * FROM comment WHERE texto = '" + comment.getTexto() + "'";

@@ -62,6 +62,14 @@ public class Blog {
         }
     }
 
+    // TODO implementar un hash para indentidicar item al recuperar por ID y no usar datos repetidos
+    // En Categorías, texto es unico
+    // En usuario email
+    // En post es URL
+    // en comments un hash md5
+
+    // TODO eliminar lo de insertar Objetos completos en post y comments para crear la referencia, solo el ID
+
     public void Categories() {
         CategoryController categoryController = CategoryController.getInstance();
         // Obtenemos todas las categorías
@@ -182,7 +190,6 @@ public class Blog {
 
     }
 
-
     public void Comments() {
         CommentController commentController = CommentController.getInstance();
 
@@ -227,13 +234,13 @@ public class Blog {
         commentDTO.setUser(commentUser);
         commentDTO.setPost(commentPost);
         System.out.println(commentController.updateCommentJSON(commentDTO));
-//
-//        System.out.println("DELETE Comentario con ID = 7");
-//        commentDTO = CommentDTO.builder()
-//                .id(7L)
-//                .build();
-//        commentDTO.setUser(commentUser);
-//        commentDTO.setPost(commentPost);
-//        System.out.println(commentController.deleteCommentJSON(commentDTO));
+
+        System.out.println("DELETE Comentario con ID = 7");
+        commentDTO = CommentDTO.builder()
+                .id(7L)
+                .build();
+        commentDTO.setUser(commentUser);
+        commentDTO.setPost(commentPost);
+        System.out.println(commentController.deleteCommentJSON(commentDTO));
     }
 }
