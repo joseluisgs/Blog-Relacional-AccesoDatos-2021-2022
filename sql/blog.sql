@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `texto` text NOT NULL,
-  `fechaPublicacion` datetime NOT NULL,
+  `fecha_publicacion` datetime NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   `post_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`),
@@ -36,7 +36,7 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de comentarios';
 
-INSERT INTO `comment` (`id`, `texto`, `fechaPublicacion`, `user_id`, `post_id`) VALUES
+INSERT INTO `comment` (`id`, `texto`, `fecha_publicacion`, `user_id`, `post_id`) VALUES
 (1,	'Comentario 01',	'2021-10-01 19:26:08',	1,	1),
 (2,	'Comentario 02',	'2021-10-01 19:26:22',	2,	2),
 (3,	'Comentario 03',	'2021-10-01 19:26:36',	3,	2),
