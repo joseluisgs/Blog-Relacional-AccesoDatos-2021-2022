@@ -12,7 +12,10 @@ import es.joseluisgs.dam.blog.dto.UserDTO;
 import es.joseluisgs.dam.blog.model.Category;
 import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.model.User;
+import es.joseluisgs.dam.blog.utils.ApplicationProperties;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -40,6 +43,20 @@ public class Blog {
             rs.first();
             controller.close();
         } catch (SQLException e) {
+            System.err.println("Error al arrancar Base de Datos: " + e.getMessage());
+            System.exit(1);
+        }
+    }
+
+    public void initDataBase() {
+        String sqlFile =  System.getProperty("user.dir")+ File.separator+"sql"+File.separator+"blog.sql";
+        System.out.println(sqlFile);
+        DataBaseController controller = DataBaseController.getInstance();
+        controller.open();
+        try {
+            controller.initData(sqlFile);
+            controller.close();
+        } catch (FileNotFoundException e) {
             System.err.println("Error al arrancar Base de Datos: " + e.getMessage());
             System.exit(1);
         }
@@ -165,6 +182,7 @@ public class Blog {
 
     }
 
+
     public void Comments() {
         CommentController commentController = CommentController.getInstance();
 
@@ -219,4 +237,5 @@ public class Blog {
         commentDTO.setPost(commentPost);
         System.out.println(commentController.deleteCommentJSON(commentDTO));
     }
+
 }

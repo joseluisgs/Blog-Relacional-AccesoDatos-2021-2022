@@ -17,6 +17,10 @@ public class App {
         // Chequeamos el sistema
         blog.checkService();
 
+        // Iniciamos la base de datos al estado original en cada prueba
+        if(properties.readProperty("database.init").equals("true"))
+            blog.initDataBase();
+
         // Categorías
         //blog.Categories();
 
@@ -27,7 +31,7 @@ public class App {
         // blog.Posts();
 
         // Commentarios
-        blog.Comments();
+        //blog.Comments();
 
 
     }
