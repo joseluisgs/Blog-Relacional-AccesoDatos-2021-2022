@@ -70,7 +70,6 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
                 comment.getPost_id() +
                 ")";
 
-        System.out.println(query);
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.update(query);
@@ -84,6 +83,20 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
 
     @Override
     public Comment update(Comment comment) {
+        String query = "UPDATE comment SET " +
+                "texto = '" + comment.getTexto() + "', " +
+                "fecha_publicacion = '" + comment.getFechaPublicacion() + "', " +
+                "user_id = " + comment.getUser_id() + ", " +
+                "post_id = " + comment.getPost_id() + " " +
+                " WHERE id = " + comment.getId();
+        
+        System.out.println(query);
+        DataBaseController db = DataBaseController.getInstance();
+        db.open();
+        int res = db.update(query);
+        db.close();
+        if (res != 0)
+            return comment;
         return null;
     }
 
