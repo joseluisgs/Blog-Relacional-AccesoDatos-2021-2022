@@ -1,5 +1,7 @@
 package es.joseluisgs.dam.blog.controller;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import es.joseluisgs.dam.blog.dto.CommentDTO;
@@ -32,28 +34,57 @@ public class CommentController {
     // Ejemplo de operaciones
     public String getAllCommentsJSON() {
         // Vamos a devolver el JSON de las categorías
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(commentService.getAllComments());
     }
 
     public String getCommentByIdJSON(Long id) {
         // Vamos a devolver el JSON de las categorías
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(commentService.getCommentById(id));
     }
 
     public String postCommentJSON(CommentDTO commentDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(commentService.postComment(commentDTO));
     }
 
     public String updateCommentJSON(CommentDTO commentDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(commentService.updateComment(commentDTO));
     }
 
     public String deleteCommentJSON(CommentDTO commentDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(commentService.deleteComment(commentDTO));
     }
+
+    // Eliminamos los campso que qno queremos que salgan en el JSON
+    ExclusionStrategy strategy = new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes field) {
+            return field.getName().startsWith("password");
+        }
+    };
+
 }
