@@ -83,7 +83,9 @@ public class CommentController {
 
         @Override
         public boolean shouldSkipField(FieldAttributes field) {
-            return field.getName().startsWith("password");
+            return field.getName().startsWith("password")
+                    || field.getName().startsWith("user_id")
+                    || field.getName().startsWith("category_id");
         }
     };
 

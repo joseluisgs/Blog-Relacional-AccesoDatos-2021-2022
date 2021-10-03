@@ -188,8 +188,10 @@ public class Blog {
         postDTO = PostDTO.builder()
                 .id(5L)
                 .build();
-        postDTO.setUser(postUser);
-        postDTO.setCategory(categoryPost);
+        // postDTO.setUser(postUser);
+        postDTO.setUser_id(2L);
+        // postDTO.setCategory(categoryPost);
+        postDTO.setCategory_id(3L);
         System.out.println(postController.deletePostJSON(postDTO));
 
     }
@@ -214,7 +216,8 @@ public class Blog {
                 .nombre("Pepe Perez")
                 .email("pepe@pepe.com")
                 .build();
-        commentDTO.setUser(commentUser);
+       // commentDTO.setUser(commentUser);
+        commentDTO.setUser_id(1L);
         // Asignamos una post que exita
         Post commentPost = Post.builder()
                 .id(3L)
@@ -225,7 +228,8 @@ public class Blog {
                 .user_id(3L)
                 .category_id(3L)
                 .build();
-        commentDTO.setPost(commentPost);
+        // commentDTO.setPost(commentPost);
+        commentDTO.setPost_id(3L);
         System.out.println(commentController.postCommentJSON(commentDTO));
 
         System.out.println("UPDATE Comentario con ID = 7");
@@ -235,16 +239,18 @@ public class Blog {
                 .texto("Update " + Instant.now().toString())
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
-        commentDTO.setUser(commentUser);
-        commentDTO.setPost(commentPost);
+        // commentDTO.setUser(commentUser);
+        // commentDTO.setPost(commentPost);
+        commentDTO.setUser_id(1L);
+        commentDTO.setPost_id(3L);
         System.out.println(commentController.updateCommentJSON(commentDTO));
 
         System.out.println("DELETE Comentario con ID = 7");
         commentDTO = CommentDTO.builder()
                 .id(7L)
                 .build();
-        commentDTO.setUser(commentUser);
-        commentDTO.setPost(commentPost);
+        commentDTO.setUser_id(1L);
+        commentDTO.setPost_id(3L);
         System.out.println(commentController.deleteCommentJSON(commentDTO));
     }
 }

@@ -11,8 +11,10 @@ public class CommentMapper extends BaseMapper<Comment, CommentDTO>{
                 .id(item.getId())
                 .texto(item.getTexto())
                 .fechaPublicacion(item.getFechaPublicacion())
-                .user_id(item.getUser().getId())
-                .post_id(item.getPost().getId())
+                // .user_id(item.getUser().getId())
+                .user_id(item.getUser_id())
+                // .post_id(item.getPost().getId())
+                .post_id(item.getPost_id())
                 .build();
     }
 
