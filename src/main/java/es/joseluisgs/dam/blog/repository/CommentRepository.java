@@ -119,7 +119,6 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
         return null;
     }
 
-    // TODO implementar un hash para identificar los campos sin recurrir a un campo que puede estar repetido
     private Comment getItem(UUID uuid) {
         try {
             String query = "SELECT * FROM comment WHERE uuid = '" + uuid + "'";

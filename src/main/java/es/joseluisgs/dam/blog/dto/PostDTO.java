@@ -28,7 +28,7 @@ public class PostDTO {
     // Para mejorar las relaciones y como es un dTO vamos a poner los ids
     private Long user_id, category_id;
 
-    // TODO Lista de comentarios asociados
+    // Lista de comentarios asociados
     private List<Comment> comments;
 
     /*public static CategoryDTO fromJSON(String json) {

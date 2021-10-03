@@ -62,14 +62,6 @@ public class Blog {
         }
     }
 
-    // TODO implementar un hash para indentidicar item al recuperar por ID y no usar datos repetidos
-    // En Categorías, texto es unico
-    // En usuario email
-    // En post es URL
-    // en comments un hash md5
-
-    // TODO eliminar lo de insertar Objetos completos en post y comments para crear la referencia, solo el ID
-
     public void Categories() {
         CategoryController categoryController = CategoryController.getInstance();
         // Obtenemos todas las categorías
