@@ -11,29 +11,37 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Builder
 public class PostDTO {
+    ExclusionStrategy strategy = new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes field) {
+            return field.getName().startsWith("password")
+                    || field.getName().startsWith("user_id")
+                    || field.getName().startsWith("category_id");
+        }
+    };
     private Long id;
     private String titulo;
     private String url;
     private String contenido;
     private LocalDateTime fechaPublicacion;
-
     // Autor
     private User user;
     // Categoría a la que pertenece
     private Category category;
-
     // Para mejorar las relaciones y como es un dTO vamos a poner los ids
     private Long user_id, category_id;
-
     // Lista de comentarios asociados
     private List<Comment> comments;
-
 
     // From/To JSON
     public static CategoryDTO fromJSON(String json) {
@@ -48,18 +56,4 @@ public class PostDTO {
                 .create();
         return prettyGson.toJson(this);
     }
-
-    ExclusionStrategy strategy = new ExclusionStrategy() {
-        @Override
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
-
-        @Override
-        public boolean shouldSkipField(FieldAttributes field) {
-            return field.getName().startsWith("password")
-                    || field.getName().startsWith("user_id")
-                    || field.getName().startsWith("category_id") ;
-        }
-    };
 }

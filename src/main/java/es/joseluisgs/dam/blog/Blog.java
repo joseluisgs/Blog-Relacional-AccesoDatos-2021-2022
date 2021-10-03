@@ -12,7 +12,6 @@ import es.joseluisgs.dam.blog.dto.UserDTO;
 import es.joseluisgs.dam.blog.model.Category;
 import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.model.User;
-import es.joseluisgs.dam.blog.utils.ApplicationProperties;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,7 +48,7 @@ public class Blog {
     }
 
     public void initDataBase() {
-        String sqlFile =  System.getProperty("user.dir")+ File.separator+"sql"+File.separator+"blog.sql";
+        String sqlFile = System.getProperty("user.dir") + File.separator + "sql" + File.separator + "blog.sql";
         System.out.println(sqlFile);
         DataBaseController controller = DataBaseController.getInstance();
         controller.open();
@@ -208,7 +207,7 @@ public class Blog {
                 .nombre("Pepe Perez")
                 .email("pepe@pepe.com")
                 .build();
-       // commentDTO.setUser(commentUser);
+        // commentDTO.setUser(commentUser);
         commentDTO.setUser_id(1L);
         // Asignamos una post que exita
         Post commentPost = Post.builder()

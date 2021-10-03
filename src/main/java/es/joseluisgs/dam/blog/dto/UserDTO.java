@@ -4,7 +4,6 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,11 +12,21 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class UserDTO {
+    ExclusionStrategy strategy = new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes field) {
+            return field.getName().startsWith("password");
+        }
+    };
     private Long id;
     private String nombre;
     private String email;
     private LocalDate fechaRegistro;
-    private String password;
 
     // TODO Bidireccionalidad
     // Lista de Comentarios
@@ -29,6 +38,7 @@ public class UserDTO {
 
     // Eliminar campos de las serialización
     // https://www.baeldung.com/gson-exclude-fields-serialization
+    private String password;
 
     // From/To JSON
     public static UserDTO fromJSON(String json) {
@@ -46,16 +56,4 @@ public class UserDTO {
         // prettyGson.toJsonTree(this).getAsJsonObject().remove("password");
         return prettyGson.toJson(this);
     }
-
-    ExclusionStrategy strategy = new ExclusionStrategy() {
-        @Override
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
-
-        @Override
-        public boolean shouldSkipField(FieldAttributes field) {
-            return field.getName().startsWith("password");
-        }
-    };
 }

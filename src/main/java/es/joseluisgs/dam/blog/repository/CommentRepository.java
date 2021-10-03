@@ -2,7 +2,6 @@ package es.joseluisgs.dam.blog.repository;
 
 import es.joseluisgs.dam.blog.database.DataBaseController;
 import es.joseluisgs.dam.blog.model.Comment;
-import es.joseluisgs.dam.blog.model.Post;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,7 +70,7 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
         String query = "INSERT INTO comment (texto, fecha_publicacion, uuid, user_id, post_id) VALUES (" +
                 "'" + comment.getTexto() + "', " +
                 "'" + comment.getFechaPublicacion() + "', " +
-                "'" +  uuid + "', " +
+                "'" + uuid + "', " +
                 comment.getUser_id() + ", " +
                 comment.getPost_id() +
                 ")";

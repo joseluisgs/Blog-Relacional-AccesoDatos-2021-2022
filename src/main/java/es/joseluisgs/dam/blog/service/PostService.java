@@ -92,9 +92,9 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         return service.getById(id);
     }
 
-    private List<Comment> getPostComments(Long id){
-       CommentService service = new CommentService(new CommentRepository());
-       return service.getCommentsByPost(id);
+    private List<Comment> getPostComments(Long id) {
+        CommentService service = new CommentService(new CommentRepository());
+        return service.getCommentsByPost(id);
     }
 
     private Comment deleteComment(Comment comment) {
