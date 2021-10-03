@@ -157,13 +157,15 @@ public class Blog {
                 .nombre("Pepe Perez")
                 .email("pepe@pepe.com")
                 .build();
-        postDTO.setUser(postUser);
+        // postDTO.setUser(postUser);
+        postDTO.setUser_id(1L);
         // Asignamos una categoria que exita
         Category categoryPost = Category.builder()
                 .id(1L)
                 .texto("General")
                 .build();
-        postDTO.setCategory(categoryPost);
+        // postDTO.setCategory(categoryPost);
+        postDTO.setCategory_id(1L);
 
         System.out.println(postController.postPostJSON(postDTO));
 
@@ -176,11 +178,13 @@ public class Blog {
                 .url("http://" + Math.random() + ".dominio.com")
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
-        postDTO.setUser(postUser);
-        postDTO.setCategory(categoryPost);
+        // postDTO.setUser(postUser);
+        postDTO.setUser_id(1L);
+        // postDTO.setCategory(categoryPost);
+        postDTO.setCategory_id(1L);
         System.out.println(postController.updatePostJSON(postDTO));
 
-        System.out.println("DELETE Post con ID = 4");
+        System.out.println("DELETE Post con ID = 5");
         postDTO = PostDTO.builder()
                 .id(5L)
                 .build();

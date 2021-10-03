@@ -12,8 +12,10 @@ public class PostMapper extends BaseMapper<Post, PostDTO> {
                 .url(item.getUrl())
                 .contenido(item.getContenido())
                 .fechaPublicacion(item.getFechaPublicacion())
-                .user_id(item.getUser().getId())
-                .category_id(item.getCategory().getId())
+                // .user_id(item.getUser().getId())
+                .user_id(item.getUser_id())
+                // .category_id(item.getCategory().getId())
+                .category_id(item.getCategory_id())
                 .build();
     }
 
