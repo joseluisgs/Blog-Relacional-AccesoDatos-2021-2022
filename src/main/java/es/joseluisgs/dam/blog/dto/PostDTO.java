@@ -25,7 +25,7 @@ public class PostDTO {
     // TODO Lista de comentarios asociados
     // private List<Comment> comentarios = new ArrayList<>();
 
-    public static CategoryDTO fromJSON(String json) {
+    /*public static CategoryDTO fromJSON(String json) {
         final Gson gson = new Gson();
         return gson.fromJson(json, CategoryDTO.class);
     }
@@ -33,5 +33,5 @@ public class PostDTO {
     public String toJSON() {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(this);
-    }
+    }*/
 }
