@@ -3,9 +3,11 @@ package es.joseluisgs.dam.blog.service;
 import es.joseluisgs.dam.blog.dto.PostDTO;
 import es.joseluisgs.dam.blog.mapper.PostMapper;
 import es.joseluisgs.dam.blog.model.Category;
+import es.joseluisgs.dam.blog.model.Comment;
 import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.model.User;
 import es.joseluisgs.dam.blog.repository.CategoryRepository;
+import es.joseluisgs.dam.blog.repository.CommentRepository;
 import es.joseluisgs.dam.blog.repository.PostRepository;
 import es.joseluisgs.dam.blog.repository.UserRepository;
 
@@ -34,6 +36,8 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
             PostDTO postDTO = mapper.toDTO(post);
             postDTO.setUser(this.getUserById(post.getUser_id()));
             postDTO.setCategory(this.getCategoryById(post.getCategory_id()));
+            // Tenemos que cargar los comentarios que tenga
+            postDTO.setComments(getPostComments(postDTO.getId()));
             result.add(postDTO);
         });
         return result;
@@ -44,6 +48,8 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         PostDTO postDTO = mapper.toDTO(post);
         postDTO.setUser(this.getUserById(post.getUser_id()));
         postDTO.setCategory(this.getCategoryById(post.getCategory_id()));
+        // Tenemos que cargar los comentarios que tenga
+        postDTO.setComments(getPostComments(postDTO.getId()));
         return postDTO;
     }
 
@@ -60,16 +66,19 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         PostDTO res = mapper.toDTO(post);
         res.setUser(this.getUserById(post.getUser_id()));
         res.setCategory(this.getCategoryById(post.getCategory_id()));
+        // Tenemos que cargar los comentarios que tenga
+        postDTO.setComments(getPostComments(res.getId()));
         return res;
     }
 
     public PostDTO deletePost(PostDTO postDTO) {
+        // Debemos borrar los comentarios antes
+        getPostComments(postDTO.getId()).forEach(this::deleteComment);
+        // Ahora borramos el post
         Post post = this.delete(mapper.fromDTO(postDTO));
         PostDTO res = mapper.toDTO(post);
         res.setUser(this.getUserById(post.getUser_id()));
         res.setCategory(this.getCategoryById(post.getCategory_id()));
-        // Debemos borrar todos los comentarios del post
-        // TODO Borrar comentarios del blog
         return res;
     }
 
@@ -82,4 +91,15 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         CategoryService service = new CategoryService(new CategoryRepository());
         return service.getById(id);
     }
+
+    private List<Comment> getPostComments(Long id){
+       CommentService service = new CommentService(new CommentRepository());
+       return service.getCommentsByPost(id);
+    }
+
+    private Comment deleteComment(Comment comment) {
+        CommentService service = new CommentService(new CommentRepository());
+        return service.repository.delete(comment);
+    }
+
 }

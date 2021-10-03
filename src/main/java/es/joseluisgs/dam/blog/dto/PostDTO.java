@@ -3,11 +3,14 @@ package es.joseluisgs.dam.blog.dto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import es.joseluisgs.dam.blog.model.Category;
+import es.joseluisgs.dam.blog.model.Comment;
 import es.joseluisgs.dam.blog.model.User;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -26,7 +29,7 @@ public class PostDTO {
     private Long user_id, category_id;
 
     // TODO Lista de comentarios asociados
-    // private List<Comment> comentarios = new ArrayList<>();
+    private List<Comment> comments;
 
     /*public static CategoryDTO fromJSON(String json) {
         final Gson gson = new Gson();

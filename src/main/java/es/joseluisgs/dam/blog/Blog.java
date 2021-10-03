@@ -186,7 +186,7 @@ public class Blog {
 
         System.out.println("DELETE Post con ID = 5");
         postDTO = PostDTO.builder()
-                .id(5L)
+                .id(4L)
                 .build();
         // postDTO.setUser(postUser);
         postDTO.setUser_id(2L);

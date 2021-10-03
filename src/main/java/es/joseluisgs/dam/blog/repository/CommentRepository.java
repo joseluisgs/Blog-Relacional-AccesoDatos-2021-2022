@@ -141,4 +141,31 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
             return null;
         }
     }
+
+    public List<Comment> getByPost(Long idPost) {
+        try {
+            String query = "SELECT * FROM comment where post_id=" + idPost;
+            DataBaseController db = DataBaseController.getInstance();
+            db.open();
+            ResultSet result = db.query(query);
+            ArrayList<Comment> list = new ArrayList<Comment>();
+            while (true) {
+                if (!result.next()) break;
+                list.add(
+                        new Comment(
+                                result.getLong("id"),
+                                result.getString("texto"),
+                                result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                                result.getLong("user_id"),
+                                result.getLong("post_id")
+                        )
+                );
+            }
+            db.close();
+            return list;
+        } catch (SQLException e) {
+            System.err.println("Error findAll: " + e.getMessage());
+            return null;
+        }
+    }
 }
