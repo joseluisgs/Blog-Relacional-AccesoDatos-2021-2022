@@ -9,9 +9,6 @@ import es.joseluisgs.dam.blog.dto.CategoryDTO;
 import es.joseluisgs.dam.blog.dto.CommentDTO;
 import es.joseluisgs.dam.blog.dto.PostDTO;
 import es.joseluisgs.dam.blog.dto.UserDTO;
-import es.joseluisgs.dam.blog.model.Category;
-import es.joseluisgs.dam.blog.model.Post;
-import es.joseluisgs.dam.blog.model.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;

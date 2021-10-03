@@ -2,9 +2,6 @@ package es.joseluisgs.dam.blog;
 
 import es.joseluisgs.dam.blog.utils.ApplicationProperties;
 
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) {
         ApplicationProperties properties = new ApplicationProperties();
