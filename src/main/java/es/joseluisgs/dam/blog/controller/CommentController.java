@@ -5,19 +5,28 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import es.joseluisgs.dam.blog.dto.CommentDTO;
-import es.joseluisgs.dam.blog.dto.PostDTO;
-import es.joseluisgs.dam.blog.model.Comment;
 import es.joseluisgs.dam.blog.repository.CommentRepository;
 import es.joseluisgs.dam.blog.service.CommentService;
-
-import java.sql.SQLException;
-import java.util.List;
 
 public class CommentController {
     private static CommentController controller = null;
 
     // Mi Servicio unido al repositorio
     private final CommentService commentService;
+    // Eliminamos los campso que qno queremos que salgan en el JSON
+    ExclusionStrategy strategy = new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes field) {
+            return field.getName().startsWith("password")
+                    || field.getName().startsWith("user_id")
+                    || field.getName().startsWith("category_id");
+        }
+    };
 
     // Implementamos nuestro Singleton para el controlador
     private CommentController(CommentService commentService) {
@@ -73,20 +82,5 @@ public class CommentController {
                 .create();
         return prettyGson.toJson(commentService.deleteComment(commentDTO));
     }
-
-    // Eliminamos los campso que qno queremos que salgan en el JSON
-    ExclusionStrategy strategy = new ExclusionStrategy() {
-        @Override
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
-
-        @Override
-        public boolean shouldSkipField(FieldAttributes field) {
-            return field.getName().startsWith("password")
-                    || field.getName().startsWith("user_id")
-                    || field.getName().startsWith("category_id");
-        }
-    };
 
 }

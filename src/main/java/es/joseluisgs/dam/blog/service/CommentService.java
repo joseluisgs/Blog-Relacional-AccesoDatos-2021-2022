@@ -1,19 +1,14 @@
 package es.joseluisgs.dam.blog.service;
 
 import es.joseluisgs.dam.blog.dto.CommentDTO;
-import es.joseluisgs.dam.blog.dto.PostDTO;
 import es.joseluisgs.dam.blog.mapper.CommentMapper;
-import es.joseluisgs.dam.blog.mapper.PostMapper;
-import es.joseluisgs.dam.blog.model.Category;
 import es.joseluisgs.dam.blog.model.Comment;
 import es.joseluisgs.dam.blog.model.Post;
 import es.joseluisgs.dam.blog.model.User;
-import es.joseluisgs.dam.blog.repository.CategoryRepository;
 import es.joseluisgs.dam.blog.repository.CommentRepository;
 import es.joseluisgs.dam.blog.repository.PostRepository;
 import es.joseluisgs.dam.blog.repository.UserRepository;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

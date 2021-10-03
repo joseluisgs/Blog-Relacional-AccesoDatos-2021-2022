@@ -13,6 +13,20 @@ public class PostController {
 
     // Mi Servicio unido al repositorio
     private final PostService postService;
+    // Eliminamos los campso que qno queremos que salgan en el JSON
+    ExclusionStrategy strategy = new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes field) {
+            return field.getName().startsWith("password")
+                    || field.getName().startsWith("user_id")
+                    || field.getName().startsWith("category_id");
+        }
+    };
 
     // Implementamos nuestro Singleton para el controlador
     private PostController(PostService postService) {
@@ -68,19 +82,4 @@ public class PostController {
                 .create();
         return prettyGson.toJson(postService.deletePost(postDTO));
     }
-
-    // Eliminamos los campso que qno queremos que salgan en el JSON
-    ExclusionStrategy strategy = new ExclusionStrategy() {
-        @Override
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
-
-        @Override
-        public boolean shouldSkipField(FieldAttributes field) {
-            return field.getName().startsWith("password")
-                            || field.getName().startsWith("user_id")
-                            || field.getName().startsWith("category_id") ;
-        }
-    };
 }

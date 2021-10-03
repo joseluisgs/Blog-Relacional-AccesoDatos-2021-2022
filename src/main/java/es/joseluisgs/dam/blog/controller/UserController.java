@@ -15,6 +15,19 @@ public class UserController {
 
     // Mi Servicio unido al repositorio
     private final UserService userService;
+    // Con esto evitamos que se imprima el campo password si no queremos
+    // https://www.baeldung.com/gson-exclude-fields-serialization
+    ExclusionStrategy strategy = new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes field) {
+            return field.getName().startsWith("password");
+        }
+    };
 
     // Implementamos nuestro Singleton para el controlador
     private UserController(UserService userService) {
@@ -75,20 +88,6 @@ public class UserController {
                 .create();
         return prettyGson.toJson(userService.deleteUser(userDTO));
     }
-
-    // Con esto evitamos que se imprima el campo password si no queremos
-    // https://www.baeldung.com/gson-exclude-fields-serialization
-    ExclusionStrategy strategy = new ExclusionStrategy() {
-        @Override
-        public boolean shouldSkipClass(Class<?> clazz) {
-            return false;
-        }
-
-        @Override
-        public boolean shouldSkipField(FieldAttributes field) {
-            return field.getName().startsWith("password");
-        }
-    };
 
 }
 

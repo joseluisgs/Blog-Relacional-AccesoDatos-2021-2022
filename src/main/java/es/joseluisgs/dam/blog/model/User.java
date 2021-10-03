@@ -14,6 +14,7 @@ public class User {
     private String password;
     private LocalDate fechaRegistro;
 
+
     public User(Long id, String nombre, String email, String password, LocalDate fechaRegistro) {
         this.id = id;
         this.nombre = nombre;

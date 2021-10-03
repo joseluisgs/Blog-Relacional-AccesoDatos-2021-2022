@@ -16,6 +16,7 @@ public class Comment {
     // Post al que pertenece
     private Long post_id;
 
+
     public Comment(Long id, String texto, LocalDateTime fechaPublicacion, Long user_id, Long post_id) {
         this.id = id;
         this.texto = texto;

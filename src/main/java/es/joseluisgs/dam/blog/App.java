@@ -18,20 +18,20 @@ public class App {
         blog.checkService();
 
         // Iniciamos la base de datos al estado original en cada prueba
-        if(properties.readProperty("database.init").equals("true"))
+        if (properties.readProperty("database.init").equals("true"))
             blog.initDataBase();
 
         // Categorías
-        //blog.Categories();
+        blog.Categories();
 
         // Usuarios
-        // blog.Users();
+        blog.Users();
 
         // Post
         blog.Posts();
 
         // Commentarios
-        // blog.Comments();
+        blog.Comments();
 
 
     }
