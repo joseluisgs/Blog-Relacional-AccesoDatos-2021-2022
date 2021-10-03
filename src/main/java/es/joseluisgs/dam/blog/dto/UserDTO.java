@@ -25,13 +25,21 @@ public class UserDTO {
     // Su login activo si lo tiene
     //private Login login;
 
-    public static UserDTO fromJSON(String json) {
+    // Eliminar campos de las serialización
+    // https://www.baeldung.com/gson-exclude-fields-serialization
+
+    /*public static UserDTO fromJSON(String json) {
         final Gson gson = new Gson();
         return gson.fromJson(json, UserDTO.class);
     }
 
     public String toJSON() {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                // .excludeFieldsWithoutExposeAnnotation() // Quitamos los campos que no están expuestos
+                .setPrettyPrinting()
+                .create();
+        // Otra manera de quitar un campo determinado para imprimir
+        // prettyGson.toJsonTree(this).getAsJsonObject().remove("password");
         return prettyGson.toJson(this);
-    }
+    }*/
 }

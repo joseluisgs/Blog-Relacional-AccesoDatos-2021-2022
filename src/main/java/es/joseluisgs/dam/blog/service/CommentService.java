@@ -86,4 +86,8 @@ public class CommentService extends BaseService<Comment, Long, CommentRepository
         PostService service = new PostService(new PostRepository());
         return service.getById(id);
     }
+
+    public List<Comment> getCommentsByPost(Long id) {
+        return repository.getByPost(id);
+    }
 }

@@ -62,14 +62,6 @@ public class Blog {
         }
     }
 
-    // TODO implementar un hash para indentidicar item al recuperar por ID y no usar datos repetidos
-    // En Categorías, texto es unico
-    // En usuario email
-    // En post es URL
-    // en comments un hash md5
-
-    // TODO eliminar lo de insertar Objetos completos en post y comments para crear la referencia, solo el ID
-
     public void Categories() {
         CategoryController categoryController = CategoryController.getInstance();
         // Obtenemos todas las categorías
@@ -157,13 +149,15 @@ public class Blog {
                 .nombre("Pepe Perez")
                 .email("pepe@pepe.com")
                 .build();
-        postDTO.setUser(postUser);
+        // postDTO.setUser(postUser);
+        postDTO.setUser_id(1L);
         // Asignamos una categoria que exita
         Category categoryPost = Category.builder()
                 .id(1L)
                 .texto("General")
                 .build();
-        postDTO.setCategory(categoryPost);
+        // postDTO.setCategory(categoryPost);
+        postDTO.setCategory_id(1L);
 
         System.out.println(postController.postPostJSON(postDTO));
 
@@ -176,16 +170,20 @@ public class Blog {
                 .url("http://" + Math.random() + ".dominio.com")
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
-        postDTO.setUser(postUser);
-        postDTO.setCategory(categoryPost);
+        // postDTO.setUser(postUser);
+        postDTO.setUser_id(1L);
+        // postDTO.setCategory(categoryPost);
+        postDTO.setCategory_id(1L);
         System.out.println(postController.updatePostJSON(postDTO));
 
-        System.out.println("DELETE Post con ID = 4");
+        System.out.println("DELETE Post con ID = 5");
         postDTO = PostDTO.builder()
-                .id(5L)
+                .id(4L)
                 .build();
-        postDTO.setUser(postUser);
-        postDTO.setCategory(categoryPost);
+        // postDTO.setUser(postUser);
+        postDTO.setUser_id(2L);
+        // postDTO.setCategory(categoryPost);
+        postDTO.setCategory_id(3L);
         System.out.println(postController.deletePostJSON(postDTO));
 
     }
@@ -210,7 +208,8 @@ public class Blog {
                 .nombre("Pepe Perez")
                 .email("pepe@pepe.com")
                 .build();
-        commentDTO.setUser(commentUser);
+       // commentDTO.setUser(commentUser);
+        commentDTO.setUser_id(1L);
         // Asignamos una post que exita
         Post commentPost = Post.builder()
                 .id(3L)
@@ -221,7 +220,8 @@ public class Blog {
                 .user_id(3L)
                 .category_id(3L)
                 .build();
-        commentDTO.setPost(commentPost);
+        // commentDTO.setPost(commentPost);
+        commentDTO.setPost_id(3L);
         System.out.println(commentController.postCommentJSON(commentDTO));
 
         System.out.println("UPDATE Comentario con ID = 7");
@@ -231,16 +231,18 @@ public class Blog {
                 .texto("Update " + Instant.now().toString())
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
-        commentDTO.setUser(commentUser);
-        commentDTO.setPost(commentPost);
+        // commentDTO.setUser(commentUser);
+        // commentDTO.setPost(commentPost);
+        commentDTO.setUser_id(1L);
+        commentDTO.setPost_id(3L);
         System.out.println(commentController.updateCommentJSON(commentDTO));
 
         System.out.println("DELETE Comentario con ID = 7");
         commentDTO = CommentDTO.builder()
                 .id(7L)
                 .build();
-        commentDTO.setUser(commentUser);
-        commentDTO.setPost(commentPost);
+        commentDTO.setUser_id(1L);
+        commentDTO.setPost_id(3L);
         System.out.println(commentController.deleteCommentJSON(commentDTO));
     }
 }

@@ -1,5 +1,7 @@
 package es.joseluisgs.dam.blog.controller;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import es.joseluisgs.dam.blog.dto.UserDTO;
@@ -34,28 +36,59 @@ public class UserController {
 
     public String getAllUsersJSON() {
         // Vamos a devolver el JSON de las categorías
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(userService.getAllUsers());
     }
 
     public String getUserByIdJSON(Long id) {
         // Vamos a devolver el JSON de las categorías
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(userService.getUserById(id));
     }
 
     public String postUserJSON(UserDTO userDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(userService.postUser(userDTO));
     }
 
     public String updateUserJSON(UserDTO userDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(userService.updateUser(userDTO));
     }
 
     public String deleteUserJSON(UserDTO userDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(userService.deleteUser(userDTO));
     }
+
+    // Con esto evitamos que se imprima el campo password si no queremos
+    // https://www.baeldung.com/gson-exclude-fields-serialization
+    ExclusionStrategy strategy = new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes field) {
+            return field.getName().startsWith("password");
+        }
+    };
+
 }
+

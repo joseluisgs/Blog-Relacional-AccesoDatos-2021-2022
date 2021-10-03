@@ -20,7 +20,10 @@ public class CommentDTO {
     // Post al que pertenece
     private Post post;
 
-    public static CategoryDTO fromJSON(String json) {
+    // Para mejorar las relaciones y como es un dTO vamos a poner los ids
+    private Long user_id, post_id;
+
+    /*public static CategoryDTO fromJSON(String json) {
         final Gson gson = new Gson();
         return gson.fromJson(json, CategoryDTO.class);
     }
@@ -28,5 +31,5 @@ public class CommentDTO {
     public String toJSON() {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(this);
-    }
+    }*/
 }

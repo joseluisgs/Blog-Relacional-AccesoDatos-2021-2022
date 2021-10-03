@@ -15,7 +15,7 @@ public class CategoryDTO {
     // Lista de post que tiene asociado. Por ahora suprimo la bidireccionalidad
     // private final Set<Post> posts = new HashSet<>();
 
-    public static CategoryDTO fromJSON(String json) {
+   /* public static CategoryDTO fromJSON(String json) {
         final Gson gson = new Gson();
         return gson.fromJson(json, CategoryDTO.class);
     }
@@ -23,5 +23,5 @@ public class CategoryDTO {
     public String toJSON() {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(this);
-    }
+    }*/
 }
