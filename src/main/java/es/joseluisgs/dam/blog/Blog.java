@@ -142,20 +142,8 @@ public class Blog {
                 .contenido(Instant.now().toString())
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
-        // Asignamos el usuario que exista, solo necesitamos su ID
-        User postUser = User.builder()
-                .id(1L)
-                .nombre("Pepe Perez")
-                .email("pepe@pepe.com")
-                .build();
-        // postDTO.setUser(postUser);
+        // Asignamos el usuario y categorías que existan
         postDTO.setUser_id(1L);
-        // Asignamos una categoria que exita
-        Category categoryPost = Category.builder()
-                .id(1L)
-                .texto("General")
-                .build();
-        // postDTO.setCategory(categoryPost);
         postDTO.setCategory_id(1L);
 
         System.out.println(postController.postPostJSON(postDTO));
@@ -169,19 +157,26 @@ public class Blog {
                 .url("http://" + Math.random() + ".dominio.com")
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
-        // postDTO.setUser(postUser);
+        // Asignamos el usuario y categorías que existan
         postDTO.setUser_id(1L);
-        // postDTO.setCategory(categoryPost);
         postDTO.setCategory_id(1L);
         System.out.println(postController.updatePostJSON(postDTO));
 
         System.out.println("DELETE Post con ID = 5");
         postDTO = PostDTO.builder()
+                .id(5L)
+                .build();
+        // Asignamos el usuario y categorías que existan
+        postDTO.setUser_id(2L);
+        postDTO.setCategory_id(3L);
+        System.out.println(postController.deletePostJSON(postDTO));
+
+        System.out.println("DELETE Post con ID = 4, tiene categorias anidadas");
+        postDTO = PostDTO.builder()
                 .id(4L)
                 .build();
-        // postDTO.setUser(postUser);
+        // Asignamos el usuario y categorías que existan
         postDTO.setUser_id(2L);
-        // postDTO.setCategory(categoryPost);
         postDTO.setCategory_id(3L);
         System.out.println(postController.deletePostJSON(postDTO));
 
@@ -201,25 +196,8 @@ public class Blog {
                 .texto("Comentario " + Instant.now().toString())
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
-        // Asignamos el usuario que exista, solo necesitamos su ID
-        User commentUser = User.builder()
-                .id(1L)
-                .nombre("Pepe Perez")
-                .email("pepe@pepe.com")
-                .build();
-        // commentDTO.setUser(commentUser);
+        // Asignamos el usuario y post que existan
         commentDTO.setUser_id(1L);
-        // Asignamos una post que exita
-        Post commentPost = Post.builder()
-                .id(3L)
-                .titulo("Post num 3")
-                .url("http://post3.com")
-                .contenido("Este es el post num 3")
-                .fechaPublicacion(LocalDateTime.now())
-                .user_id(3L)
-                .category_id(3L)
-                .build();
-        // commentDTO.setPost(commentPost);
         commentDTO.setPost_id(3L);
         System.out.println(commentController.postCommentJSON(commentDTO));
 
@@ -230,8 +208,7 @@ public class Blog {
                 .texto("Update " + Instant.now().toString())
                 .fechaPublicacion(LocalDateTime.now())
                 .build();
-        // commentDTO.setUser(commentUser);
-        // commentDTO.setPost(commentPost);
+        // Asignamos el usuario y post que existan
         commentDTO.setUser_id(1L);
         commentDTO.setPost_id(3L);
         System.out.println(commentController.updateCommentJSON(commentDTO));
