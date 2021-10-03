@@ -1,5 +1,7 @@
 package es.joseluisgs.dam.blog.dto;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import es.joseluisgs.dam.blog.model.Category;
@@ -20,6 +22,7 @@ public class PostDTO {
     private String url;
     private String contenido;
     private LocalDateTime fechaPublicacion;
+
     // Autor
     private User user;
     // Categoría a la que pertenece
@@ -31,13 +34,32 @@ public class PostDTO {
     // Lista de comentarios asociados
     private List<Comment> comments;
 
-    /*public static CategoryDTO fromJSON(String json) {
+
+    // From/To JSON
+    public static CategoryDTO fromJSON(String json) {
         final Gson gson = new Gson();
         return gson.fromJson(json, CategoryDTO.class);
     }
 
     public String toJSON() {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson prettyGson = new GsonBuilder()
+                .addSerializationExclusionStrategy(strategy)
+                .setPrettyPrinting()
+                .create();
         return prettyGson.toJson(this);
-    }*/
+    }
+
+    ExclusionStrategy strategy = new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes field) {
+            return field.getName().startsWith("password")
+                    || field.getName().startsWith("user_id")
+                    || field.getName().startsWith("category_id") ;
+        }
+    };
 }

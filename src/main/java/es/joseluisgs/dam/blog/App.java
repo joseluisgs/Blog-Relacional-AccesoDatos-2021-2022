@@ -22,16 +22,16 @@ public class App {
             blog.initDataBase();
 
         // Categorías
-        //blog.Categories();
+        blog.Categories();
 
         // Usuarios
-        // blog.Users();
+        blog.Users();
 
         // Post
         blog.Posts();
 
         // Commentarios
-        // blog.Comments();
+        blog.Comments();
 
 
     }

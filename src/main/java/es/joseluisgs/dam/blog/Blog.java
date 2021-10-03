@@ -224,7 +224,7 @@ public class Blog {
         commentDTO.setPost_id(3L);
         System.out.println(commentController.postCommentJSON(commentDTO));
 
-        System.out.println("UPDATE Comentario con ID = 7");
+        System.out.println("UPDATE Comentario con ID = 4");
         // Solo dejamos cambiar el tútulo o el contenido
         commentDTO = CommentDTO.builder()
                 .id(4L)
@@ -237,9 +237,9 @@ public class Blog {
         commentDTO.setPost_id(3L);
         System.out.println(commentController.updateCommentJSON(commentDTO));
 
-        System.out.println("DELETE Comentario con ID = 7");
+        System.out.println("DELETE Comentario con ID = 8");
         commentDTO = CommentDTO.builder()
-                .id(7L)
+                .id(8L)
                 .build();
         commentDTO.setUser_id(1L);
         commentDTO.setPost_id(3L);
