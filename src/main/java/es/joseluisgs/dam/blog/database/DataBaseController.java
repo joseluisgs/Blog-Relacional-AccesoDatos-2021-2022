@@ -45,6 +45,7 @@ public class DataBaseController {
         // Leemos los datos de la base de datos que pueden estar en
         // porperties o en .env
         // imaginemos que el usuario y pasword estaán en .env y el resto en application.properties
+        // si no los rellenamos aquí.
         ApplicationProperties properties = new ApplicationProperties();
         serverUrl = properties.readProperty("database.server.url");
         serverPort = properties.readProperty("database.server.port");
@@ -60,7 +61,7 @@ public class DataBaseController {
     public void open() {
         try {
             //String url = "jdbc:sqlite:"+this.ruta+this.bbdd; //MySQL jdbc:mysql://localhost/prueba", "root", "1daw"
-            String url = "jdbc:mariadb://" + this.serverUrl + ":" + this.serverPort + "/" + this.dataBaseName + "";
+            String url = "jdbc:mariadb://" + this.serverUrl + ":" + this.serverPort + "/" + this.dataBaseName;
             // System.out.println(url);
             // Obtenemos la conexión
             connection = DriverManager.getConnection(url, user, password);
@@ -71,7 +72,6 @@ public class DataBaseController {
 
     public void close() {
         try {
-            resultSet.close();
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
@@ -90,28 +90,26 @@ public class DataBaseController {
 
     public ResultSet select(String querySQL, Object... params) {
         try {
-            resultSet = executeQuery(querySQL, params);
+            return executeQuery(querySQL, params);
         } catch (SQLException e) {
             System.err.println("Error al consultar BD" + e.getMessage());
-        } finally {
-            return resultSet;
+            return null;
         }
     }
 
     public ResultSet select(String querySQL, int limit, int offset, Object... params) {
         try {
             String query = querySQL + " LIMIT " + limit + " OFFSET " + offset;
-            resultSet = executeQuery(query, params);
+            return executeQuery(query, params);
         } catch (SQLException e) {
             System.err.println("Error al consultar BD con paginación" + e.getMessage());
-        } finally {
-            return resultSet;
+            return null;
         }
     }
 
     public ResultSet insert(String insertSQL, Object... params) {
         try {
-            // Con return generated keys obtenemos las claves generadas
+            // Con return generated keys obtenemos las claves generadas is las claves es autonumerica por ejemplo
             preparedStatement = connection.prepareStatement(insertSQL, preparedStatement.RETURN_GENERATED_KEYS);
             // Vamos a pasarle los parametros usando preparedStatement
             for (int i = 0; i < params.length; i++) {
@@ -121,34 +119,29 @@ public class DataBaseController {
             return preparedStatement.getGeneratedKeys();
         } catch (SQLException e) {
             System.err.println("Error al insertar BD" + e.getMessage());
+            return null;
         }
-        return null;
     }
 
     public int update(String updateSQL, Object... params) {
-        int res = -1;
         try {
-            res = updateQuery(updateSQL, params);
+            return updateQuery(updateSQL, params);
         } catch (SQLException e) {
             System.err.println("Error al actualizar BD" + e.getMessage());
-        } finally {
-            return res;
+            return -1;
         }
     }
 
     public int delete(String deleteSQL, Object... params) {
-        int res = -1;
         try {
-            res = updateQuery(deleteSQL, params);
+            return updateQuery(deleteSQL, params);
         } catch (SQLException e) {
             System.err.println("Error al eliminar BD" + e.getMessage());
-        } finally {
-            return res;
+            return -1;
         }
     }
 
     private int updateQuery(String genericSQL, Object... params) throws SQLException {
-        int res = -1;
         // Con return generated keys obtenemos las claves generadas
         preparedStatement = connection.prepareStatement(genericSQL);
         // Vamos a pasarle los parametros usando preparedStatement
