@@ -27,7 +27,7 @@ public class App {
         // Post
         blog.Posts();
 
-        // Commentarios
+        // Comentarios
         blog.Comments();
 
 
