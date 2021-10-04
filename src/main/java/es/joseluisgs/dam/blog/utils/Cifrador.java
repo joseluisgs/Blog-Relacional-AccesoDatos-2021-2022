@@ -16,7 +16,7 @@ public class Cifrador {
         return cif;
     }
 
-    public String SHA512(String cadena) {
+    public String SHA256(String cadena) {
         MessageDigest md = null;
         byte[] hash = null;
         // Llamamos a la función de hash de java

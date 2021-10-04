@@ -1,5 +1,7 @@
 package es.joseluisgs.dam.blog.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import es.joseluisgs.dam.blog.model.Login;
 import es.joseluisgs.dam.blog.repository.LoginRepository;
 import es.joseluisgs.dam.blog.service.LoginService;
@@ -26,7 +28,24 @@ public class LoginController {
     }
 
     // Ejemplo de operaciones
-    public List<Login> getAllLogins() throws SQLException {
-        return loginService.getAllLogins();
+    public void login(String userMail, String userPassword) {
+        Login login = loginService.login(userMail, userPassword);
+        if(login!=null) {
+            // System.out.println("SI");
+            final Gson prettyGson = new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create();
+            System.out.println(prettyGson.toJson(login));
+        } else {
+            System.err.println("ERROR Login: Usuario/a no existe o los datos son incorrectos");
+        }
+    }
+
+    public void logout(Long ID) {
+        if(loginService.logout(ID)) {
+            System.out.println("Logout OK");
+        } else {
+            System.err.println("ERROR Logout: Usuario/a no existe o los datos son incorrectos");
+        }
     }
 }

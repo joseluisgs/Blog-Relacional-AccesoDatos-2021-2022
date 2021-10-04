@@ -17,8 +17,7 @@ public class UserRepository implements CrudRespository<User, Long> {
             db.open();
             ResultSet result = db.select(query);
             ArrayList<User> list = new ArrayList<User>();
-            while (true) {
-                if (!result.next()) break;
+            while (result.next()) {
                 list.add(
                         new User(
                                 result.getLong("id"),
@@ -73,8 +72,10 @@ public class UserRepository implements CrudRespository<User, Long> {
             }
             // una vez insertado comprobamos que esta correcto para devolverlo
             db.close();
-        } finally {
             return user;
+        } catch (SQLException e) {
+            System.err.println("Error save: " + e.getMessage());
+            return null;
         }
     }
 
@@ -100,5 +101,27 @@ public class UserRepository implements CrudRespository<User, Long> {
         if (res != 0)
             return user;
         return null;
+    }
+
+    public User getByMail(String userMail) {
+        try {
+            String query = "SELECT * FROM user WHERE email = ?";
+            DataBaseController db = DataBaseController.getInstance();
+            db.open();
+            ResultSet result = db.select(query, userMail);
+            result.absolute(1);
+            User user = new User(
+                    result.getLong("id"),
+                    result.getString("nombre"),
+                    result.getString("email"),
+                    result.getString("password"),
+                    result.getDate("fecha_registro").toLocalDate()
+            );
+            db.close();
+            return user;
+        } catch (SQLException e) {
+            // System.err.println("Error getByMail: " + e.getMessage());
+            return null;
+        }
     }
 }

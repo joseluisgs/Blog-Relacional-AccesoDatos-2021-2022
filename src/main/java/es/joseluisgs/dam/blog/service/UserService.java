@@ -29,7 +29,7 @@ public class UserService extends BaseService<User, Long, UserRepository> {
 
     public UserDTO postUser(UserDTO userDTO) {
         // Ciframos antes el password
-        userDTO.setPassword(Cifrador.getInstance().SHA512(userDTO.getPassword()));
+        userDTO.setPassword(Cifrador.getInstance().SHA256(userDTO.getPassword()));
         User res = this.save(mapper.fromDTO(userDTO));
         return mapper.toDTO(res);
     }
@@ -42,5 +42,9 @@ public class UserService extends BaseService<User, Long, UserRepository> {
     public UserDTO deleteUser(UserDTO userDTO) {
         User res = this.delete(mapper.fromDTO(userDTO));
         return mapper.toDTO(res);
+    }
+
+    public User getUserByMail(String userMail) {
+        return repository.getByMail(userMail);
     }
 }
