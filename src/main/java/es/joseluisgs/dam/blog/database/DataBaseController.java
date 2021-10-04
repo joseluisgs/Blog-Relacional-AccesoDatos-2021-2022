@@ -128,7 +128,7 @@ public class DataBaseController {
     public int update(String updateSQL, Object... params) {
         int res = -1;
         try {
-             res = updateQuery(updateSQL, params);
+            res = updateQuery(updateSQL, params);
         } catch (SQLException e) {
             System.err.println("Error al actualizar BD" + e.getMessage());
         } finally {
@@ -149,13 +149,13 @@ public class DataBaseController {
 
     private int updateQuery(String genericSQL, Object... params) throws SQLException {
         int res = -1;
-            // Con return generated keys obtenemos las claves generadas
-            preparedStatement = connection.prepareStatement(genericSQL);
-            // Vamos a pasarle los parametros usando preparedStatement
-            for (int i = 0; i < params.length; i++) {
-                preparedStatement.setObject(i + 1, params[i]);
-            }
-            return preparedStatement.executeUpdate();
+        // Con return generated keys obtenemos las claves generadas
+        preparedStatement = connection.prepareStatement(genericSQL);
+        // Vamos a pasarle los parametros usando preparedStatement
+        for (int i = 0; i < params.length; i++) {
+            preparedStatement.setObject(i + 1, params[i]);
+        }
+        return preparedStatement.executeUpdate();
     }
 
     public void initData(String sqlFile) throws FileNotFoundException {
