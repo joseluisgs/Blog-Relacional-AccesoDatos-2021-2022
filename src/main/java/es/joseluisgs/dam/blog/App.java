@@ -19,7 +19,7 @@ public class App {
             blog.initDataBase();
 
         // Categorías
-        // blog.Categories();
+        blog.Categories();
 
         // Usuarios
         // blog.Users();
@@ -28,7 +28,7 @@ public class App {
         // blog.Posts();
 
         // Comentarios
-        blog.Comments();
+        // blog.Comments();
 
 
     }
