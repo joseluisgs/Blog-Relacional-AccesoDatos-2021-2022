@@ -34,7 +34,7 @@ public class Blog {
     public void checkService() {
         DataBaseController controller = DataBaseController.getInstance();
         controller.open();
-        ResultSet rs = controller.query("SELECT * from test");
+        ResultSet rs = controller.select("SELECT * from test");
         try {
             rs.first();
             controller.close();
@@ -210,9 +210,9 @@ public class Blog {
         commentDTO.setPost_id(3L);
         System.out.println(commentController.updateCommentJSON(commentDTO));
 
-        System.out.println("DELETE Comentario con ID = 8");
+        System.out.println("DELETE Comentario con ID = 6");
         commentDTO = CommentDTO.builder()
-                .id(8L)
+                .id(6L)
                 .build();
         commentDTO.setUser_id(1L);
         commentDTO.setPost_id(3L);

@@ -15,10 +15,9 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
             String query = "SELECT * FROM category";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.query(query);
+            ResultSet result = db.select(query);
             ArrayList<Category> list = new ArrayList<Category>();
-            while (true) {
-                if (!result.next()) break;
+            while (result.next()) {
                 list.add(
                         new Category(
                                 result.getLong("id"),
@@ -37,10 +36,10 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
     @Override
     public Category getById(Long ID) {
         try {
-            String query = "SELECT * FROM category WHERE id = " + ID;
+            String query = "SELECT * FROM category WHERE id = ?";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.query(query);
+            ResultSet result = db.select(query, ID);
             result.absolute(1);
             Category category = new Category(
                     result.getLong("id"),
@@ -56,27 +55,32 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
 
     @Override
     public Category save(Category category) {
-        String query = "INSERT INTO category (texto) " +
-                "VALUES ('" + category.getTexto() + "')";
-        DataBaseController db = DataBaseController.getInstance();
-        db.open();
-        int res = db.update(query);
-        if (res != 0)
-            // Para obtener su ID
-            category = this.getItem(category);
-        // una vez insertado comprobamos que esta correcto para devolverlo
-        db.close();
-        return category;
+        try {
+            // si ponemos como primer parametro  null como primero, y pasamos en la llamada
+            // al tener configurado el servidor con Prepared generated keys, obtenemos el ID generado autoincremntal de MariaDB
+            String query = "INSERT INTO category VALUES (null, ?)";
+            DataBaseController db = DataBaseController.getInstance();
+            db.open();
+            ResultSet res = db.insert(query, category.getTexto());
+            if (res != null) {
+                // Para obtener su ID
+                res.absolute(1);
+                category.setId(res.getLong(1));
+            }
+            db.close();
+        } catch (SQLException e) {
+            System.err.println("Error Insert: " + e.getMessage());
+        } finally {
+            return category;
+        }
     }
 
     @Override
     public Category update(Category category) {
-        String query = "UPDATE category SET " +
-                "texto = '" + category.getTexto() + "'" +
-                " WHERE id = " + category.getId();
+        String query = "UPDATE category SET texto = ? WHERE id = ?";
         DataBaseController db = DataBaseController.getInstance();
         db.open();
-        int res = db.update(query);
+        int res = db.update(query, category.getTexto(), category.getId());
         db.close();
         if (res != 0)
             return category;
@@ -85,35 +89,14 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
 
     @Override
     public Category delete(Category category) {
-        String query = "DELETE FROM category " +
-                "WHERE id = " + category.getId();
+        String query = "DELETE FROM category WHERE id = ?";
         DataBaseController db = DataBaseController.getInstance();
         db.open();
-        int res = db.update(query);
+        int res = db.delete(query, category.getId());
         db.close();
         if (res != 0)
             return category;
         return null;
 
     }
-
-    private Category getItem(Category category) {
-        try {
-            String query = "SELECT * FROM category WHERE texto = '" + category.getTexto() + "'";
-            DataBaseController db = DataBaseController.getInstance();
-            db.open();
-            ResultSet result = db.query(query);
-            result.absolute(1);
-            category = new Category(
-                    result.getLong("id"),
-                    result.getString("texto")
-            );
-            db.close();
-            return category;
-        } catch (SQLException e) {
-            System.err.println("Error getItem: " + e.getMessage());
-            return null;
-        }
-    }
-
 }
