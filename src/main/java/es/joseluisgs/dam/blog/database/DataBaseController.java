@@ -78,22 +78,31 @@ public class DataBaseController {
         }
     }
 
-    public ResultSet query(String querySQL) {
+    public ResultSet query(String querySQL, Object ... params) {
         resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(querySQL);
+            // Vamos a pasarle los parametros usando preparedStatement
+            for(int i=0; i<params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
             resultSet = preparedStatement.executeQuery();
+
         } catch (SQLException e) {
             System.err.println("Error al consultar BD" + e.getMessage());
         }
         return resultSet;
     }
 
-    public ResultSet query(String querySQL, int limit, int offset) {
+    public ResultSet query(String querySQL, int limit, int offset, Object ... params) {
         resultSet = null;
         String query = querySQL + " LIMIT " + limit + " OFFSET " + offset;
         try {
             preparedStatement = connection.prepareStatement(query);
+            // Vamos a pasarle los parametros usando preparedStatement
+            for(int i=0; i<params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException e) {
             System.err.println("Error al consultar BD" + e.getMessage());
@@ -101,10 +110,14 @@ public class DataBaseController {
         return resultSet;
     }
 
-    public int update(String updateSQL) {
+    public int update(String updateSQL, Object ... params) {
         int changes = -1;
         try {
             preparedStatement = connection.prepareStatement(updateSQL);
+            // Vamos a pasarle los parametros usando preparedStatement
+            for(int i=0; i<params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
             changes = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error al actualizar BD" + e.getMessage());
