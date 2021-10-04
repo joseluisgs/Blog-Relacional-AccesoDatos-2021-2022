@@ -61,7 +61,7 @@ public class DataBaseController {
     public void open() {
         try {
             //String url = "jdbc:sqlite:"+this.ruta+this.bbdd; //MySQL jdbc:mysql://localhost/prueba", "root", "1daw"
-            String url = "jdbc:mariadb://" + this.serverUrl + ":" + this.serverPort + "/" + this.dataBaseName + "";
+            String url = "jdbc:mariadb://" + this.serverUrl + ":" + this.serverPort + "/" + this.dataBaseName;
             // System.out.println(url);
             // Obtenemos la conexión
             connection = DriverManager.getConnection(url, user, password);
