@@ -71,8 +71,8 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
 
         DataBaseController db = DataBaseController.getInstance();
         db.open();
-        ResultSet res = db.insert(query, comment.getTexto(), comment.getFechaPublicacion(), uuid,
-                comment.getUser_id(), comment.getPost_id());
+        ResultSet res = db.insert(query, comment.getTexto(), comment.getFechaPublicacion(),
+                comment.getUser_id(), comment.getPost_id(), uuid.toString());
             if (res != null) {
                 // Para obtener su ID
                 res.absolute(1);
