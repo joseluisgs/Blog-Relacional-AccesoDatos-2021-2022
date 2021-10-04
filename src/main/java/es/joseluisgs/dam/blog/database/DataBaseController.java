@@ -71,6 +71,7 @@ public class DataBaseController {
 
     public void close() {
         try {
+            resultSet.close();
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
@@ -78,51 +79,83 @@ public class DataBaseController {
         }
     }
 
-    public ResultSet query(String querySQL, Object ... params) {
-        resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(querySQL);
-            // Vamos a pasarle los parametros usando preparedStatement
-            for(int i=0; i<params.length; i++) {
-                preparedStatement.setObject(i + 1, params[i]);
-            }
-            resultSet = preparedStatement.executeQuery();
-
-        } catch (SQLException e) {
-            System.err.println("Error al consultar BD" + e.getMessage());
+    private ResultSet executeQuery(String querySQL, Object... params) throws SQLException {
+        preparedStatement = connection.prepareStatement(querySQL);
+        // Vamos a pasarle los parametros usando preparedStatement
+        for (int i = 0; i < params.length; i++) {
+            preparedStatement.setObject(i + 1, params[i]);
         }
-        return resultSet;
+        return preparedStatement.executeQuery();
     }
 
-    public ResultSet query(String querySQL, int limit, int offset, Object ... params) {
-        resultSet = null;
-        String query = querySQL + " LIMIT " + limit + " OFFSET " + offset;
+    public ResultSet select(String querySQL, Object... params) {
         try {
-            preparedStatement = connection.prepareStatement(query);
-            // Vamos a pasarle los parametros usando preparedStatement
-            for(int i=0; i<params.length; i++) {
-                preparedStatement.setObject(i + 1, params[i]);
-            }
-            resultSet = preparedStatement.executeQuery();
+            resultSet = executeQuery(querySQL, params);
         } catch (SQLException e) {
             System.err.println("Error al consultar BD" + e.getMessage());
+        } finally {
+            return resultSet;
         }
-        return resultSet;
     }
 
-    public int update(String updateSQL, Object ... params) {
-        int changes = -1;
+    public ResultSet select(String querySQL, int limit, int offset, Object... params) {
         try {
-            preparedStatement = connection.prepareStatement(updateSQL);
+            String query = querySQL + " LIMIT " + limit + " OFFSET " + offset;
+            resultSet = executeQuery(query, params);
+        } catch (SQLException e) {
+            System.err.println("Error al consultar BD con paginación" + e.getMessage());
+        } finally {
+            return resultSet;
+        }
+    }
+
+    public ResultSet insert(String insertSQL, Object... params) {
+        try {
+            // Con return generated keys obtenemos las claves generadas
+            preparedStatement = connection.prepareStatement(insertSQL, preparedStatement.RETURN_GENERATED_KEYS);
             // Vamos a pasarle los parametros usando preparedStatement
-            for(int i=0; i<params.length; i++) {
+            for (int i = 0; i < params.length; i++) {
                 preparedStatement.setObject(i + 1, params[i]);
             }
-            changes = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
+            return preparedStatement.getGeneratedKeys();
+        } catch (SQLException e) {
+            System.err.println("Error al insertar BD" + e.getMessage());
+        }
+        return null;
+    }
+
+    public int update(String updateSQL, Object... params) {
+        int res = -1;
+        try {
+             res = updateQuery(updateSQL, params);
         } catch (SQLException e) {
             System.err.println("Error al actualizar BD" + e.getMessage());
+        } finally {
+            return res;
         }
-        return changes;
+    }
+
+    public int delete(String deleteSQL, Object... params) {
+        int res = -1;
+        try {
+            res = updateQuery(deleteSQL, params);
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar BD" + e.getMessage());
+        } finally {
+            return res;
+        }
+    }
+
+    private int updateQuery(String genericSQL, Object... params) throws SQLException {
+        int res = -1;
+            // Con return generated keys obtenemos las claves generadas
+            preparedStatement = connection.prepareStatement(genericSQL);
+            // Vamos a pasarle los parametros usando preparedStatement
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
+            return preparedStatement.executeUpdate();
     }
 
     public void initData(String sqlFile) throws FileNotFoundException {
