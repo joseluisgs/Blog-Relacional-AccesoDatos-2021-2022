@@ -49,10 +49,14 @@ INSERT INTO `comment` (`id`, `texto`, `fecha_publicacion`, `user_id`, `post_id`,
 
 DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
-  `user_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`user_id`),
-  CONSTRAINT `login_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+                         `user_id` bigint(20) unsigned NOT NULL,
+                         `ultimo_acceso` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+                         `token` varchar(100) NOT NULL,
+                         PRIMARY KEY (`user_id`),
+                         CONSTRAINT `login_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de login';
+
+
 
 
 DROP TABLE IF EXISTS `post`;

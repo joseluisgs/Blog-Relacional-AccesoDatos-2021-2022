@@ -1,9 +1,14 @@
 package es.joseluisgs.dam.blog.service;
 
 import es.joseluisgs.dam.blog.model.Login;
+import es.joseluisgs.dam.blog.model.User;
 import es.joseluisgs.dam.blog.repository.LoginRepository;
+import es.joseluisgs.dam.blog.repository.UserRepository;
+import es.joseluisgs.dam.blog.utils.Cifrador;
 
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class LoginService extends BaseService<Login, Long, LoginRepository> {
@@ -20,7 +25,29 @@ public class LoginService extends BaseService<Login, Long, LoginRepository> {
         return this.findAll();
     }
 
-    public Login createLogin(Login login) {
-        return this.save(login);
+    public Login login(String userMail, String userPassword) {
+        User user = getUserByMail(userMail);
+        Cifrador cif = Cifrador.getInstance();
+        if ((user != null) && user.getPassword().equals(cif.SHA256(userPassword))) {
+            // System.out.println("SI");
+            Login login = repository.save(new Login(user.getId(), LocalDateTime.now()));
+            // System.out.println(login);
+            return login;
+        } else {
+            // System.out.println("NO");
+            return null;
+        }
+    }
+
+    private User getUserByMail(String userMail) {
+        UserService service = new UserService(new UserRepository());
+        return service.getUserByMail(userMail);
+    }
+
+    public boolean logout(Long id) {
+        if (repository.deleteById(id) != null)
+            return true;
+        else
+            return false;
     }
 }

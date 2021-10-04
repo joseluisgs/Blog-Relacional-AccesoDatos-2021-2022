@@ -1,9 +1,6 @@
 package es.joseluisgs.dam.blog;
 
-import es.joseluisgs.dam.blog.controller.CategoryController;
-import es.joseluisgs.dam.blog.controller.CommentController;
-import es.joseluisgs.dam.blog.controller.PostController;
-import es.joseluisgs.dam.blog.controller.UserController;
+import es.joseluisgs.dam.blog.controller.*;
 import es.joseluisgs.dam.blog.database.DataBaseController;
 import es.joseluisgs.dam.blog.dto.CategoryDTO;
 import es.joseluisgs.dam.blog.dto.CommentDTO;
@@ -217,5 +214,19 @@ public class Blog {
         commentDTO.setUser_id(1L);
         commentDTO.setPost_id(3L);
         System.out.println(commentController.deleteCommentJSON(commentDTO));
+    }
+
+    public void Login() {
+        LoginController loginController = LoginController.getInstance();
+        System.out.println("Login con un usario que SI existe");
+        loginController.login("pepe@pepe.es", "1234");
+        System.out.println("Login con un usario que SI existe Y mal Passqord datos correctos");
+        loginController.login("pepe@pepe.es", "1255");
+        System.out.println("Login con un usario que NO existe o mal Passqord datos correctos");
+        loginController.login("pepe@pepe.com", "1255");
+        System.out.println("Logout de usuario que está logueado");
+        loginController.logout(1L);
+        System.out.println("Logout de usuario que no está logueado");
+        loginController.logout(33L);
     }
 }
