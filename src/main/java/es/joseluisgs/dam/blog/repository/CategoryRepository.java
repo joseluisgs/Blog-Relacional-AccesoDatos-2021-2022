@@ -69,7 +69,7 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
             }
             db.close();
         } catch (SQLException e) {
-            System.err.println("Error getById: " + e.getMessage());
+            System.err.println("Error Insert: " + e.getMessage());
         } finally {
             return category;
         }
