@@ -6,6 +6,7 @@ import es.joseluisgs.dam.blog.dto.CategoryDTO;
 import es.joseluisgs.dam.blog.repository.CategoryRepository;
 import es.joseluisgs.dam.blog.service.CategoryService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CategoryController {
@@ -28,25 +29,40 @@ public class CategoryController {
 
     // Ejemplo de operaciones
     // Usamos DTO para implementar este patrón en represantación y trasporte de la información
-    public List<CategoryDTO> getAllCategories() {
-        return categoryService.getAllCategories();
-    }
+//    public List<CategoryDTO> getAllCategories() {
+//        return categoryService.getAllCategories();
+//    }
 
     public String getAllCategoriesJSON() {
+        try {
         // Vamos a devolver el JSON de las categorías
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.getAllCategories());
+        } catch (SQLException e) {
+            System.err.println("Error en getAllCategories: " + e.getMessage());
+            return "Error en getAllCategories: " + e.getMessage();
+        }
     }
 
     public String getCategoryByIdJSON(Long id) {
+        try {
         // Vamos a devolver el JSON de las categorías
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.getCategoryById(id));
+        } catch (SQLException e) {
+            System.err.println("Error en getCategoryById: " + e.getMessage());
+            return "Error en getCategoryById: " + e.getMessage();
+        }
     }
 
     public String postCategoryJSON(CategoryDTO categoryDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.postCategory(categoryDTO));
+        } catch (SQLException e) {
+            System.err.println("Error en postCategory: " + e.getMessage());
+            return "Error en postCategory: " + e.getMessage();
+        }
     }
 
     public String updateCategoryJSON(CategoryDTO categoryDTO) {

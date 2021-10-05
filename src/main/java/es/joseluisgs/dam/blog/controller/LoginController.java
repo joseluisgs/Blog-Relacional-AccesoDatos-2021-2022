@@ -8,6 +8,7 @@ import es.joseluisgs.dam.blog.service.LoginService;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class LoginController {
     private static LoginController controller = null;
@@ -29,23 +30,26 @@ public class LoginController {
 
     // Ejemplo de operaciones
     public void login(String userMail, String userPassword) {
-        Login login = loginService.login(userMail, userPassword);
-        if(login!=null) {
-            // System.out.println("SI");
-            final Gson prettyGson = new GsonBuilder()
-                    .setPrettyPrinting()
-                    .create();
-            System.out.println(prettyGson.toJson(login));
-        } else {
-            System.err.println("ERROR Login: Usuario/a no existe o los datos son incorrectos");
+        try {
+            Login login = loginService.login(userMail, userPassword);
+            if(login != null) {
+                final Gson prettyGson = new GsonBuilder()
+                        .setPrettyPrinting()
+                        .create();
+                System.out.println(prettyGson.toJson(login));
+            } else
+                System.err.println("Error Login: Usuario/a no existe o los datos son incorrectos");
+        } catch (SQLException e) {
+            System.err.println("Error Login: Usuario/a no existe o los datos son incorrectos");
         }
+
     }
 
     public void logout(Long ID) {
         if(loginService.logout(ID)) {
             System.out.println("Logout OK");
         } else {
-            System.err.println("ERROR Logout: Usuario/a no existe o los datos son incorrectos");
+            System.err.println("Error Logout: Usuario/a no existe o los datos son incorrectos");
         }
     }
 }

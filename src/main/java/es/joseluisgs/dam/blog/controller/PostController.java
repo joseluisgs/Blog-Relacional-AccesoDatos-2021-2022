@@ -8,6 +8,8 @@ import es.joseluisgs.dam.blog.dto.PostDTO;
 import es.joseluisgs.dam.blog.repository.PostRepository;
 import es.joseluisgs.dam.blog.service.PostService;
 
+import java.sql.SQLException;
+
 public class PostController {
     private static PostController controller = null;
 
@@ -43,43 +45,68 @@ public class PostController {
     // Ejemplo de operaciones
     public String getAllPostJSON() {
         // Vamos a devolver el JSON de las categorías
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(postService.getAllPosts());
+        } catch (SQLException e) {
+            System.err.println("Error en getAllPots: " + e.getMessage());
+            return "Error en getAllPost: " + e.getMessage();
+        }
     }
 
     public String getPostByIdJSON(Long id) {
         // Vamos a devolver el JSON de las categorías
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(postService.getPostById(id));
+        } catch (SQLException e) {
+            System.err.println("Error en getPostById " + e.getMessage());
+            return "Error en getPostById: " + e.getMessage();
+        }
     }
 
     public String postPostJSON(PostDTO postDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(postService.postPost(postDTO));
+        } catch (SQLException e) {
+            System.err.println("Error en postPost: " + e.getMessage());
+            return "Error en postPost: " + e.getMessage();
+        }
     }
 
     public String updatePostJSON(PostDTO postDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(postService.updatePost(postDTO));
+        } catch (SQLException e) {
+            System.err.println("Error en updatePost: " + e.getMessage());
+            return "Error en updatePost: " + e.getMessage();
+        }
     }
 
     public String deletePostJSON(PostDTO postDTO) {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(postService.deletePost(postDTO));
+        try {
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(postService.deletePost(postDTO));
+        } catch (SQLException e) {
+            System.err.println("Error en deletePost: " + e.getMessage());
+            return "Error en deletePost: " + e.getMessage();
+        }
     }
 }

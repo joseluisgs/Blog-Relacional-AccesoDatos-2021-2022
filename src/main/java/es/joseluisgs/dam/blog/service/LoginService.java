@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public class LoginService extends BaseService<Login, Long, LoginRepository> {
 
@@ -21,32 +22,28 @@ public class LoginService extends BaseService<Login, Long, LoginRepository> {
     // Otras operaciones o especificaciones para CRUD
     // O podíamos mapear el nombre
     // O simplemente ocultar las que no queramos usar en niveles superiores
-    public List<Login> getAllLogins() throws SQLException {
-        return this.findAll();
+    public Optional<List<Login>> getAllLogins() throws SQLException {
+        return null;
     }
 
-    public Login login(String userMail, String userPassword) {
+    public Login login(String userMail, String userPassword) throws SQLException {
         User user = getUserByMail(userMail);
         Cifrador cif = Cifrador.getInstance();
         if ((user != null) && user.getPassword().equals(cif.SHA256(userPassword))) {
             // System.out.println("SI");
             Login login = repository.save(new Login(user.getId(), LocalDateTime.now()));
-            // System.out.println(login);
             return login;
-        } else {
-            // System.out.println("NO");
-            return null;
         }
+        return null;
     }
 
-    private User getUserByMail(String userMail) {
+    private User getUserByMail(String userMail) throws SQLException {
         UserService service = new UserService(new UserRepository());
         return service.getUserByMail(userMail);
     }
 
     public boolean logout(Long id) {
-        if (repository.deleteById(id) != null)
-            return true;
+        if (repository.deleteById(id).isPresent()) return true;
         else
             return false;
     }

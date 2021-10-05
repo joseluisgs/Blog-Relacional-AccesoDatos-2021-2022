@@ -7,57 +7,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class CommentRepository implements CrudRespository<Comment, Long> {
     @Override
-    public List<Comment> findAll() {
-        try {
+    public List<Comment> findAll() throws SQLException {
             String query = "SELECT * FROM comment";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.select(query);
-            ArrayList<Comment> list = new ArrayList<Comment>();
-            while (result.next()) {
-                list.add(
-                        new Comment(
-                                result.getLong("id"),
-                                result.getString("texto"),
-                                result.getTimestamp("fecha_publicacion").toLocalDateTime(),
-                                result.getLong("user_id"),
-                                result.getLong("post_id")
-                        )
-                );
-            }
-            db.close();
-            return list;
-        } catch (SQLException e) {
-            System.err.println("Error findAll: " + e.getMessage());
-            return null;
-        }
+        ResultSet result = db.select(query).orElseThrow(() -> new SQLException("Error al consultar registros de comentarios"));
+                ArrayList<Comment> list = new ArrayList<Comment>();
+                while (result.next()) {
+                    list.add(
+                            new Comment(
+                                    result.getLong("id"),
+                                    result.getString("texto"),
+                                    result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                                    result.getLong("user_id"),
+                                    result.getLong("post_id")
+                            )
+                    );
+                }
+                db.close();
+                return list;
+
     }
 
     @Override
-    public Comment getById(Long ID) {
-        try {
+    public Comment getById(Long ID) throws SQLException {
             String query = "SELECT * FROM comment WHERE id = ?";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.select(query, ID);
-            result.absolute(1);
-            Comment comment = new Comment(
-                    result.getLong("id"),
-                    result.getString("texto"),
-                    result.getTimestamp("fecha_publicacion").toLocalDateTime(),
-                    result.getLong("user_id"),
-                    result.getLong("post_id")
-            );
-            db.close();
-            return comment;
-        } catch (SQLException e) {
-            System.err.println("Error getById: " + e.getMessage());
-            return null;
-        }
+        ResultSet result = db.select(query, ID).orElseThrow(() -> new SQLException("Error no existe comentario con ID " + ID));
+                result.first();
+                Comment comment = new Comment(
+                        result.getLong("id"),
+                        result.getString("texto"),
+                        result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                        result.getLong("user_id"),
+                        result.getLong("post_id")
+                );
+                db.close();
+                return comment;
     }
 
     @Override
@@ -111,29 +103,24 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
         return null;
     }
 
-    public List<Comment> getByPost(Long idPost) {
-        try {
+    public List<Comment> getByPost(Long idPost) throws SQLException {
             String query = "SELECT * FROM comment where post_id = ?";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.select(query, idPost);
-            ArrayList<Comment> list = new ArrayList<Comment>();
-            while (result.next()) {
-                list.add(
-                        new Comment(
-                                result.getLong("id"),
-                                result.getString("texto"),
-                                result.getTimestamp("fecha_publicacion").toLocalDateTime(),
-                                result.getLong("user_id"),
-                                result.getLong("post_id")
-                        )
-                );
-            }
-            db.close();
-            return list;
-        } catch (SQLException e) {
-            System.err.println("Error findAll: " + e.getMessage());
-            return null;
-        }
+        ResultSet result = db.select(query, idPost).orElseThrow(() -> new SQLException("Error no existe comentario con idPost " + idPost));
+                ArrayList<Comment> list = new ArrayList<Comment>();
+                while (result.next()) {
+                    list.add(
+                            new Comment(
+                                    result.getLong("id"),
+                                    result.getString("texto"),
+                                    result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                                    result.getLong("user_id"),
+                                    result.getLong("post_id")
+                            )
+                    );
+                }
+                db.close();
+                return list;
     }
 }

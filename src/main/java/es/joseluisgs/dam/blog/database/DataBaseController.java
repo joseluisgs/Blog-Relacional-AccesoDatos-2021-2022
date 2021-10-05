@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
 import java.sql.*;
+import java.util.Optional;
 
 public class DataBaseController {
     private static DataBaseController controller;
@@ -88,22 +89,22 @@ public class DataBaseController {
         return preparedStatement.executeQuery();
     }
 
-    public ResultSet select(String querySQL, Object... params) {
+    public Optional<ResultSet> select(String querySQL, Object... params) {
         try {
-            return executeQuery(querySQL, params);
+            return Optional.of(executeQuery(querySQL, params));
         } catch (SQLException e) {
             System.err.println("Error al consultar BD" + e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 
-    public ResultSet select(String querySQL, int limit, int offset, Object... params) {
+    public Optional<ResultSet> select(String querySQL, int limit, int offset, Object... params) {
         try {
             String query = querySQL + " LIMIT " + limit + " OFFSET " + offset;
-            return executeQuery(query, params);
+            return Optional.of(executeQuery(query, params));
         } catch (SQLException e) {
             System.err.println("Error al consultar BD con paginación" + e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 

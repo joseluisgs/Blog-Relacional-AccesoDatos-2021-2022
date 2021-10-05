@@ -7,15 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PostRepository implements CrudRespository<Post, Long> {
     @Override
-    public List<Post> findAll() {
-        try {
+    public List<Post> findAll() throws SQLException {
             String query = "SELECT * FROM post";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.select(query);
+        ResultSet result = db.select(query).orElseThrow(() -> new SQLException("Error al consultar registros de post"));
             ArrayList<Post> list = new ArrayList<Post>();
             while (result.next()) {
                 list.add(
@@ -32,20 +32,15 @@ public class PostRepository implements CrudRespository<Post, Long> {
             }
             db.close();
             return list;
-        } catch (SQLException e) {
-            System.err.println("Error findAll: " + e.getMessage());
-            return null;
-        }
     }
 
     @Override
-    public Post getById(Long ID) {
-        try {
+    public Post getById(Long ID) throws SQLException {
             String query = "SELECT * FROM post WHERE id = ?";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.select(query, ID);
-            result.absolute(1);
+        ResultSet result = db.select(query, ID).orElseThrow(() -> new SQLException("Error no existe post con ID " + ID));
+            result.first();
             Post post = new Post(
                     result.getLong("id"),
                     result.getString("titulo"),
@@ -57,10 +52,6 @@ public class PostRepository implements CrudRespository<Post, Long> {
             );
             db.close();
             return post;
-        } catch (SQLException e) {
-            System.err.println("Error getById: " + e.getMessage());
-            return null;
-        }
     }
 
     @Override

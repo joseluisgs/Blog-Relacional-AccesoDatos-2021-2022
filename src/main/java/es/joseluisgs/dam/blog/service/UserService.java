@@ -6,6 +6,7 @@ import es.joseluisgs.dam.blog.model.User;
 import es.joseluisgs.dam.blog.repository.UserRepository;
 import es.joseluisgs.dam.blog.utils.Cifrador;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserService extends BaseService<User, Long, UserRepository> {
@@ -19,15 +20,15 @@ public class UserService extends BaseService<User, Long, UserRepository> {
     // Otras operaciones o especificaciones para CRUD
     // O podíamos mapear el nombre
     // O simplemente ocultar las que no queramos usar en niveles superiores
-    public List<UserDTO> getAllUsers() {
+    public List<UserDTO> getAllUsers() throws SQLException {
         return mapper.toDTO(this.findAll());
     }
 
-    public UserDTO getUserById(Long id) {
+    public UserDTO getUserById(Long id) throws SQLException {
         return mapper.toDTO(this.getById(id));
     }
 
-    public UserDTO postUser(UserDTO userDTO) {
+    public UserDTO postUser(UserDTO userDTO) throws SQLException {
         // Ciframos antes el password
         userDTO.setPassword(Cifrador.getInstance().SHA256(userDTO.getPassword()));
         User res = this.save(mapper.fromDTO(userDTO));
@@ -44,7 +45,7 @@ public class UserService extends BaseService<User, Long, UserRepository> {
         return mapper.toDTO(res);
     }
 
-    public User getUserByMail(String userMail) {
+    public User getUserByMail(String userMail) throws SQLException {
         return repository.getByMail(userMail);
     }
 }

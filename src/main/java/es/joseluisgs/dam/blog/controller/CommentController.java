@@ -8,6 +8,8 @@ import es.joseluisgs.dam.blog.dto.CommentDTO;
 import es.joseluisgs.dam.blog.repository.CommentRepository;
 import es.joseluisgs.dam.blog.service.CommentService;
 
+import java.sql.SQLException;
+
 public class CommentController {
     private static CommentController controller = null;
 
@@ -43,44 +45,69 @@ public class CommentController {
     // Ejemplo de operaciones
     public String getAllCommentsJSON() {
         // Vamos a devolver el JSON de las categorías
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(commentService.getAllComments());
+        } catch (SQLException e) {
+            System.err.println("Error en getAllComments: " + e.getMessage());
+            return "Error en getAllComments: " + e.getMessage();
+        }
     }
 
     public String getCommentByIdJSON(Long id) {
-        // Vamos a devolver el JSON de las categorías
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(commentService.getCommentById(id));
+        try {
+            // Vamos a devolver el JSON de las categorías
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(commentService.getCommentById(id));
+        } catch (SQLException e) {
+            System.err.println("Error en getCommentById: " + e.getMessage());
+            return "Error en getCommentById: " + e.getMessage();
+        }
     }
 
     public String postCommentJSON(CommentDTO commentDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(commentService.postComment(commentDTO));
+        } catch (SQLException e) {
+            System.err.println("Error en postComment: " + e.getMessage());
+            return "Error en postComment: " + e.getMessage();
+        }
     }
 
     public String updateCommentJSON(CommentDTO commentDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(commentService.updateComment(commentDTO));
+        } catch (SQLException e) {
+            System.err.println("Error en updateCommment: " + e.getMessage());
+            return "Error en updateComment: " + e.getMessage();
+        }
     }
 
     public String deleteCommentJSON(CommentDTO commentDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(commentService.deleteComment(commentDTO));
+        } catch (SQLException e) {
+            System.err.println("Error en deleteComment: " + e.getMessage());
+            return "Error en deleteComment: " + e.getMessage();
+        }
     }
 
 }

@@ -7,50 +7,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CategoryRepository implements CrudRespository<Category, Long> {
     @Override
-    public List<Category> findAll() {
-        try {
+    public List<Category> findAll() throws SQLException {
             String query = "SELECT * FROM category";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.select(query);
-            ArrayList<Category> list = new ArrayList<Category>();
-            while (result.next()) {
-                list.add(
-                        new Category(
-                                result.getLong("id"),
-                                result.getString("texto")
-                        )
-                );
-            }
-            db.close();
-            return list;
-        } catch (SQLException e) {
-            System.err.println("Error findAll: " + e.getMessage());
-            return null;
-        }
-    }
+            ResultSet result = db.select(query).orElseThrow(() -> new SQLException("Error al consultar registros de Categorías"));
+                ArrayList<Category> list = new ArrayList<Category>();
+                while (result.next()) {
+                    list.add(
+                            new Category(
+                                    result.getLong("id"),
+                                    result.getString("texto")
+                            )
+                    );
+                }
+                db.close();
+                return list;
+   }
 
     @Override
-    public Category getById(Long ID) {
-        try {
+    public Category getById(Long ID) throws SQLException {
             String query = "SELECT * FROM category WHERE id = ?";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet result = db.select(query, ID);
-            result.absolute(1);
-            Category category = new Category(
-                    result.getLong("id"),
-                    result.getString("texto")
-            );
-            db.close();
-            return category;
-        } catch (SQLException e) {
-            System.err.println("Error getById: " + e.getMessage());
-            return null;
-        }
+            ResultSet result = db.select(query, ID).orElseThrow(() -> new SQLException("Error no existe categoría con ID " + ID));
+                result.first();
+                Category category = new Category(
+                        result.getLong("id"),
+                        result.getString("texto")
+                );
+                db.close();
+                return category;
     }
 
     @Override
@@ -64,7 +55,7 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
             ResultSet res = db.insert(query, category.getTexto());
             if (res != null) {
                 // Para obtener su ID
-                res.absolute(1);
+                res.first();
                 category.setId(res.getLong(1));
             }
             db.close();

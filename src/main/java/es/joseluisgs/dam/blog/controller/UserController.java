@@ -8,6 +8,7 @@ import es.joseluisgs.dam.blog.dto.UserDTO;
 import es.joseluisgs.dam.blog.repository.UserRepository;
 import es.joseluisgs.dam.blog.service.UserService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserController {
@@ -43,34 +44,49 @@ public class UserController {
 
     // Ejemplo de operaciones
     // Usamos DTO para implementar este patrón en represantación y trasporte de la información
-    public List<UserDTO> getAllUsers() {
-        return userService.getAllUsers();
-    }
+//    public List<UserDTO> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
 
     public String getAllUsersJSON() {
         // Vamos a devolver el JSON de las categorías
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(userService.getAllUsers());
+        try {
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(userService.getAllUsers());
+        } catch (SQLException e) {
+            System.err.println("Error en getAllUser: " + e.getMessage());
+            return "Error en getAllUser: " + e.getMessage();
+        }
     }
 
     public String getUserByIdJSON(Long id) {
         // Vamos a devolver el JSON de las categorías
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(userService.getUserById(id));
+        } catch (SQLException e) {
+            System.err.println("Error en getUserById " + e.getMessage());
+            return "Error en getUserById: " + e.getMessage();
+        }
     }
 
     public String postUserJSON(UserDTO userDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(userService.postUser(userDTO));
+        } catch (SQLException e) {
+            System.err.println("Error en postUser " + e.getMessage());
+            return "Error en postUser: " + e.getMessage();
+        }
     }
 
     public String updateUserJSON(UserDTO userDTO) {
