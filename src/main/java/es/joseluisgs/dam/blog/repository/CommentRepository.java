@@ -53,8 +53,7 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
     }
 
     @Override
-    public Comment save(Comment comment) {
-        try {
+    public Comment save(Comment comment) throws SQLException {
             // Le dotamos de un UUID único, por si hay dos mensajes iguales en texto y momento.
             // también podríamos usar un hash, pero podrían llegar dos mensajes iguales en el mismo instante
             // es imporbable, pero así explico el uuid
@@ -64,17 +63,14 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
             DataBaseController db = DataBaseController.getInstance();
             db.open();
             ResultSet res = db.insert(query, comment.getTexto(), comment.getFechaPublicacion(),
-                    comment.getUser_id(), comment.getPost_id(), uuid.toString());
-            if (res != null) {
+                    comment.getUser_id(), comment.getPost_id(),
+                    uuid.toString()).orElseThrow(() -> new SQLException("Error al insertar Commentario"));
                 // Para obtener su ID
-                res.absolute(1);
+                res.first();
                 comment.setId(res.getLong(1));
-            }
             // una vez insertado comprobamos que esta correcto para devolverlo
             db.close();
-        } finally {
             return comment;
-        }
     }
 
     @Override

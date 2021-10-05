@@ -45,25 +45,18 @@ public class CategoryRepository implements CrudRespository<Category, Long> {
     }
 
     @Override
-    public Category save(Category category) {
-        try {
+    public Category save(Category category) throws SQLException {
             // si ponemos como primer parametro  null como primero, y pasamos en la llamada
             // al tener configurado el servidor con Prepared generated keys, obtenemos el ID generado autoincremntal de MariaDB
             String query = "INSERT INTO category VALUES (null, ?)";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet res = db.insert(query, category.getTexto());
-            if (res != null) {
+            ResultSet res = db.insert(query, category.getTexto()).orElseThrow(() -> new SQLException("Error al insertar categoría"));
                 // Para obtener su ID
                 res.first();
                 category.setId(res.getLong(1));
-            }
-            db.close();
-        } catch (SQLException e) {
-            System.err.println("Error Insert: " + e.getMessage());
-        } finally {
-            return category;
-        }
+                db.close();
+                return category;
     }
 
     @Override

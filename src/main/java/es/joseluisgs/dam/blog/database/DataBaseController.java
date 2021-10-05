@@ -108,7 +108,7 @@ public class DataBaseController {
         }
     }
 
-    public ResultSet insert(String insertSQL, Object... params) {
+    public Optional<ResultSet> insert(String insertSQL, Object... params) {
         try {
             // Con return generated keys obtenemos las claves generadas is las claves es autonumerica por ejemplo
             preparedStatement = connection.prepareStatement(insertSQL, preparedStatement.RETURN_GENERATED_KEYS);
@@ -117,10 +117,10 @@ public class DataBaseController {
                 preparedStatement.setObject(i + 1, params[i]);
             }
             preparedStatement.executeUpdate();
-            return preparedStatement.getGeneratedKeys();
+            return Optional.of(preparedStatement.getGeneratedKeys());
         } catch (SQLException e) {
             System.err.println("Error al insertar BD" + e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 

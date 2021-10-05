@@ -55,25 +55,19 @@ public class PostRepository implements CrudRespository<Post, Long> {
     }
 
     @Override
-    public Post save(Post post) {
-        try {
+    public Post save(Post post) throws SQLException {
             String query = "INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, ?)";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
             ResultSet res = db.insert(query, post.getTitulo(), post.getUrl(), post.getContenido(),
-                    post.getFechaPublicacion(), post.getUser_id(), post.getCategory_id());
-            if (res != null) {
+                    post.getFechaPublicacion(), post.getUser_id(),
+                    post.getCategory_id()).orElseThrow(() -> new SQLException("Error al insertar Post"));
                 // Para obtener su ID
-                res.absolute(1);
+                res.first();
                 post.setId(res.getLong(1));
-            }
-            // una vez insertado comprobamos que esta correcto para devolverlo
+            // una vez insertado comprobamos que está correcto para devolverlo
             db.close();
-        } catch (SQLException e) {
-            System.err.println("Error getById: " + e.getMessage());
-        } finally {
             return post;
-        }
     }
 
     @Override

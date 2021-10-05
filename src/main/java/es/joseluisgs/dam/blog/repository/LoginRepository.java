@@ -22,19 +22,16 @@ public class LoginRepository implements CrudRespository<Login, Long> {
 
     @Override
     public Login save(Login login) throws SQLException {
-        try {
             UUID uuid = UUID.randomUUID();
             String query = "INSERT INTO login VALUES (?, ?, ?)";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet res = db.insert(query, login.getUser_id(), login.getUltimoAcceso(), uuid.toString());
+            db.insert(query, login.getUser_id(), login.getUltimoAcceso(),
+                    uuid.toString()).orElseThrow(() -> new SQLException("Error al insertar Login"));
             // una vez insertado comprobamos que esta correcto para devolverlo
             login.setToken(uuid.toString());
             db.close();
             return login;
-        } catch (Exception e) {
-            throw new SQLException("Error Repositorio save: " + e.getMessage());
-        }
     }
 
     @Override

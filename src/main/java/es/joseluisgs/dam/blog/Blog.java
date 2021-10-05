@@ -75,19 +75,19 @@ public class Blog {
                 .texto("Prueba " + Instant.now().toString())
                 .build();
         System.out.println(categoryController.postCategoryJSON(categoryDTO));
-
-        System.out.println("UPDATE Categoría con ID = 4");
-        categoryDTO = CategoryDTO.builder()
-                .id(4L)
-                .texto("Prueba Update")
-                .build();
-        System.out.println(categoryController.updateCategoryJSON(categoryDTO));
-
-        System.out.println("DELETE Categoría con ID = 4");
-        categoryDTO = CategoryDTO.builder()
-                .id(4L)
-                .build();
-        System.out.println(categoryController.deleteCategoryJSON(categoryDTO));
+//
+//        System.out.println("UPDATE Categoría con ID = 4");
+//        categoryDTO = CategoryDTO.builder()
+//                .id(4L)
+//                .texto("Prueba Update")
+//                .build();
+//        System.out.println(categoryController.updateCategoryJSON(categoryDTO));
+//
+//        System.out.println("DELETE Categoría con ID = 4");
+//        categoryDTO = CategoryDTO.builder()
+//                .id(4L)
+//                .build();
+//        System.out.println(categoryController.deleteCategoryJSON(categoryDTO));
     }
 
     public void Users() {
@@ -108,19 +108,19 @@ public class Blog {
                 .build();
         System.out.println(userController.postUserJSON(userDTO));
 
-        System.out.println("UPDATE Usuario con ID = 5");
-        userDTO = UserDTO.builder()
-                .id(5L)
-                .nombre("Prueba Update")
-                .email("prueba@update.com")
-                .build();
-        System.out.println(userController.updateUserJSON(userDTO));
-
-        System.out.println("DELETE User con ID = 5");
-        userDTO = UserDTO.builder()
-                .id(5L)
-                .build();
-        System.out.println(userController.deleteUserJSON(userDTO));
+//        System.out.println("UPDATE Usuario con ID = 5");
+//        userDTO = UserDTO.builder()
+//                .id(5L)
+//                .nombre("Prueba Update")
+//                .email("prueba@update.com")
+//                .build();
+//        System.out.println(userController.updateUserJSON(userDTO));
+//
+//        System.out.println("DELETE User con ID = 5");
+//        userDTO = UserDTO.builder()
+//                .id(5L)
+//                .build();
+//        System.out.println(userController.deleteUserJSON(userDTO));
     }
 
     public void Posts() {
@@ -145,37 +145,37 @@ public class Blog {
 
         System.out.println(postController.postPostJSON(postDTO));
 
-        System.out.println("UPDATE Post con ID = 4");
-        // Solo dejamos cambiar el tútulo o el contenido
-        postDTO = PostDTO.builder()
-                .id(4L)
-                .titulo("Update " + Instant.now().toString())
-                .contenido("Update " + Instant.now().toString())
-                .url("http://" + Math.random() + ".dominio.com")
-                .fechaPublicacion(LocalDateTime.now())
-                .build();
-        // Asignamos el usuario y categorías que existan
-        postDTO.setUser_id(1L);
-        postDTO.setCategory_id(1L);
-        System.out.println(postController.updatePostJSON(postDTO));
-
-        System.out.println("DELETE Post con ID = 5");
-        postDTO = PostDTO.builder()
-                .id(5L)
-                .build();
-        // Asignamos el usuario y categorías que existan
-        postDTO.setUser_id(2L);
-        postDTO.setCategory_id(3L);
-        System.out.println(postController.deletePostJSON(postDTO));
-
-        System.out.println("DELETE Post con ID = 4, tiene categorias anidadas");
-        postDTO = PostDTO.builder()
-                .id(4L)
-                .build();
-        // Asignamos el usuario y categorías que existan
-        postDTO.setUser_id(2L);
-        postDTO.setCategory_id(3L);
-        System.out.println(postController.deletePostJSON(postDTO));
+//        System.out.println("UPDATE Post con ID = 4");
+//        // Solo dejamos cambiar el tútulo o el contenido
+//        postDTO = PostDTO.builder()
+//                .id(4L)
+//                .titulo("Update " + Instant.now().toString())
+//                .contenido("Update " + Instant.now().toString())
+//                .url("http://" + Math.random() + ".dominio.com")
+//                .fechaPublicacion(LocalDateTime.now())
+//                .build();
+//        // Asignamos el usuario y categorías que existan
+//        postDTO.setUser_id(1L);
+//        postDTO.setCategory_id(1L);
+//        System.out.println(postController.updatePostJSON(postDTO));
+//
+//        System.out.println("DELETE Post con ID = 5");
+//        postDTO = PostDTO.builder()
+//                .id(5L)
+//                .build();
+//        // Asignamos el usuario y categorías que existan
+//        postDTO.setUser_id(2L);
+//        postDTO.setCategory_id(3L);
+//        System.out.println(postController.deletePostJSON(postDTO));
+//
+//        System.out.println("DELETE Post con ID = 4, tiene categorias anidadas");
+//        postDTO = PostDTO.builder()
+//                .id(4L)
+//                .build();
+//        // Asignamos el usuario y categorías que existan
+//        postDTO.setUser_id(2L);
+//        postDTO.setCategory_id(3L);
+//        System.out.println(postController.deletePostJSON(postDTO));
 
     }
 
@@ -198,25 +198,25 @@ public class Blog {
         commentDTO.setPost_id(3L);
         System.out.println(commentController.postCommentJSON(commentDTO));
 
-        System.out.println("UPDATE Comentario con ID = 4");
-        // Solo dejamos cambiar el tútulo o el contenido
-        commentDTO = CommentDTO.builder()
-                .id(4L)
-                .texto("Update " + Instant.now().toString())
-                .fechaPublicacion(LocalDateTime.now())
-                .build();
-        // Asignamos el usuario y post que existan
-        commentDTO.setUser_id(1L);
-        commentDTO.setPost_id(3L);
-        System.out.println(commentController.updateCommentJSON(commentDTO));
-
-        System.out.println("DELETE Comentario con ID = 6");
-        commentDTO = CommentDTO.builder()
-                .id(6L)
-                .build();
-        commentDTO.setUser_id(1L);
-        commentDTO.setPost_id(3L);
-        System.out.println(commentController.deleteCommentJSON(commentDTO));
+//        System.out.println("UPDATE Comentario con ID = 4");
+//        // Solo dejamos cambiar el tútulo o el contenido
+//        commentDTO = CommentDTO.builder()
+//                .id(4L)
+//                .texto("Update " + Instant.now().toString())
+//                .fechaPublicacion(LocalDateTime.now())
+//                .build();
+//        // Asignamos el usuario y post que existan
+//        commentDTO.setUser_id(1L);
+//        commentDTO.setPost_id(3L);
+//        System.out.println(commentController.updateCommentJSON(commentDTO));
+//
+//        System.out.println("DELETE Comentario con ID = 6");
+//        commentDTO = CommentDTO.builder()
+//                .id(6L)
+//                .build();
+//        commentDTO.setUser_id(1L);
+//        commentDTO.setPost_id(3L);
+//        System.out.println(commentController.deleteCommentJSON(commentDTO));
     }
 
     public void Login() {
@@ -227,9 +227,9 @@ public class Blog {
         loginController.login("pepe@pepe.es", "1255");
         System.out.println("Login con un usario que NO existe o mal Password datos correctos");
         loginController.login("pepe@pepe.com", "1255");
-//        System.out.println("Logout de usuario que está logueado");
-//        loginController.logout(1L);
-//        System.out.println("Logout de usuario que no está logueado");
-//        loginController.logout(33L);
+        System.out.println("Logout de usuario que está logueado");
+        loginController.logout(1L);
+        System.out.println("Logout de usuario que no está logueado");
+        loginController.logout(33L);
     }
 }

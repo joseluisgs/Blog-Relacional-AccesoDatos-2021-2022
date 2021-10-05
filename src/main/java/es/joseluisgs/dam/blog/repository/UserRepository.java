@@ -51,23 +51,18 @@ public class UserRepository implements CrudRespository<User, Long> {
     }
 
     @Override
-    public User save(User user) {
-        try {
+    public User save(User user) throws SQLException{
             String query = "INSERT INTO user VALUES (null, ?, ?, ?, ?)";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-            ResultSet res = db.insert(query, user.getNombre(), user.getEmail(), user.getPassword(), user.getFechaRegistro());
-            if (res != null) {
+            ResultSet res = db.insert(query, user.getNombre(), user.getEmail(),
+                    user.getPassword(), user.getFechaRegistro()).orElseThrow(() -> new SQLException("Error al insertar Usuario"));
                 // Para obtener su ID
+                res.first();
                 user.setId(res.getLong(1));
-            }
             // una vez insertado comprobamos que esta correcto para devolverlo
             db.close();
             return user;
-        } catch (SQLException e) {
-            System.err.println("Error save: " + e.getMessage());
-            return null;
-        }
     }
 
     @Override
