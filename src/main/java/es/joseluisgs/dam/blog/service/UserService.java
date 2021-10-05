@@ -35,12 +35,12 @@ public class UserService extends BaseService<User, Long, UserRepository> {
         return mapper.toDTO(res);
     }
 
-    public UserDTO updateUser(UserDTO userDTO) {
+    public UserDTO updateUser(UserDTO userDTO) throws SQLException {
         User res = this.update(mapper.fromDTO(userDTO));
         return mapper.toDTO(res);
     }
 
-    public UserDTO deleteUser(UserDTO userDTO) {
+    public UserDTO deleteUser(UserDTO userDTO) throws SQLException {
         User res = this.delete(mapper.fromDTO(userDTO));
         return mapper.toDTO(res);
     }

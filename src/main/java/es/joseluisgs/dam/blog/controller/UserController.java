@@ -57,8 +57,8 @@ public class UserController {
                     .create();
             return prettyGson.toJson(userService.getAllUsers());
         } catch (SQLException e) {
-            System.err.println("Error en getAllUser: " + e.getMessage());
-            return "Error en getAllUser: " + e.getMessage();
+            System.err.println("Error UserController en getAllUser: " + e.getMessage());
+            return "Error UserController en getAllUser: " + e.getMessage();
         }
     }
 
@@ -71,8 +71,8 @@ public class UserController {
                 .create();
         return prettyGson.toJson(userService.getUserById(id));
         } catch (SQLException e) {
-            System.err.println("Error en getUserById " + e.getMessage());
-            return "Error en getUserById: " + e.getMessage();
+            System.err.println("Error UserController en getUserById " + e.getMessage());
+            return "Error UserController en getUserById: " + e.getMessage();
         }
     }
 
@@ -84,25 +84,35 @@ public class UserController {
                 .create();
         return prettyGson.toJson(userService.postUser(userDTO));
         } catch (SQLException e) {
-            System.err.println("Error en postUser " + e.getMessage());
-            return "Error en postUser: " + e.getMessage();
+            System.err.println("Error UserController en postUser " + e.getMessage());
+            return "Error UserController en postUser: " + e.getMessage();
         }
     }
 
     public String updateUserJSON(UserDTO userDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(userService.updateUser(userDTO));
+        } catch (SQLException e) {
+            System.err.println("Error UserController en updateUser " + e.getMessage());
+            return "Error UserController en updateUser: " + e.getMessage();
+        }
     }
 
     public String deleteUserJSON(UserDTO userDTO) {
+        try{
         final Gson prettyGson = new GsonBuilder()
                 .addSerializationExclusionStrategy(strategy)
                 .setPrettyPrinting()
                 .create();
         return prettyGson.toJson(userService.deleteUser(userDTO));
+        } catch (SQLException e) {
+            System.err.println("Error UserController en deleteUser " + e.getMessage());
+            return "Error UserController en deleteUser: " + e.getMessage();
+        }
     }
 
 }

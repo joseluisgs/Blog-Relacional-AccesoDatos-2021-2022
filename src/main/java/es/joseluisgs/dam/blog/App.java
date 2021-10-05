@@ -22,7 +22,7 @@ public class App {
         blog.Categories();
 
         // Usuarios
-        blog.Users();
+       blog.Users();
 
         // Post
         blog.Posts();
@@ -31,7 +31,7 @@ public class App {
         blog.Comments();
 
         // Login
-        // blog.Login();
+        blog.Login();
 
 
     }

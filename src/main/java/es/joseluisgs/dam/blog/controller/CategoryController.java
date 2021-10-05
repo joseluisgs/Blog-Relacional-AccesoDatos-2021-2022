@@ -39,8 +39,8 @@ public class CategoryController {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.getAllCategories());
         } catch (SQLException e) {
-            System.err.println("Error en getAllCategories: " + e.getMessage());
-            return "Error en getAllCategories: " + e.getMessage();
+            System.err.println("Error CategoryController en getAllCategories: " + e.getMessage());
+            return "Error CategoryController en getAllCategories: " + e.getMessage();
         }
     }
 
@@ -50,8 +50,8 @@ public class CategoryController {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.getCategoryById(id));
         } catch (SQLException e) {
-            System.err.println("Error en getCategoryById: " + e.getMessage());
-            return "Error en getCategoryById: " + e.getMessage();
+            System.err.println("Error CategoryController en getCategoryById: " + e.getMessage());
+            return "Error CategoryController en getCategoryById: " + e.getMessage();
         }
     }
 
@@ -60,18 +60,28 @@ public class CategoryController {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.postCategory(categoryDTO));
         } catch (SQLException e) {
-            System.err.println("Error en postCategory: " + e.getMessage());
-            return "Error en postCategory: " + e.getMessage();
+            System.err.println("Error CategoryController en postCategory: " + e.getMessage());
+            return "Error CategoryController en postCategory: " + e.getMessage();
         }
     }
 
-    public String updateCategoryJSON(CategoryDTO categoryDTO) {
+    public String updateCategoryJSON(CategoryDTO categoryDTO)  {
+        try {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.updateCategory(categoryDTO));
+        } catch (SQLException e) {
+            System.err.println("Error CategoryController en updateCategory: " + e.getMessage());
+            return "Error CategoryController en updateCategory: " + e.getMessage();
+        }
     }
 
     public String deleteCategoryJSON(CategoryDTO categoryDTO) {
+        try {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(categoryService.deleteCategory(categoryDTO));
+        } catch (SQLException e) {
+            System.err.println("Error CategoryController en deleteCategory: " + e.getMessage());
+            return "Error CategoryController en deleteCategory: " + e.getMessage();
+        }
     }
 }

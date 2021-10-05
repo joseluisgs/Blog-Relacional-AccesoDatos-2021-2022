@@ -52,8 +52,8 @@ public class CommentController {
                 .create();
         return prettyGson.toJson(commentService.getAllComments());
         } catch (SQLException e) {
-            System.err.println("Error en getAllComments: " + e.getMessage());
-            return "Error en getAllComments: " + e.getMessage();
+            System.err.println("Error CommentController en getAllComments: " + e.getMessage());
+            return "Error CommentController en getAllComments: " + e.getMessage();
         }
     }
 
@@ -66,8 +66,8 @@ public class CommentController {
                     .create();
             return prettyGson.toJson(commentService.getCommentById(id));
         } catch (SQLException e) {
-            System.err.println("Error en getCommentById: " + e.getMessage());
-            return "Error en getCommentById: " + e.getMessage();
+            System.err.println("Error CommentController en getCommentById: " + e.getMessage());
+            return "Error CommentController en getCommentById: " + e.getMessage();
         }
     }
 
@@ -79,8 +79,8 @@ public class CommentController {
                 .create();
         return prettyGson.toJson(commentService.postComment(commentDTO));
         } catch (SQLException e) {
-            System.err.println("Error en postComment: " + e.getMessage());
-            return "Error en postComment: " + e.getMessage();
+            System.err.println("Error CommentController en postComment: " + e.getMessage());
+            return "Error CommentController en postComment: " + e.getMessage();
         }
     }
 
@@ -92,8 +92,8 @@ public class CommentController {
                 .create();
         return prettyGson.toJson(commentService.updateComment(commentDTO));
         } catch (SQLException e) {
-            System.err.println("Error en updateCommment: " + e.getMessage());
-            return "Error en updateComment: " + e.getMessage();
+            System.err.println("Error CommentController en updateCommment: " + e.getMessage());
+            return "Error CommentController en updateComment: " + e.getMessage();
         }
     }
 
@@ -105,8 +105,8 @@ public class CommentController {
                 .create();
         return prettyGson.toJson(commentService.deleteComment(commentDTO));
         } catch (SQLException e) {
-            System.err.println("Error en deleteComment: " + e.getMessage());
-            return "Error en deleteComment: " + e.getMessage();
+            System.err.println("Error CommentController en deleteComment: " + e.getMessage());
+            return "Error CommentController en deleteComment: " + e.getMessage();
         }
     }
 

@@ -29,12 +29,12 @@ public abstract class BaseService<T, ID, R extends CrudRespository<T, ID>> {
     }
 
     // Actualiza
-    public T update(T t) {
+    public T update(T t) throws SQLException {
         return repository.update(t);
     }
 
     // Elimina
-    public T delete(T t) {
+    public T delete(T t) throws SQLException {
         return repository.delete(t);
     }
 }

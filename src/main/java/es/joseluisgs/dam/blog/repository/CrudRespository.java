@@ -18,10 +18,10 @@ public interface CrudRespository<T, ID> {
     T save(T t) throws SQLException;
 
     // Actualiza
-    T update(T t);
+    T update(T t) throws SQLException;
 
     // Elimina
-    T delete(T t);
+    T delete(T t) throws SQLException;
 
 
 }

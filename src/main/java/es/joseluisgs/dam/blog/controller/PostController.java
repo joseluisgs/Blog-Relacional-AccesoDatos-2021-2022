@@ -52,8 +52,8 @@ public class PostController {
                 .create();
         return prettyGson.toJson(postService.getAllPosts());
         } catch (SQLException e) {
-            System.err.println("Error en getAllPots: " + e.getMessage());
-            return "Error en getAllPost: " + e.getMessage();
+            System.err.println("Error PostController en getAllPots: " + e.getMessage());
+            return "Error PostController en getAllPost: " + e.getMessage();
         }
     }
 
@@ -66,8 +66,8 @@ public class PostController {
                 .create();
         return prettyGson.toJson(postService.getPostById(id));
         } catch (SQLException e) {
-            System.err.println("Error en getPostById " + e.getMessage());
-            return "Error en getPostById: " + e.getMessage();
+            System.err.println("Error PostController en getPostById " + e.getMessage());
+            return "Error PostController en getPostById: " + e.getMessage();
         }
     }
 
@@ -79,8 +79,8 @@ public class PostController {
                 .create();
         return prettyGson.toJson(postService.postPost(postDTO));
         } catch (SQLException e) {
-            System.err.println("Error en postPost: " + e.getMessage());
-            return "Error en postPost: " + e.getMessage();
+            System.err.println("Error PostController en postPost: " + e.getMessage());
+            return "Error PostController en postPost: " + e.getMessage();
         }
     }
 
@@ -92,8 +92,8 @@ public class PostController {
                 .create();
         return prettyGson.toJson(postService.updatePost(postDTO));
         } catch (SQLException e) {
-            System.err.println("Error en updatePost: " + e.getMessage());
-            return "Error en updatePost: " + e.getMessage();
+            System.err.println("Error PostController en updatePost: " + e.getMessage());
+            return "Error PostController en updatePost: " + e.getMessage();
         }
     }
 
@@ -105,8 +105,8 @@ public class PostController {
                     .create();
             return prettyGson.toJson(postService.deletePost(postDTO));
         } catch (SQLException e) {
-            System.err.println("Error en deletePost: " + e.getMessage());
-            return "Error en deletePost: " + e.getMessage();
+            System.err.println("Error PostController en deletePost: " + e.getMessage());
+            return "Error PostController en deletePost: " + e.getMessage();
         }
     }
 }

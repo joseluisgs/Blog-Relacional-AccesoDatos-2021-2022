@@ -42,9 +42,8 @@ public class LoginService extends BaseService<Login, Long, LoginRepository> {
         return service.getUserByMail(userMail);
     }
 
-    public boolean logout(Long id) {
-        if (repository.deleteById(id).isPresent()) return true;
-        else
-            return false;
+    public boolean logout(Long id) throws SQLException {
+        if (repository.deleteById(id)>0) return true;
+        else return false;
     }
 }

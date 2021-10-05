@@ -37,8 +37,8 @@ public class UserRepository implements CrudRespository<User, Long> {
             String query = "SELECT * FROM user WHERE id = ?";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-        ResultSet result = db.select(query, ID).orElseThrow(() -> new SQLException("Error no existe usuario con ID " + ID));
-                result.first();
+        ResultSet result = db.select(query, ID).orElseThrow(() -> new SQLException("Error al consultar usuario con ID " + ID));
+                if(result.first()) {
                 User user = new User(
                         result.getLong("id"),
                         result.getString("nombre"),
@@ -48,6 +48,8 @@ public class UserRepository implements CrudRespository<User, Long> {
                 );
                 db.close();
                 return user;
+                } else
+                    throw new SQLException("Error no existe Usuario con ID: " + ID);
     }
 
     @Override
@@ -56,44 +58,47 @@ public class UserRepository implements CrudRespository<User, Long> {
             DataBaseController db = DataBaseController.getInstance();
             db.open();
             ResultSet res = db.insert(query, user.getNombre(), user.getEmail(),
-                    user.getPassword(), user.getFechaRegistro()).orElseThrow(() -> new SQLException("Error al insertar Usuario"));
+                    user.getPassword(), user.getFechaRegistro()).orElseThrow(() -> new SQLException("Error UserRepository al insertar Usuario"));
                 // Para obtener su ID
-                res.first();
-                user.setId(res.getLong(1));
-            // una vez insertado comprobamos que esta correcto para devolverlo
-            db.close();
-            return user;
+                if(res.first()) {
+                    user.setId(res.getLong(1));
+                    // una vez insertado comprobamos que esta correcto para devolverlo
+                    db.close();
+                    return user;
+    } else
+            throw new SQLException("Error UserRepository al insertar usuario en BD");
     }
 
     @Override
-    public User update(User user) {
+    public User update(User user) throws SQLException {
         String query = "UPDATE user SET nombre = ?, email = ? WHERE id = ?";
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.update(query, user.getNombre(), user.getEmail(), user.getId());
         db.close();
-        if (res != 0)
+        if (res > 0)
             return user;
-        return null;
+        else
+            throw new SQLException("Error UserRepository al actualizar usuario con id: " + user.getId());
     }
 
     @Override
-    public User delete(User user) {
+    public User delete(User user) throws SQLException {
         String query = "DELETE FROM user WHERE id = ?";
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.delete(query, user.getId());
         db.close();
-        if (res != 0)
+        if (res > 0)
             return user;
-        return null;
+        throw new SQLException("Error UserRepository al actualizar usuario con id: " + user.getId());
     }
 
     public User getByMail(String userMail) throws SQLException {
         String query = "SELECT * FROM user WHERE email = ?";
         DataBaseController db = DataBaseController.getInstance();
         db.open();
-        ResultSet result = db.select(query, userMail).orElseThrow(() -> new SQLException("Error no existe usuario con email " + userMail));
+        ResultSet result = db.select(query, userMail).orElseThrow(() -> new SQLException("Error UserRepository no existe usuario con email " + userMail));
             result.first();
             User user = new User(
                     result.getLong("id"),

@@ -74,7 +74,9 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
 
     public PostDTO deletePost(PostDTO postDTO) throws SQLException {
         // Debemos borrar los comentarios antes
-        getPostComments(postDTO.getId()).forEach(this::deleteComment);
+        for (Comment comment : getPostComments(postDTO.getId())) {
+            deleteComment(comment);
+        }
         // Ahora borramos el post
         Post post = this.delete(mapper.fromDTO(postDTO));
         PostDTO res = mapper.toDTO(post);
@@ -98,7 +100,7 @@ public class PostService extends BaseService<Post, Long, PostRepository> {
         return service.getCommentsByPost(id);
     }
 
-    private Comment deleteComment(Comment comment) {
+    private Comment deleteComment(Comment comment) throws SQLException {
         CommentService service = new CommentService(new CommentRepository());
         return service.repository.delete(comment);
     }

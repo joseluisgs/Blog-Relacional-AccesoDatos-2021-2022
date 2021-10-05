@@ -46,9 +46,13 @@ public class LoginController {
     }
 
     public void logout(Long ID) {
-        if(loginService.logout(ID)) {
-            System.out.println("Logout OK");
-        } else {
+        try {
+            if(loginService.logout(ID)) {
+                System.out.println("Logout OK");
+            } else {
+                System.err.println("Error Logout: Usuario/a no existe o los datos son incorrectos");
+            }
+        } catch (SQLException e) {
             System.err.println("Error Logout: Usuario/a no existe o los datos son incorrectos");
         }
     }

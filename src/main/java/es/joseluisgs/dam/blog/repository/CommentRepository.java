@@ -16,7 +16,7 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
             String query = "SELECT * FROM comment";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-        ResultSet result = db.select(query).orElseThrow(() -> new SQLException("Error al consultar registros de comentarios"));
+        ResultSet result = db.select(query).orElseThrow(() -> new SQLException("Error CommentRepository al consultar registros de comentarios"));
                 ArrayList<Comment> list = new ArrayList<Comment>();
                 while (result.next()) {
                     list.add(
@@ -36,20 +36,22 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
 
     @Override
     public Comment getById(Long ID) throws SQLException {
-            String query = "SELECT * FROM comment WHERE id = ?";
-            DataBaseController db = DataBaseController.getInstance();
-            db.open();
-        ResultSet result = db.select(query, ID).orElseThrow(() -> new SQLException("Error no existe comentario con ID " + ID));
-                result.first();
-                Comment comment = new Comment(
-                        result.getLong("id"),
-                        result.getString("texto"),
-                        result.getTimestamp("fecha_publicacion").toLocalDateTime(),
-                        result.getLong("user_id"),
-                        result.getLong("post_id")
-                );
-                db.close();
-                return comment;
+        String query = "SELECT * FROM comment WHERE id = ?";
+        DataBaseController db = DataBaseController.getInstance();
+        db.open();
+        ResultSet result = db.select(query, ID).orElseThrow(() -> new SQLException("Error CommentRepository al consultar comentario con ID " + ID));
+        if (result.first()) {
+            Comment comment = new Comment(
+                    result.getLong("id"),
+                    result.getString("texto"),
+                    result.getTimestamp("fecha_publicacion").toLocalDateTime(),
+                    result.getLong("user_id"),
+                    result.getLong("post_id")
+            );
+            db.close();
+            return comment;
+        } else
+            throw new SQLException("Error CommentRepository no existe comentario con ID: " + ID);
     }
 
     @Override
@@ -64,46 +66,50 @@ public class CommentRepository implements CrudRespository<Comment, Long> {
             db.open();
             ResultSet res = db.insert(query, comment.getTexto(), comment.getFechaPublicacion(),
                     comment.getUser_id(), comment.getPost_id(),
-                    uuid.toString()).orElseThrow(() -> new SQLException("Error al insertar Commentario"));
+                    uuid.toString()).orElseThrow(() -> new SQLException("Error CommentRepository al insertar Commentario"));
                 // Para obtener su ID
-                res.first();
-                comment.setId(res.getLong(1));
-            // una vez insertado comprobamos que esta correcto para devolverlo
-            db.close();
-            return comment;
+                if(res.first()) {
+                    comment.setId(res.getLong(1));
+                    // una vez insertado comprobamos que esta correcto para devolverlo
+                    db.close();
+                    return comment;
+                }else
+                    throw new SQLException("Error CommentRepository al insertar comentario en BD");
     }
 
     @Override
-    public Comment update(Comment comment) {
+    public Comment update(Comment comment) throws SQLException {
         String query = "UPDATE comment SET texto = ?, fecha_publicacion = ?, user_id = ?, post_id = ? WHERE id = ?";
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.update(query, comment.getTexto(), comment.getFechaPublicacion(), comment.getUser_id(),
                 comment.getPost_id(), comment.getId());
         db.close();
-        if (res != 0)
+        if (res > 0)
             return comment;
-        return null;
+        else
+            throw new SQLException("Error CommentRepository al actualizar comentario con id: " + comment.getId());
     }
 
     @Override
-    public Comment delete(Comment comment) {
+    public Comment delete(Comment comment) throws SQLException {
         String query = "DELETE FROM comment WHERE id = ?";
 
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.delete(query, comment.getId());
         db.close();
-        if (res != 0)
+        if (res > 0)
             return comment;
-        return null;
+        else
+            throw new SQLException("Error CommentRepository al eliminar comentario con id: " + comment.getId());
     }
 
     public List<Comment> getByPost(Long idPost) throws SQLException {
             String query = "SELECT * FROM comment where post_id = ?";
             DataBaseController db = DataBaseController.getInstance();
             db.open();
-        ResultSet result = db.select(query, idPost).orElseThrow(() -> new SQLException("Error no existe comentario con idPost " + idPost));
+        ResultSet result = db.select(query, idPost).orElseThrow(() -> new SQLException("Error CommentRepository no existe comentario con idPost " + idPost));
                 ArrayList<Comment> list = new ArrayList<Comment>();
                 while (result.next()) {
                     list.add(

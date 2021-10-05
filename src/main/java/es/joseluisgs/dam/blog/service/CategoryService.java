@@ -33,12 +33,12 @@ public class CategoryService extends BaseService<Category, Long, CategoryReposit
         return mapper.toDTO(res);
     }
 
-    public CategoryDTO updateCategory(CategoryDTO categoryDTO) {
+    public CategoryDTO updateCategory(CategoryDTO categoryDTO) throws SQLException {
         Category res = this.update(mapper.fromDTO(categoryDTO));
         return mapper.toDTO(res);
     }
 
-    public CategoryDTO deleteCategory(CategoryDTO categoryDTO) {
+    public CategoryDTO deleteCategory(CategoryDTO categoryDTO) throws SQLException {
         Category res = this.delete(mapper.fromDTO(categoryDTO));
         return mapper.toDTO(res);
     }

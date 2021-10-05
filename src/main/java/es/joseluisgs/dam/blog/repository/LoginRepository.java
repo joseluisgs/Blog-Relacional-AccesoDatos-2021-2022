@@ -27,7 +27,7 @@ public class LoginRepository implements CrudRespository<Login, Long> {
             DataBaseController db = DataBaseController.getInstance();
             db.open();
             db.insert(query, login.getUser_id(), login.getUltimoAcceso(),
-                    uuid.toString()).orElseThrow(() -> new SQLException("Error al insertar Login"));
+                    uuid.toString()).orElseThrow(() -> new SQLException("Error LoginRepository al insertar Login"));
             // una vez insertado comprobamos que esta correcto para devolverlo
             login.setToken(uuid.toString());
             db.close();
@@ -44,15 +44,15 @@ public class LoginRepository implements CrudRespository<Login, Long> {
         return null;
     }
 
-    public Optional<Long> deleteById(Long id) {
+    public Long deleteById(Long id) throws SQLException {
         String query = "DELETE FROM login WHERE user_id = ?";
-
         DataBaseController db = DataBaseController.getInstance();
         db.open();
         int res = db.delete(query, id);
         db.close();
-        if (res != 0)
-            return Optional.of(id);
-        return Optional.empty();
+        if (res > 0)
+            return id;
+        else
+            throw new SQLException("Error LoginRepository al eliminar login con User ID: " + id);
     }
 }
