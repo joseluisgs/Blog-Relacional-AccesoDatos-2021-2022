@@ -7,7 +7,6 @@ import es.joseluisgs.dam.blog.repository.UserRepository;
 import es.joseluisgs.dam.blog.utils.Cifrador;
 
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +42,6 @@ public class LoginService extends BaseService<Login, Long, LoginRepository> {
     }
 
     public boolean logout(Long id) throws SQLException {
-        if (repository.deleteById(id)>0) return true;
-        else return false;
+        return repository.deleteById(id) > 0;
     }
 }

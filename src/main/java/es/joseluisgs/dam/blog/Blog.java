@@ -29,14 +29,14 @@ public class Blog {
         return instance;
     }
 
-    public void checkService()  {
+    public void checkService() {
         DataBaseController controller = DataBaseController.getInstance();
         try {
             controller.open();
             Optional<ResultSet> rs = controller.select("SELECT * from test");
-            if(rs.isPresent()) {
-                    rs.get().first();
-                    controller.close();
+            if (rs.isPresent()) {
+                rs.get().first();
+                controller.close();
             }
         } catch (SQLException e) {
             System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());

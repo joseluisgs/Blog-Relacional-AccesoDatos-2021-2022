@@ -46,11 +46,11 @@ public class PostController {
     public String getAllPostJSON() {
         // Vamos a devolver el JSON de las categorías
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(postService.getAllPosts());
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(postService.getAllPosts());
         } catch (SQLException e) {
             System.err.println("Error PostController en getAllPots: " + e.getMessage());
             return "Error PostController en getAllPost: " + e.getMessage();
@@ -60,11 +60,11 @@ public class PostController {
     public String getPostByIdJSON(Long id) {
         // Vamos a devolver el JSON de las categorías
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(postService.getPostById(id));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(postService.getPostById(id));
         } catch (SQLException e) {
             System.err.println("Error PostController en getPostById " + e.getMessage());
             return "Error PostController en getPostById: " + e.getMessage();
@@ -73,11 +73,11 @@ public class PostController {
 
     public String postPostJSON(PostDTO postDTO) {
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(postService.postPost(postDTO));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(postService.postPost(postDTO));
         } catch (SQLException e) {
             System.err.println("Error PostController en postPost: " + e.getMessage());
             return "Error PostController en postPost: " + e.getMessage();
@@ -86,11 +86,11 @@ public class PostController {
 
     public String updatePostJSON(PostDTO postDTO) {
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(postService.updatePost(postDTO));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(postService.updatePost(postDTO));
         } catch (SQLException e) {
             System.err.println("Error PostController en updatePost: " + e.getMessage());
             return "Error PostController en updatePost: " + e.getMessage();

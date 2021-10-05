@@ -46,11 +46,11 @@ public class CommentController {
     public String getAllCommentsJSON() {
         // Vamos a devolver el JSON de las categorías
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(commentService.getAllComments());
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(commentService.getAllComments());
         } catch (SQLException e) {
             System.err.println("Error CommentController en getAllComments: " + e.getMessage());
             return "Error CommentController en getAllComments: " + e.getMessage();
@@ -73,11 +73,11 @@ public class CommentController {
 
     public String postCommentJSON(CommentDTO commentDTO) {
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(commentService.postComment(commentDTO));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(commentService.postComment(commentDTO));
         } catch (SQLException e) {
             System.err.println("Error CommentController en postComment: " + e.getMessage());
             return "Error CommentController en postComment: " + e.getMessage();
@@ -86,11 +86,11 @@ public class CommentController {
 
     public String updateCommentJSON(CommentDTO commentDTO) {
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(commentService.updateComment(commentDTO));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(commentService.updateComment(commentDTO));
         } catch (SQLException e) {
             System.err.println("Error CommentController en updateCommment: " + e.getMessage());
             return "Error CommentController en updateComment: " + e.getMessage();
@@ -99,11 +99,11 @@ public class CommentController {
 
     public String deleteCommentJSON(CommentDTO commentDTO) {
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(commentService.deleteComment(commentDTO));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(commentService.deleteComment(commentDTO));
         } catch (SQLException e) {
             System.err.println("Error CommentController en deleteComment: " + e.getMessage());
             return "Error CommentController en deleteComment: " + e.getMessage();

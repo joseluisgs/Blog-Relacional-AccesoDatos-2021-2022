@@ -9,7 +9,6 @@ import es.joseluisgs.dam.blog.repository.UserRepository;
 import es.joseluisgs.dam.blog.service.UserService;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class UserController {
     private static UserController controller = null;
@@ -65,11 +64,11 @@ public class UserController {
     public String getUserByIdJSON(Long id) {
         // Vamos a devolver el JSON de las categorías
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(userService.getUserById(id));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(userService.getUserById(id));
         } catch (SQLException e) {
             System.err.println("Error UserController en getUserById " + e.getMessage());
             return "Error UserController en getUserById: " + e.getMessage();
@@ -78,11 +77,11 @@ public class UserController {
 
     public String postUserJSON(UserDTO userDTO) {
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(userService.postUser(userDTO));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(userService.postUser(userDTO));
         } catch (SQLException e) {
             System.err.println("Error UserController en postUser " + e.getMessage());
             return "Error UserController en postUser: " + e.getMessage();
@@ -91,11 +90,11 @@ public class UserController {
 
     public String updateUserJSON(UserDTO userDTO) {
         try {
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(userService.updateUser(userDTO));
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(userService.updateUser(userDTO));
         } catch (SQLException e) {
             System.err.println("Error UserController en updateUser " + e.getMessage());
             return "Error UserController en updateUser: " + e.getMessage();
@@ -103,12 +102,12 @@ public class UserController {
     }
 
     public String deleteUserJSON(UserDTO userDTO) {
-        try{
-        final Gson prettyGson = new GsonBuilder()
-                .addSerializationExclusionStrategy(strategy)
-                .setPrettyPrinting()
-                .create();
-        return prettyGson.toJson(userService.deleteUser(userDTO));
+        try {
+            final Gson prettyGson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(strategy)
+                    .setPrettyPrinting()
+                    .create();
+            return prettyGson.toJson(userService.deleteUser(userDTO));
         } catch (SQLException e) {
             System.err.println("Error UserController en deleteUser " + e.getMessage());
             return "Error UserController en deleteUser: " + e.getMessage();

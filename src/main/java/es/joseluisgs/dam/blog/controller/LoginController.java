@@ -7,8 +7,6 @@ import es.joseluisgs.dam.blog.repository.LoginRepository;
 import es.joseluisgs.dam.blog.service.LoginService;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
 
 public class LoginController {
     private static LoginController controller = null;
@@ -32,7 +30,7 @@ public class LoginController {
     public void login(String userMail, String userPassword) {
         try {
             Login login = loginService.login(userMail, userPassword);
-            if(login != null) {
+            if (login != null) {
                 final Gson prettyGson = new GsonBuilder()
                         .setPrettyPrinting()
                         .create();
@@ -47,7 +45,7 @@ public class LoginController {
 
     public void logout(Long ID) {
         try {
-            if(loginService.logout(ID)) {
+            if (loginService.logout(ID)) {
                 System.out.println("Logout OK");
             } else {
                 System.err.println("Error Logout: Usuario/a no existe o los datos son incorrectos");

@@ -3,10 +3,8 @@ package es.joseluisgs.dam.blog.repository;
 import es.joseluisgs.dam.blog.database.DataBaseController;
 import es.joseluisgs.dam.blog.model.Login;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class LoginRepository implements CrudRespository<Login, Long> {
@@ -22,16 +20,16 @@ public class LoginRepository implements CrudRespository<Login, Long> {
 
     @Override
     public Login save(Login login) throws SQLException {
-            UUID uuid = UUID.randomUUID();
-            String query = "INSERT INTO login VALUES (?, ?, ?)";
-            DataBaseController db = DataBaseController.getInstance();
-            db.open();
-            db.insert(query, login.getUser_id(), login.getUltimoAcceso(),
-                    uuid.toString()).orElseThrow(() -> new SQLException("Error LoginRepository al insertar Login"));
-            // una vez insertado comprobamos que esta correcto para devolverlo
-            login.setToken(uuid.toString());
-            db.close();
-            return login;
+        UUID uuid = UUID.randomUUID();
+        String query = "INSERT INTO login VALUES (?, ?, ?)";
+        DataBaseController db = DataBaseController.getInstance();
+        db.open();
+        db.insert(query, login.getUser_id(), login.getUltimoAcceso(),
+                uuid.toString()).orElseThrow(() -> new SQLException("Error LoginRepository al insertar Login"));
+        // una vez insertado comprobamos que esta correcto para devolverlo
+        login.setToken(uuid.toString());
+        db.close();
+        return login;
     }
 
     @Override

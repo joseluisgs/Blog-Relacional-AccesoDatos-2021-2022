@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor // Requerimos un constructor con al menos las propiedades finales
 public abstract class BaseService<T, ID, R extends CrudRespository<T, ID>> {
