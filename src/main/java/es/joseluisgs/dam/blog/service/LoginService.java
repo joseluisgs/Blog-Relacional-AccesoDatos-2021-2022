@@ -1,5 +1,7 @@
 package es.joseluisgs.dam.blog.service;
 
+import es.joseluisgs.dam.blog.dto.LoginDTO;
+import es.joseluisgs.dam.blog.mapper.LoginMapper;
 import es.joseluisgs.dam.blog.model.Login;
 import es.joseluisgs.dam.blog.model.User;
 import es.joseluisgs.dam.blog.repository.LoginRepository;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class LoginService extends BaseService<Login, Long, LoginRepository> {
+    LoginMapper mapper = new LoginMapper();
 
     // Inyección de dependencias en el constructor. El servicio necesita este repositorio
     public LoginService(LoginRepository repository) {
@@ -25,12 +28,13 @@ public class LoginService extends BaseService<Login, Long, LoginRepository> {
         return null;
     }
 
-    public Login login(String userMail, String userPassword) throws SQLException {
+    public LoginDTO login(String userMail, String userPassword) throws SQLException {
         User user = getUserByMail(userMail);
         Cifrador cif = Cifrador.getInstance();
         if ((user != null) && user.getPassword().equals(cif.SHA256(userPassword))) {
             // System.out.println("SI");
-            Login login = repository.save(new Login(user.getId(), LocalDateTime.now()));
+            LoginDTO login = mapper.toDTO(repository.save(new Login(user.getId(), LocalDateTime.now(), null)));
+            login.setUser(user);
             return login;
         }
         return null;

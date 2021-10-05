@@ -201,7 +201,7 @@ public class Blog {
         commentDTO.setPost_id(3L);
         System.out.println(commentController.postCommentJSON(commentDTO));
 
-        System.out.println("UPDATE Comentario con ID = 66");
+        System.out.println("UPDATE Comentario con ID = 4");
         // Solo dejamos cambiar el tútulo o el contenido
         commentDTO = CommentDTO.builder()
                 .id(4L)
@@ -215,7 +215,7 @@ public class Blog {
 
         System.out.println("DELETE Comentario con ID = 6");
         commentDTO = CommentDTO.builder()
-                .id(68L)
+                .id(6L)
                 .build();
         commentDTO.setUser_id(1L);
         commentDTO.setPost_id(3L);
@@ -225,14 +225,14 @@ public class Blog {
     public void Login() {
         LoginController loginController = LoginController.getInstance();
         System.out.println("Login con un usario que SI existe");
-        loginController.login("pepe@pepe.es", "1234");
+        System.out.println(loginController.login("pepe@pepe.es", "1234"));
         System.out.println("Login con un usario que SI existe Y mal Password datos correctos");
-        loginController.login("pepe@pepe.es", "1255");
+        System.out.println(loginController.login("pepe@pepe.es", "1255"));
         System.out.println("Login con un usario que NO existe o mal Password datos correctos");
-        loginController.login("pepe@pepe.com", "1255");
+        System.out.println(loginController.login("pepe@pepe.com", "1255"));
         System.out.println("Logout de usuario que está logueado");
-        loginController.logout(1L);
+        System.out.println(loginController.logout(1L));
         System.out.println("Logout de usuario que no está logueado");
-        loginController.logout(33L);
+        System.out.println(loginController.logout(33L));
     }
 }
