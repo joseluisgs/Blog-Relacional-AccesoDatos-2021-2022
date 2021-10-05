@@ -6,7 +6,7 @@ import es.joseluisgs.dam.blog.dto.CategoryDTO;
 import es.joseluisgs.dam.blog.repository.CategoryRepository;
 import es.joseluisgs.dam.blog.service.CategoryService;
 
-import java.util.List;
+import java.sql.SQLException;
 
 public class CategoryController {
     private static CategoryController controller = null;
@@ -28,34 +28,59 @@ public class CategoryController {
 
     // Ejemplo de operaciones
     // Usamos DTO para implementar este patrón en represantación y trasporte de la información
-    public List<CategoryDTO> getAllCategories() {
-        return categoryService.getAllCategories();
-    }
+//    public List<CategoryDTO> getAllCategories() {
+//        return categoryService.getAllCategories();
+//    }
 
     public String getAllCategoriesJSON() {
-        // Vamos a devolver el JSON de las categorías
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        return prettyGson.toJson(categoryService.getAllCategories());
+        try {
+            // Vamos a devolver el JSON de las categorías
+            final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            return prettyGson.toJson(categoryService.getAllCategories());
+        } catch (SQLException e) {
+            System.err.println("Error CategoryController en getAllCategories: " + e.getMessage());
+            return "Error CategoryController en getAllCategories: " + e.getMessage();
+        }
     }
 
     public String getCategoryByIdJSON(Long id) {
-        // Vamos a devolver el JSON de las categorías
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        return prettyGson.toJson(categoryService.getCategoryById(id));
+        try {
+            // Vamos a devolver el JSON de las categorías
+            final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            return prettyGson.toJson(categoryService.getCategoryById(id));
+        } catch (SQLException e) {
+            System.err.println("Error CategoryController en getCategoryById: " + e.getMessage());
+            return "Error CategoryController en getCategoryById: " + e.getMessage();
+        }
     }
 
     public String postCategoryJSON(CategoryDTO categoryDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        return prettyGson.toJson(categoryService.postCategory(categoryDTO));
+        try {
+            final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            return prettyGson.toJson(categoryService.postCategory(categoryDTO));
+        } catch (SQLException e) {
+            System.err.println("Error CategoryController en postCategory: " + e.getMessage());
+            return "Error CategoryController en postCategory: " + e.getMessage();
+        }
     }
 
     public String updateCategoryJSON(CategoryDTO categoryDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        return prettyGson.toJson(categoryService.updateCategory(categoryDTO));
+        try {
+            final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            return prettyGson.toJson(categoryService.updateCategory(categoryDTO));
+        } catch (SQLException e) {
+            System.err.println("Error CategoryController en updateCategory: " + e.getMessage());
+            return "Error CategoryController en updateCategory: " + e.getMessage();
+        }
     }
 
     public String deleteCategoryJSON(CategoryDTO categoryDTO) {
-        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        return prettyGson.toJson(categoryService.deleteCategory(categoryDTO));
+        try {
+            final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            return prettyGson.toJson(categoryService.deleteCategory(categoryDTO));
+        } catch (SQLException e) {
+            System.err.println("Error CategoryController en deleteCategory: " + e.getMessage());
+            return "Error CategoryController en deleteCategory: " + e.getMessage();
+        }
     }
 }

@@ -19,16 +19,16 @@ public class App {
             blog.initDataBase();
 
         // Categorías
-        // blog.Categories();
+        blog.Categories();
 
         // Usuarios
-        // blog.Users();
+        blog.Users();
 
         // Post
-        // blog.Posts();
+        blog.Posts();
 
         // Comentarios
-        // blog.Comments();
+        blog.Comments();
 
         // Login
         blog.Login();

@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class Blog {
     private static Blog instance;
@@ -30,13 +31,15 @@ public class Blog {
 
     public void checkService() {
         DataBaseController controller = DataBaseController.getInstance();
-        controller.open();
-        ResultSet rs = controller.select("SELECT * from test");
         try {
-            rs.first();
-            controller.close();
+            controller.open();
+            Optional<ResultSet> rs = controller.select("SELECT * from test");
+            if (rs.isPresent()) {
+                rs.get().first();
+                controller.close();
+            }
         } catch (SQLException e) {
-            System.err.println("Error al arrancar Base de Datos: " + e.getMessage());
+            System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());
             System.exit(1);
         }
     }
@@ -45,12 +48,15 @@ public class Blog {
         String sqlFile = System.getProperty("user.dir") + File.separator + "sql" + File.separator + "blog.sql";
         System.out.println(sqlFile);
         DataBaseController controller = DataBaseController.getInstance();
-        controller.open();
         try {
+            controller.open();
             controller.initData(sqlFile);
             controller.close();
+        } catch (SQLException e) {
+            System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());
+            System.exit(1);
         } catch (FileNotFoundException e) {
-            System.err.println("Error al arrancar Base de Datos: " + e.getMessage());
+            System.err.println("Error al leer el fichero de datos iniciales: " + e.getMessage());
             System.exit(1);
         }
     }
@@ -219,14 +225,14 @@ public class Blog {
     public void Login() {
         LoginController loginController = LoginController.getInstance();
         System.out.println("Login con un usario que SI existe");
-        loginController.login("pepe@pepe.es", "1234");
-        System.out.println("Login con un usario que SI existe Y mal Passqord datos correctos");
-        loginController.login("pepe@pepe.es", "1255");
-        System.out.println("Login con un usario que NO existe o mal Passqord datos correctos");
-        loginController.login("pepe@pepe.com", "1255");
+        System.out.println(loginController.login("pepe@pepe.es", "1234"));
+        System.out.println("Login con un usario que SI existe Y mal Password datos correctos");
+        System.out.println(loginController.login("pepe@pepe.es", "1255"));
+        System.out.println("Login con un usario que NO existe o mal Password datos correctos");
+        System.out.println(loginController.login("pepe@pepe.com", "1255"));
         System.out.println("Logout de usuario que está logueado");
-        loginController.logout(1L);
+        System.out.println(loginController.logout(1L));
         System.out.println("Logout de usuario que no está logueado");
-        loginController.logout(33L);
+        System.out.println(loginController.logout(33L));
     }
 }
