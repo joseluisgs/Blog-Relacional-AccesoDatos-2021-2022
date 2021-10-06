@@ -10,11 +10,15 @@ services:
     build: ./mariadb
     image: mariadb
     container_name: mariadb
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
     volumes:
       - mariadb-volume:/var/lib/mysql
     networks:
       - mariadb-network
-    restart: always
+    # restart: always
 
   # ADMIN MARIADB
   adminer:

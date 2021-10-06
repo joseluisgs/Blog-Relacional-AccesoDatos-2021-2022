@@ -58,6 +58,7 @@ CREATE TABLE `login` (
 
 
 
+
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
