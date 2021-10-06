@@ -33,7 +33,7 @@ public class Blog {
         DataBaseController controller = DataBaseController.getInstance();
         try {
             controller.open();
-            Optional<ResultSet> rs = controller.select("SELECT * from test");
+            Optional<ResultSet> rs = controller.select("SELECT 'Hello World'");
             if (rs.isPresent()) {
                 rs.get().first();
                 controller.close();
